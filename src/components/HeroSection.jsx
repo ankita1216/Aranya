@@ -1,295 +1,435 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowRight,
-  House,
-  Leaf,
-  Menu,
-  Plane,
-  TreePine,
-  Users,
-  X,
-} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-const heroImages = ["/images/hero1.png", "/images/hero2.png", "/images/hero3.png"];
+import hero1 from "/images/hero1.png";
+import hero2 from "/images/hero2.png";
+import hero3 from "/images/hero3.png";
 
-const navLinks = [
-  "THE EXPERIENCE",
-  "AMENITIES",
-  "RESIDENCES",
-  "LOCATION",
-  "ABOUT US",
-];
-
-const stats = [
-  { icon: Leaf, value: "70%", label: "OPEN GREEN" },
-  { icon: House, value: "1535 SQM", label: "CLUBHOUSE" },
-  { icon: Plane, value: "2 MINS", label: "FROM AIRPORT" },
-  { icon: TreePine, value: "25+", label: "LIFESTYLE AMENITIES" },
-  { icon: Users, value: "BUILT FOR", label: "GENERATIONS" },
-];
-
-const slideDurations = [11000, 5200, 5200];
-
-const slideStories = [
-  {
-    eyebrow: "Forest arrival",
-    line: "A quiet walk home, held by light, trees, and the warmth of arrival.",
-  },
-  {
-    eyebrow: "Private greens",
-    line: "Residences planned around open breathing space, not leftover landscape.",
-  },
-  {
-    eyebrow: "Club Aranya",
-    line: "Leisure that feels intimate, generous, and made for slow evenings.",
-  },
-];
-
-function HeroSection() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setActiveSlide((slide) => (slide + 1) % heroImages.length);
-    }, slideDurations[activeSlide]);
-
-    return () => window.clearTimeout(timer);
-  }, [activeSlide]);
+// ── Floating dust particles ──────────────────────────────────────────────────
+function Particles() {
+  const particles = Array.from({ length: 28 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    dur: Math.random() * 12 + 8,
+    delay: Math.random() * 6,
+    drift: (Math.random() - 0.5) * 60,
+  }));
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-[#070c08] text-[#f7f0de]">
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={heroImages[activeSlide]}
-          src={heroImages[activeSlide]}
-          alt="Aranya residences surrounded by landscaped greens"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          initial={{ opacity: 0, scale: 1.035 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.4, ease: "easeOut" }}
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            background: "radial-gradient(circle, rgba(201,164,77,0.6) 0%, rgba(201,164,77,0) 100%)",
+          }}
+          animate={{
+            y: [0, -80, 0],
+            x: [0, p.drift, 0],
+            opacity: [0, 0.8, 0],
+            scale: [0.5, 1.2, 0.5],
+          }}
+          transition={{
+            duration: p.dur,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
-      </AnimatePresence>
+      ))}
+    </div>
+  );
+}
 
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,10,6,0.48)_0%,rgba(5,10,6,0.28)_26%,rgba(5,10,6,0.04)_54%,rgba(5,10,6,0.22)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,5,3,0.42)_0%,rgba(3,5,3,0)_36%,rgba(3,5,3,0.03)_60%,rgba(3,5,3,0.88)_100%)]" />
-      <div className="absolute inset-y-0 left-0 w-[36rem] max-w-[70vw] bg-[radial-gradient(circle_at_12%_48%,rgba(5,10,6,0.62),rgba(5,10,6,0.32)_42%,rgba(5,10,6,0)_72%)]" />
+// ── Leaf shadow overlay ──────────────────────────────────────────────────────
+function LeafShadows() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{
+            left: `${10 + i * 18}%`,
+            top: `${-10 + i * 5}%`,
+            width: 180 + i * 40,
+            height: 180 + i * 40,
+            background: `radial-gradient(ellipse, rgba(18,56,42,${0.06 + i * 0.02}) 0%, transparent 70%)`,
+            borderRadius: "60% 40% 70% 30% / 50% 60% 40% 50%",
+          }}
+          animate={{
+            x: [0, 12, -8, 0],
+            y: [0, -10, 6, 0],
+            rotate: [0, 4, -3, 0],
+            scale: [1, 1.05, 0.97, 1],
+          }}
+          transition={{
+            duration: 14 + i * 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 1.5,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
-      <header className="relative z-30 flex h-24 items-center justify-between px-5 sm:h-28 sm:px-12 lg:h-36 lg:px-[4.4rem]">
-        <a href="#" className="block w-32 sm:w-48 lg:w-52" aria-label="Aranya home">
-          <img src="/logo/trust.png" alt="Aranya by Rang Homes" className="w-full" />
-        </a>
+// ── Stats bar ────────────────────────────────────────────────────────────────
+const stats = [
+  { value: "70%", label: "Open Green" },
+  { value: "1535 SQM", label: "Clubhouse" },
+  { value: "2 mins", label: "from Airport" },
+  { value: "25+", label: "Amenities" },
+  { value: "Built for", label: "Generations" },
+];
 
-        <nav className="hidden items-center gap-9 xl:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase().replaceAll(" ", "-")}`}
-              className="text-[0.76rem] font-medium tracking-[0.12em] text-white/86 transition-colors duration-300 hover:text-[#d7b862]"
+// ── Main component ───────────────────────────────────────────────────────────
+export default function AranyaHero() {
+  const containerRef = useRef(null);
+
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activePhase, setActivePhase] = useState(0); // 0=morning,1=evening,2=night
+  const [lineVisible, setLineVisible] = useState([false, false, false]);
+
+  // Track scroll within the sticky container
+  useEffect(() => {
+    const el = document.getElementById("aranya-scroll-track");
+    const onScroll = () => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const total = el.offsetHeight - window.innerHeight;
+      const p = Math.min(Math.max(scrolled / total, 0), 1);
+      setScrollProgress(p);
+      if (p < 0.33) setActivePhase(0);
+      else if (p < 0.66) setActivePhase(1);
+      else setActivePhase(2);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Stagger line reveals on mount
+  useEffect(() => {
+    const timers = [
+      setTimeout(() => setLineVisible((l) => [true, l[1], l[2]]), 800),
+      setTimeout(() => setLineVisible((l) => [l[0], true, l[2]]), 1400),
+      setTimeout(() => setLineVisible((l) => [l[0], l[1], true]), 2000),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  // Per-image opacities
+  const img1Opacity = scrollProgress < 0.33 ? 1 : Math.max(0, 1 - (scrollProgress - 0.33) / 0.2);
+  const img2Opacity =
+    scrollProgress < 0.2
+      ? 0
+      : scrollProgress < 0.45
+        ? (scrollProgress - 0.2) / 0.25
+        : scrollProgress < 0.66
+          ? 1
+          : Math.max(0, 1 - (scrollProgress - 0.66) / 0.2);
+  const img3Opacity = scrollProgress < 0.55 ? 0 : Math.min(1, (scrollProgress - 0.55) / 0.25);
+
+  // Subtle zoom per layer
+  const img1Scale = 1 + scrollProgress * 0.06;
+  const img2Scale = 1 + Math.max(0, scrollProgress - 0.2) * 0.05;
+  const img3Scale = 1 + Math.max(0, scrollProgress - 0.55) * 0.04;
+
+  // Parallax Y offsets
+  const img1Y = scrollProgress * -40;
+  const img2Y = scrollProgress * -20;
+  const img3Y = scrollProgress * -10;
+
+  const emotionalLines = [
+    "Morning begins in calm.",
+    "Evenings feel alive.",
+    "Nights belong to you.",
+  ];
+
+
+
+  return (
+    <div
+      id="aranya-scroll-track"
+      style={{ height: "350vh" }}
+      className="relative"
+    >
+      {/* ── Sticky viewport ─────────────────────────────────────────────── */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden" ref={containerRef}>
+
+        {/* ── Image layers ─────────────────────────────────────────────── */}
+        {[
+          { src: hero1, opacity: img1Opacity, scale: img1Scale, y: img1Y },
+          { src: hero2, opacity: img2Opacity, scale: img2Scale, y: img2Y },
+          { src: hero3, opacity: img3Opacity, scale: img3Scale, y: img3Y },
+        ].map((layer, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 will-change-transform"
+            style={{
+              opacity: layer.opacity,
+              transform: `scale(${layer.scale}) translateY(${layer.y}px)`,
+              transition: "opacity 0.6s ease",
+              zIndex: i + 1,
+            }}
+          >
+            <motion.div
+              className="w-full h-full"
+              initial={i === 0 ? { scale: 1.15, filter: "blur(10px)" } : {}}
+              animate={i === 0 ? { scale: 1, filter: "blur(0px)" } : {}}
+              transition={{ duration: 1.8, ease: "easeOut" }}
             >
-              {link}
-            </a>
-          ))}
-        </nav>
-
-        <button
-          className="grid h-11 w-11 place-items-center text-[#d7b862]"
-          aria-label="Open navigation menu"
-          type="button"
-          onClick={() => setIsMenuOpen((open) => !open)}
-        >
-          {isMenuOpen ? (
-            <X strokeWidth={1.5} className="h-9 w-9" />
-          ) : (
-            <Menu strokeWidth={1.5} className="h-10 w-10" />
-          )}
-        </button>
-      </header>
-
-      {isMenuOpen && (
-        <div className="absolute inset-0 z-20 bg-[#071008]/96 px-6 pt-28 backdrop-blur-md xl:hidden">
-          <nav className="grid gap-6 border-y border-[#d6ba61]/22 py-8">
-            {navLinks.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase().replaceAll(" ", "-")}`}
-                className="font-serif text-3xl text-[#f7f0de]"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link}
-              </a>
-            ))}
-            <a
-              href="#enquiry"
-              className="mt-3 inline-flex w-fit items-center gap-3 border border-[#d6ba61] px-5 py-3 text-xs font-medium uppercase tracking-[0.16em] text-[#d6ba61]"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Enquire Now
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </nav>
-        </div>
-      )}
-
-      <div className="absolute left-4 top-[40%] z-20 hidden sm:block lg:left-[3.25rem]">
-        <div className="relative flex h-32 w-px flex-col items-center justify-center gap-5 bg-white/24">
-          {heroImages.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              aria-label={`Go to hero slide ${index + 1}`}
-              aria-current={activeSlide === index}
-              onClick={() => setActiveSlide(index)}
-              className={`absolute -left-[0.32rem] h-3 w-3 rounded-full border transition-all duration-300 ${
-                activeSlide === index
-                  ? "scale-110 border-[#d9b64d] bg-[#d9b64d]"
-                  : "border-white/70 bg-white/70 hover:border-[#d9b64d] hover:bg-[#d9b64d]"
-              }`}
-              style={{ top: `${index * 3.4 + 1.6}rem` }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="absolute bottom-[9.5rem] left-1/2 z-20 flex -translate-x-1/2 gap-3 sm:hidden">
-        {heroImages.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            aria-label={`Go to hero slide ${index + 1}`}
-            onClick={() => setActiveSlide(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              activeSlide === index ? "w-8 bg-[#d9b64d]" : "w-2 bg-white/68"
-            }`}
-          />
+              <img
+                src={layer.src}
+                alt={`hero layer ${i + 1}`}
+                className="w-full h-full object-cover object-center"
+                style={{
+                  filter: i === 2 ? "brightness(0.75) saturate(1.2)" : i === 1 ? "brightness(0.85)" : "brightness(0.9)",
+                }}
+              />
+            </motion.div>
+          </div>
         ))}
-      </div>
 
-      <main className="relative z-10 flex min-h-[calc(100svh-6rem)] items-center px-5 pb-52 pt-0 sm:px-12 sm:pb-40 lg:min-h-[calc(100svh-9rem)] lg:px-[7.4rem] lg:pb-36">
-        <div className="w-full max-w-[32rem] sm:max-w-[37rem]">
-          <motion.p
-            className="mb-4 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-[#d6ba61] sm:mb-5 sm:text-[0.68rem] sm:tracking-[0.28em]"
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.12 }}
-          >
-            An address held by nature
-          </motion.p>
+        {/* ── Gradient overlay ────────────────────────────────────────── */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background: `linear-gradient(
+              105deg,
+              rgba(18,56,42,${0.72 + img3Opacity * 0.15}) 0%,
+              rgba(18,56,42,${0.35 + img3Opacity * 0.1}) 45%,
+              transparent 100%
+            )`,
+            transition: "background 0.8s ease",
+          }}
+        />
 
-          <motion.p
-            className="mb-5 font-serif text-[1.95rem] leading-[1.18] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] sm:mb-7 sm:text-5xl lg:text-[2.45rem]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2 }}
-          >
-            Not just a home.
-            <br />
-            A way of living.
-          </motion.p>
+        {/* ── Ambient corner vignette ─────────────────────────────────── */}
+        <div className="absolute inset-0 z-10 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at 80% 50%, transparent 40%, rgba(10,25,18,0.5) 100%)",
+          }}
+        />
 
+        {/* ── Particles & leaf shadows ─────────────────────────────────── */}
+        <Particles />
+        <LeafShadows />
+
+
+        {/* ── Hero text block ──────────────────────────────────────────── */}
+        <div
+          className="absolute inset-0 z-30 flex flex-col justify-center px-8 md:px-16 lg:px-24"
+          style={{ paddingTop: "5vh" }}
+        >
+          {/* Emotional lines */}
+          <div className="mb-6 flex flex-col gap-2">
+            {emotionalLines.map((line, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, x: -30 }}
+                animate={lineVisible[i] ? { opacity: activePhase >= i ? 1 : 0.28, x: 0 } : {}}
+                transition={{ duration: 0.9, ease: "easeOut" }}
+                className="text-sm md:text-base tracking-widest font-light italic"
+                style={{
+                  color: activePhase === i ? "#C9A44D" : "rgba(248,243,231,0.55)",
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  letterSpacing: "0.18em",
+                  transition: "color 0.8s ease",
+                }}
+              >
+                {line}
+              </motion.p>
+            ))}
+          </div>
+
+          {/* Main title */}
           <motion.h1
-            className="font-serif text-[3.05rem] font-medium leading-none tracking-[0.11em] text-[#cfb866] drop-shadow-[0_4px_18px_rgba(0,0,0,0.52)] min-[390px]:text-[3.45rem] sm:text-[5.9rem] sm:tracking-[0.18em] lg:text-[5.25rem] xl:text-[5.8rem]"
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.95, delay: 0.35 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="leading-none mb-4"
+            style={{
+              fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif",
+              fontSize: "clamp(4.5rem, 12vw, 10rem)",
+              fontWeight: 300,
+              color: "#F8F3E7",
+              letterSpacing: "0.08em",
+            }}
           >
             ARANYA
           </motion.h1>
 
+          {/* Gold rule */}
           <motion.div
-            className="my-5 flex items-center gap-2 text-[#c9ad5d] sm:my-8"
-            initial={{ opacity: 0, x: -18 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.85, delay: 0.55 }}
-          >
-            <span className="h-px w-[10rem] bg-[#c9ad5d] sm:w-[17rem]" />
-            <span className="font-serif text-2xl leading-none">‹</span>
-          </motion.div>
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
+            style={{
+              width: 80,
+              height: 1,
+              background: "linear-gradient(90deg, #C9A44D, transparent)",
+              transformOrigin: "left",
+              marginBottom: "1.5rem",
+            }}
+          />
 
+          {/* Subtext */}
           <motion.p
-            className="font-serif text-[1.15rem] leading-[1.45] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] sm:text-[1.52rem]"
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.72 }}
+            transition={{ duration: 0.9, delay: 1.6, ease: "easeOut" }}
+            className="text-xs md:text-sm tracking-[0.3em] uppercase mb-10"
+            style={{ color: "rgba(201,164,77,0.75)" }}
           >
-            Where 70% is not built.
-            <br />
-            It breathes.
+            Three moments. One life.
           </motion.p>
 
-          <motion.p
-            className="mt-4 max-w-[23rem] text-[0.82rem] leading-6 text-white/74 sm:mt-5 sm:max-w-[26rem] sm:text-sm sm:leading-7"
-            initial={{ opacity: 0, y: 18 }}
+          {/* CTA */}
+          <motion.a
+            href="#"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.82 }}
+            transition={{ duration: 0.9, delay: 2, ease: "easeOut" }}
+            className="group inline-flex items-center gap-3 w-fit"
           >
-            A calm address shaped around canopy walks, soft arrival courts, and
-            homes that let morning light, shade, and stillness become part of
-            every day.
-          </motion.p>
-
-          <motion.div
-            className="mt-9 flex flex-wrap items-center gap-5 sm:mt-14"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.9 }}
-          >
-            <a
-              href="#photo-section"
-              className="group inline-flex items-center gap-4 text-[#e2c159]"
+            <span
+              className="text-[11px] tracking-[0.3em] uppercase border-b pb-1 transition-all duration-400"
+              style={{
+                color: "#C9A44D",
+                borderColor: "rgba(201,164,77,0.4)",
+              }}
+              onMouseEnter={(e) => (e.target.style.borderColor = "#C9A44D")}
+              onMouseLeave={(e) => (e.target.style.borderColor = "rgba(201,164,77,0.4)")}
             >
-              <span className="grid h-9 w-9 place-items-center rounded-full border border-[#e2c159] transition-colors group-hover:bg-[#e2c159]">
-                <ArrowRight className="h-4 w-4 transition-colors group-hover:text-[#071008]" />
-              </span>
-              <span className="text-xs font-medium uppercase tracking-[0.16em] text-white/82">
-                Discover Your Space
-              </span>
-            </a>
-
-            <a
-              href="#enquiry"
-              className="group inline-flex min-h-11 items-center gap-3 border-b border-[#d6ba61] pb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#f1d57a] transition-colors hover:text-white"
+              Explore the experience
+            </span>
+            <motion.div
+              className="transition-transform duration-300"
+              whileHover={{ x: 6 }}
             >
-              Enquire Now
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-          </motion.div>
+              <ArrowRight size={14} color="#C9A44D" strokeWidth={1.5} />
+            </motion.div>
+          </motion.a>
         </div>
-      </main>
 
-      <div className="pointer-events-none absolute right-8 top-[46%] z-10 hidden max-w-[14.5rem] border-l border-[#d6ba61]/34 pl-5 text-right lg:block">
-        <p className="text-[0.62rem] font-medium uppercase tracking-[0.25em] text-[#d6ba61]">
-          {slideStories[activeSlide].eyebrow}
-        </p>
-        <p className="mt-3 text-sm leading-6 text-white/64">
-          {slideStories[activeSlide].line}
-        </p>
-      </div>
-
-      <div className="absolute bottom-0 left-0 z-20 w-full bg-[linear-gradient(90deg,rgba(8,18,12,0.96),rgba(18,31,19,0.92),rgba(8,15,10,0.96))] px-3 py-4 shadow-[0_-24px_50px_rgba(0,0,0,0.4)] sm:px-10 sm:py-6">
-        <div className="mx-auto grid max-w-[82rem] grid-cols-2 gap-y-3 sm:grid-cols-3 sm:gap-y-6 lg:grid-cols-5 lg:gap-y-0">
-          {stats.map(({ icon: Icon, value, label }) => (
+        {/* ── Phase indicator dots ─────────────────────────────────────── */}
+        <div className="absolute right-8 md:right-12 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-3">
+          {[0, 1, 2].map((i) => (
             <div
-              key={label}
-              className="flex min-h-12 items-center gap-3 px-2 text-[#d6ba61] sm:min-h-16 sm:gap-5 sm:px-4 lg:border-r lg:border-white/18 lg:px-8 last:lg:border-r-0"
-            >
-              <Icon strokeWidth={1.2} className="h-7 w-7 shrink-0 sm:h-11 sm:w-11" />
-              <div>
-                <p className="font-serif text-[1rem] leading-tight tracking-[0.04em] sm:text-[1.4rem]">
-                  {value}
-                </p>
-                <p className="mt-1 text-[0.52rem] font-medium uppercase tracking-[0.08em] sm:text-[0.68rem] sm:tracking-[0.12em]">
-                  {label}
-                </p>
-              </div>
-            </div>
+              key={i}
+              className="rounded-full transition-all duration-500"
+              style={{
+                width: activePhase === i ? 6 : 4,
+                height: activePhase === i ? 6 : 4,
+                background: activePhase === i ? "#C9A44D" : "rgba(248,243,231,0.35)",
+              }}
+            />
           ))}
         </div>
+
+        {/* ── Scroll nudge ─────────────────────────────────────────────── */}
+        <motion.div
+          className="absolute bottom-32 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: scrollProgress > 0.05 ? 0 : 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-1"
+          >
+            <div
+              className="w-px h-8"
+              style={{ background: "linear-gradient(to bottom, transparent, rgba(201,164,77,0.7))" }}
+            />
+            <span className="text-[8px] tracking-[0.35em] uppercase" style={{ color: "rgba(201,164,77,0.6)" }}>
+              Scroll
+            </span>
+          </motion.div>
+        </motion.div>
+
+        {/* ── Stats bar ────────────────────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 2.4, ease: "easeOut" }}
+          className="absolute bottom-0 left-0 right-0 z-40"
+          style={{
+            background: "rgba(18,56,42,0.55)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            borderTop: "1px solid rgba(201,164,77,0.15)",
+          }}
+        >
+          <div className="flex flex-wrap justify-around items-center px-6 md:px-14 py-4 md:py-5 gap-y-3">
+            {stats.map((s, i) => (
+              <div key={i} className="flex flex-col items-center text-center px-3">
+                <span
+                  className="text-sm md:text-base font-light"
+                  style={{
+                    color: "#C9A44D",
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  {s.value}
+                </span>
+                <span
+                  className="text-[9px] tracking-[0.2em] uppercase mt-0.5"
+                  style={{ color: "rgba(248,243,231,0.55)" }}
+                >
+                  {s.label}
+                </span>
+                {i < stats.length - 1 && (
+                  <div
+                    className="hidden md:block absolute"
+                    style={{
+                      width: 1,
+                      height: 24,
+                      background: "rgba(201,164,77,0.2)",
+                      right: 0,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── Time-of-day ambient band ─────────────────────────────────── */}
+        <div
+          className="absolute top-0 right-0 w-1 h-full z-20 transition-all duration-1000"
+          style={{
+            background:
+              activePhase === 0
+                ? "linear-gradient(to bottom, rgba(255,220,140,0.4), transparent)"
+                : activePhase === 1
+                  ? "linear-gradient(to bottom, rgba(255,140,60,0.3), transparent)"
+                  : "linear-gradient(to bottom, rgba(201,164,77,0.5), transparent)",
+          }}
+        />
       </div>
-    </section>
+
+      {/* Google Fonts */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+      `}</style>
+    </div>
   );
 }
-
-export default HeroSection;

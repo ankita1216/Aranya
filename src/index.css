@@ -1,17 +1,15 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-@import "tailwindcss";
-
-@theme {
+@theme{
   --color-gold: #C9A44D;
-  --color-deep-green: #2d5644;
+  --color-deep-green: #2D5644;
   --color-hero-bg: #06100B;
   --color-warm-white: #F8F3E7;
 
   --font-serif: "Cormorant Garamond", serif;
   --font-sans: "Inter", sans-serif;
 
-  /* Typography Utilities */
   --text-h1: clamp(3rem, 8vw, 6rem);
   --text-h2: clamp(2.5rem, 6vw, 4.5rem);
   --text-h3: clamp(1.5rem, 4vw, 2.5rem);
@@ -31,22 +29,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Theme Utilities */
-.bg-warm-white {
-  background-color: var(--color-warm-white);
-  color: var(--color-deep-green);
-}
-
-.bg-gold-theme {
-  background-color: var(--color-gold);
-  color: var(--color-warm-white);
-}
-
-.bg-deep-green {
-  background-color: var(--color-deep-green);
-  color: var(--color-warm-white);
-}
-
 /* Global Typography Components */
 h1 {
   font-family: var(--font-serif);
@@ -58,7 +40,6 @@ h1 {
 h2 {
   font-family: var(--font-serif);
   font-size: 50px;
-  /* ✅ Added */
   font-weight: 300;
   line-height: 1.1;
   color: inherit;
@@ -78,25 +59,8 @@ p {
   color: inherit;
 }
 
-/* Forcing specific colors when needed */
-.text-gold {
-  color: var(--color-gold) !important;
-}
-
-.text-deep-green {
-  color: var(--color-deep-green) !important;
-}
-
-.text-warm-white {
-  color: var(--color-warm-white) !important;
-}
-
 .section-padding {
   padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 4rem);
-}
-
-.gold-accent {
-  color: var(--color-gold);
 }
 
 .uppercase-track {
@@ -104,4 +68,20 @@ p {
   letter-spacing: 0.3em;
   font-size: 0.75rem;
   font-weight: 500;
+}
+
+/* Theme Utilities */
+.bg-warm-white {
+  background-color: var(--color-warm-white);
+  color: var(--color-deep-green);
+}
+
+.bg-gold-theme {
+  background-color: var(--color-gold);
+  color: var(--color-warm-white);
+}
+
+.bg-deep-green {
+  background-color: var(--color-deep-green);
+  color: var(--color-warm-white);
 }

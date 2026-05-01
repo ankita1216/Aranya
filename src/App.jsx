@@ -1,3 +1,5 @@
+import { Routes, Route } from 'react-router-dom'
+import ThankYou from './components/ThankYou'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import AboutSection from './components/AboutSection'
@@ -10,9 +12,7 @@ import FooterSection from './components/FooterSection'
 import SectionWrapper from './components/SectionWrapper'
 import AranyaHighlight from './components/AranyaHighlight'
 
-
-
-function App() {
+function LandingPage() {
   return (
     <main style={{ backgroundColor: '#2D5644' }}>
       <Navbar />
@@ -43,7 +43,16 @@ function App() {
       
       <FooterSection />
     </main>
-  )
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/thank-you" element={<ThankYou />} />
+    </Routes>
+  );
 }
 
 export default App

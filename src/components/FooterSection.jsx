@@ -24,11 +24,13 @@ export default function FooterSection() {
           
           {/* Column 1: Branding */}
           <div className="flex flex-col gap-8">
-            <img 
-              src="/images/RANG HOMES-New1.jpg" 
-              alt="Rang Homes Logo" 
-              className="h-16 w-auto object-contain self-start invert brightness-0 transition-all duration-500 hover:brightness-100 hover:invert-0" 
-            />
+            <div className="bg-white p-2 rounded-lg self-start">
+              <img 
+                src="/images/RANG HOMES-New1.webp" 
+                alt="Rang Homes Logo" 
+                className="h-12 w-auto object-contain" 
+              />
+            </div>
             <p className="text-sm leading-relaxed text-[#F8F3E7]/60 max-w-xs font-light">
               INDOTECH INFRACON PRIVATE LIMITED is a trusted developer with over 8 years of experience, known for delivering high-quality residential projects with a focus on modern living and long-term value.
             </p>

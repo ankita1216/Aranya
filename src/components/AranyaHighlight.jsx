@@ -46,7 +46,7 @@ export default function AranyaHighlight() {
           >
             <motion.img
               style={{ scale: imageScale }}
-              src="/images/Aranya.jpg"
+              src="/images/Aranya.webp"
               alt="Aranya Landmark"
               className="w-full h-full object-cover"
             />

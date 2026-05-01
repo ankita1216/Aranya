@@ -38,7 +38,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <img 
-            src="/logo/trust.png" 
+            src="/logo/trust.webp" 
             alt="Aranya Logo" 
             className={`h-16 lg:h-20 w-auto transition-all duration-500 ${isHero ? "brightness-50" : "brightness-200"}`} 
           />

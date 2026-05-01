@@ -1,16 +1,16 @@
 const photos = [
   {
-    src: "/images/hero1.png",
+    src: "/images/hero1.webp",
     title: "Arrival through a living canopy",
     label: "Hero View",
   },
   {
-    src: "/images/hero2.png",
+    src: "/images/hero2.webp",
     title: "Residences wrapped in green",
     label: "Landscape",
   },
   {
-    src: "/images/hero3.png",
+    src: "/images/hero3.webp",
     title: "A clubhouse made for slow evenings",
     label: "Club Aranya",
   },

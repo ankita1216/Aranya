@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-import hero1 from "/images/hero1.png";
-import hero2 from "/images/hero2.png";
+import hero1 from "/images/hero1.webp";
+import hero2 from "/images/hero2.webp";
 
 const imageStories = [
   {

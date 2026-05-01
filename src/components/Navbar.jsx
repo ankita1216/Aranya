@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -13,14 +13,35 @@ const navLinks = [
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHero, setIsHero] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // If we scroll past the first viewport (Hero), switch to dark theme
+      if (window.scrollY > window.innerHeight - 80) {
+        setIsHero(false);
+      } else {
+        setIsHero(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
       {/* --- Navigation --- */}
-      <nav className="fixed top-0 left-0 w-full z-50 px-6 lg:px-16 py-5 flex justify-between items-center transition-all duration-300">
+      <nav className={`fixed top-0 left-0 w-full z-50 px-6 lg:px-16 py-5 flex justify-between items-center transition-all duration-500 ${
+        isHero ? "bg-transparent" : "bg-[#2D5644]/90 backdrop-blur-md shadow-lg"
+      }`}>
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <img src="/logo/trust.png" alt="Aranya Logo" className="h-16 lg:h-20 w-auto brightness-200" />
+          <img 
+            src="/logo/trust.png" 
+            alt="Aranya Logo" 
+            className={`h-16 lg:h-20 w-auto transition-all duration-500 ${isHero ? "brightness-50" : "brightness-200"}`} 
+          />
         </div>
 
         {/* Desktop Nav */}
@@ -29,7 +50,9 @@ export default function Navbar() {
             <a 
               key={link.name} 
               href={link.href}
-              className="font-inter text-[#F8F3E7] text-xs font-medium tracking-[0.2em] hover:text-[#C9A44D] transition-colors duration-300 drop-shadow-md"
+              className={`font-inter text-xs font-medium tracking-[0.2em] hover:text-[#C9A44D] transition-colors duration-300 ${
+                isHero ? "text-[#172018]" : "text-[#F8F3E7]"
+              }`}
             >
               {link.name}
             </a>
@@ -39,7 +62,7 @@ export default function Navbar() {
         {/* Mobile Menu Toggle */}
         <button 
           onClick={() => setIsMobileMenuOpen(true)}
-          className="lg:hidden text-[#F8F3E7] hover:text-[#C9A44D] transition-colors drop-shadow-md"
+          className={`lg:hidden transition-colors ${isHero ? "text-[#172018]" : "text-[#F8F3E7]"}`}
         >
           <Menu size={28} />
         </button>

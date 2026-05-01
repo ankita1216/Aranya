@@ -8,7 +8,9 @@ import VideoWalkthrough from './components/VideoWalkthrough'
 import GallerySection from './components/GallerySection'
 import FooterSection from './components/FooterSection'
 import SectionWrapper from './components/SectionWrapper'
-import LuxuryDivider from './components/LuxuryDivider'
+import AranyaHighlight from './components/AranyaHighlight'
+
+
 
 function App() {
   return (
@@ -23,30 +25,21 @@ function App() {
       <SectionWrapper id="about">
         <AboutSection />
       </SectionWrapper>
-      <LuxuryDivider />
 
-      <SectionWrapper id="amenities">
-        <AmenitiesSection />
-      </SectionWrapper>
-      <LuxuryDivider />
+      <AmenitiesSection />
 
-      <SectionWrapper id="location">
-        <LocationSection />
-      </SectionWrapper>
-      <LuxuryDivider />
+      <LocationSection />
+
+      <AranyaHighlight />
 
       <SectionWrapper id="plans">
         <PlanSection />
       </SectionWrapper>
-      <LuxuryDivider />
 
       {/* Video Walkthrough is a scroll-portal, usually best without extra wrapper scale */}
       <VideoWalkthrough />
-      <LuxuryDivider />
 
-      <SectionWrapper id="gallery">
-        <GallerySection />
-      </SectionWrapper>
+      <GallerySection />
       
       <FooterSection />
     </main>

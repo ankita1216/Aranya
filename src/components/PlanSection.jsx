@@ -63,40 +63,33 @@ export default function PlanSection() {
   };
 
   return (
-    <section id="plans" className="relative section-padding bg-deep-green overflow-hidden">
+    <section id="plans" className="relative  bg-deep-green overflow-hidden">
       {/* Background aesthetics */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[rgba(201,164,77,0.03)] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[rgba(18,56,42,0.4)] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-12">
-        {/* Header */}
-        <div className="text-center md:text-left flex flex-col gap-4">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            Floor Plans
-          </motion.h2>
-          <motion.div 
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            style={{ width: 60, height: 1, background: "linear-gradient(90deg, #C9A44D, transparent)", transformOrigin: "left" }}
-            className="mx-auto md:mx-0"
-          />
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          >
-            Meticulously crafted spaces designed for elevated living.
-          </motion.p>
-        </div>
+      <div className="max-w-7xl mx-auto w-full relative z-20 mb-2 md:mb-8 px-4 md:px-0">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl"
+        >
+          <div className="flex items-center gap-4 mb-3 md:mb-4">
+            <div className="w-8 md:w-12 h-[1px] bg-gold"></div>
+            <span className="uppercase-track text-gold">Architectural Excellence</span>
+          </div>
+          <h2 className="text-white">
+            Floor <span className="text-gold italic">Plans</span>
+          </h2>
+          <p className="max-w-2xl text-white/80">
+            Meticulously crafted spaces designed for elevated living, combining functional brilliance with aesthetic grace.
+          </p>
+        </motion.div>
+      </div>
 
+      <div className="max-w-7xl mx-auto w-full relative z-20 px-4 md:px-0">
         {/* Tabs Container */}
         <div className="flex flex-col gap-8">
           {/* Primary Tabs */}
@@ -125,7 +118,7 @@ export default function PlanSection() {
           {/* Secondary Tabs (Subtabs) */}
           <AnimatePresence mode="wait">
             {currentUnit.plans.length > 1 && (
-              <motion.div 
+              <motion.div
                 key={`subtabs-${activeUnit}`}
                 initial={{ opacity: 0, height: 0, y: -10 }}
                 animate={{ opacity: 1, height: "auto", y: 0 }}
@@ -139,11 +132,10 @@ export default function PlanSection() {
                     <button
                       key={plan.id}
                       onClick={() => { setActiveSubTab(plan.id); setZoom(1); }}
-                      className={`relative uppercase-track text-[9px] py-2 px-4 rounded-full border transition-all duration-300 ${
-                        isActive 
-                          ? "border-gold text-gold bg-gold/5 shadow-[0_0_15px_rgba(201,164,77,0.15)]" 
+                      className={`relative uppercase-track text-[9px] py-2 px-4 rounded-full border transition-all duration-300 ${isActive
+                          ? "border-gold text-gold bg-gold/5 shadow-[0_0_15px_rgba(201,164,77,0.15)]"
                           : "border-white/10 text-white/40 hover:border-white/30 hover:text-white/80"
-                      }`}
+                        }`}
                     >
                       {plan.label}
                     </button>
@@ -154,7 +146,7 @@ export default function PlanSection() {
           </AnimatePresence>
 
           {/* Plan Display Area */}
-          <div 
+          <div
             ref={containerRef}
             className="relative w-full aspect-square md:aspect-video bg-black/20 rounded-2xl border border-gold/10 overflow-hidden flex items-center justify-center p-6 md:p-12 mt-2"
           >
@@ -167,8 +159,8 @@ export default function PlanSection() {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className={`w-full h-full flex items-center justify-center ${zoom > 1 ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
               >
-                <motion.img 
-                  src={currentPlan.image} 
+                <motion.img
+                  src={currentPlan.image}
                   alt={`${currentUnit.name} Plan ${currentPlan.label}`}
                   className="w-full h-full object-contain"
                   style={{ filter: "drop-shadow(0 0 20px rgba(201,164,77,0.1))" }}

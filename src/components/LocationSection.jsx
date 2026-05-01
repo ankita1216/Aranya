@@ -105,7 +105,7 @@ export default function LocationSection() {
   }, []);
 
   return (
-    <section id="location" className="relative min-h-[100svh] bg-gold-theme flex flex-col justify-center overflow-hidden py-24">
+    <section id="location" className="relative bg-deep-green overflow-hidden section-padding">
       {/* Hide scrollbar styles */}
       <style>{`
         .hide-scrollbar::-webkit-scrollbar {
@@ -125,7 +125,7 @@ export default function LocationSection() {
       </div>
 
       {/* --- Section Header --- */}
-      <div className="w-full px-6 md:px-16 lg:px-32 relative z-20 mb-2 md:mb-8 pt-4 md:pt-10 shrink-0">
+      <div className="max-w-7xl mx-auto w-full relative z-20 mb-2 md:mb-8 shrink-0 px-4 md:px-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -134,12 +134,12 @@ export default function LocationSection() {
           className="max-w-3xl"
         >
           <div className="flex items-center gap-4 mb-3 md:mb-4">
-            <div className="w-8 md:w-12 h-[1px] bg-white"></div>
-            <span className="uppercase-track text-white">Prime Location</span>
+            <div className="w-8 md:w-12 h-[1px] bg-gold"></div>
+            <span className="uppercase-track text-gold">Prime Location</span>
           </div>
           <h2 className="text-white">
             Everything You Need,<br/>
-            <span className="text-deep-green italic">Within Your Reach</span>
+            <span className="text-gold italic">Within Your Reach</span>
           </h2>
           <p className="max-w-2xl text-white/80">
             Aranya is perfectly situated to offer seamless connectivity to key city landmarks, premium healthcare, top educational institutions, and vibrant lifestyle destinations.
@@ -153,7 +153,7 @@ export default function LocationSection() {
         className="flex w-full items-center relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-12"
       >
          {locationData.map((category, index) => (
-           <div key={category.id} className="min-w-full w-full flex flex-col justify-center px-6 md:px-16 lg:px-32 relative snap-center shrink-0">
+            <div key={category.id} className="min-w-full w-full flex flex-col justify-center px-6 md:px-12 xl:px-24 relative snap-center shrink-0">
               
               {/* Category Header */}
               <div className="mb-12 md:mb-24">
@@ -170,28 +170,28 @@ export default function LocationSection() {
               <div className="relative w-full max-w-7xl mx-auto">
                  
                  {/* Central Timeline Line (Desktop Only) */}
-                 <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#F8F3E7]/10 to-transparent -translate-y-1/2 hidden md:block" />
+                  <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#F8F3E7]/10 to-transparent -translate-y-1/2 hidden xl:block" />
 
-                 <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-4 relative z-10 w-full">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:flex xl:flex-row justify-center xl:justify-between gap-6 md:gap-4 relative z-10 w-full">
                    {category.places.map((place, idx) => {
                       const isTop = idx % 2 === 0;
                       
                       return (
-                         <div key={idx} className={`flex-1 flex flex-col ${isTop ? 'md:justify-end md:pb-20' : 'md:justify-start md:pt-20'} relative group`}>
+                          <div key={idx} className={`flex-1 flex flex-col ${isTop ? 'xl:justify-end xl:pb-20' : 'xl:justify-start xl:pt-20'} relative group min-w-0`}>
                             
                             {/* Connection Line & Node (Desktop Only) */}
-                            <div className={`hidden md:block absolute left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-[#C9A44D]/0 via-[#C9A44D]/40 to-[#C9A44D]/0 transition-all duration-700 opacity-50 group-hover:opacity-100 ${isTop ? 'bottom-0 h-20' : 'top-0 h-20'}`} />
-                            <div className={`hidden md:block absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#12382A] border-[3px] border-[#C9A44D]/50 group-hover:border-[#C9A44D] group-hover:shadow-[0_0_20px_rgba(201,164,77,0.8)] group-hover:bg-[#C9A44D] transition-all duration-500 z-20 ${isTop ? 'bottom-[-8px]' : 'top-[-8px]'}`} />
+                             <div className={`hidden xl:block absolute left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-[#C9A44D]/0 via-[#C9A44D]/40 to-[#C9A44D]/0 transition-all duration-700 opacity-50 group-hover:opacity-100 ${isTop ? 'bottom-0 h-20' : 'top-0 h-20'}`} />
+                             <div className={`hidden xl:block absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#12382A] border-[3px] border-[#C9A44D]/50 group-hover:border-[#C9A44D] group-hover:shadow-[0_0_20px_rgba(201,164,77,0.8)] group-hover:bg-[#C9A44D] transition-all duration-500 z-20 ${isTop ? 'bottom-[-8px]' : 'top-[-8px]'}`} />
 
                             {/* Content Card */}
-                            <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-2 p-4 md:p-6 rounded-2xl bg-[#F8F3E7]/5 border border-transparent group-hover:border-[#C9A44D]/30 group-hover:bg-[#F8F3E7]/10 transition-all duration-500 backdrop-blur-md relative z-30 mx-2 md:mx-4 hover:-translate-y-2 md:hover:-translate-y-0 hover:shadow-2xl">
+                            <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-2 p-4 md:p-6 rounded-2xl bg-[#F8F3E7]/5 border border-transparent group-hover:border-[#C9A44D]/30 group-hover:bg-[#F8F3E7]/10 transition-all duration-500 backdrop-blur-md relative z-30 mx-2 md:mx-4 hover:-translate-y-2 md:hover:-translate-y-0 hover:shadow-2xl w-full min-w-0 overflow-hidden">
                                <div className="flex items-center gap-3 shrink-0">
                                  <div className="p-2 rounded-full bg-deep-green border border-white/20 group-hover:border-white transition-colors duration-500">
                                     <MapPin size={18} className="text-white/40 group-hover:text-white transition-colors" />
                                  </div>
-                                 <span className="font-serif font-bold text-lg md:text-2xl text-white tracking-tight">{place.distance}</span>
+                                  <span className="font-serif font-bold text-sm md:text-lg text-white break-normal whitespace-normal">{place.distance}</span>
                                </div>
-                               <h3 className="text-lg md:text-xl md:mt-2 text-left text-white">{place.name}</h3>
+                               <h3 className="text-sm md:text-base md:mt-2 text-left text-white w-full break-normal whitespace-normal leading-tight">{place.name}</h3>
                             </div>
 
                          </div>
@@ -205,7 +205,7 @@ export default function LocationSection() {
       </div>
 
       {/* --- Navigation Controls --- */}
-      <div className="absolute bottom-10 left-0 right-0 px-6 md:px-16 lg:px-32 flex items-center justify-between z-50 pointer-events-none">
+       <div className="absolute bottom-10 left-0 right-0 px-6 md:px-12 xl:px-24 flex items-center justify-between z-50 pointer-events-none">
          {/* Left Arrow */}
           <button 
             onClick={() => scroll('left')}

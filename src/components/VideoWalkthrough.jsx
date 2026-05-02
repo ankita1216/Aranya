@@ -42,14 +42,13 @@ export default function VideoWalkthrough() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Didact+Gothic&display=swap');
         .vw-root {
           --cream: #F5F0E8;
           --gold:  #B89A5A;
           --gold-light: #D4B87A;
           --ink:   #0B0D09;
           --muted: rgba(245,240,232,0.45);
-          font-family: 'Didact Gothic', sans-serif;
+          font-family: 'Poppins', sans-serif;
         }
         .vw-serif { font-family: 'Cormorant Garamond', serif; }
         @keyframes pulse-line {
@@ -87,6 +86,7 @@ export default function VideoWalkthrough() {
                 src="https://www.youtube.com/embed/0xOfYiOB6iM?autoplay=1&mute=1&loop=1&playlist=0xOfYiOB6iM&controls=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
                 title="Aranya Walkthrough"
                 allow="autoplay; encrypted-media"
+                loading="lazy"
               />
             </motion.div>
           </motion.div>

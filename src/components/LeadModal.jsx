@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function LeadModal({ isOpen, onClose }) {
@@ -13,6 +13,17 @@ export default function LeadModal({ isOpen, onClose }) {
     location: ""
   });
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Lead captured:", formData);
@@ -24,7 +35,7 @@ export default function LeadModal({ isOpen, onClose }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -39,33 +50,44 @@ export default function LeadModal({ isOpen, onClose }) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-lg overflow-hidden rounded-[2.5rem] bg-[#f8f3e7] shadow-2xl"
+            className="relative w-[92%] sm:w-full max-w-md mx-auto max-h-[90vh] overflow-y-auto no-scrollbar rounded-[2rem] bg-[#f8f3e7] shadow-2xl"
           >
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute right-6 top-6 z-10 p-2 text-[#2d5644] transition-transform hover:rotate-90"
+              className="absolute right-6 top-6 z-20 p-2 text-[#407266] transition-transform hover:rotate-90"
             >
               <X size={24} />
             </button>
 
-            <div className="flex flex-col p-8 md:p-12">
-              <div className="mb-8 text-center">
-                <h2 className="font-serif text-3xl md:text-4xl text-[#2d5644]">Enquire Now</h2>
-                <div className="mx-auto mt-3 h-[1px] w-12 bg-[#c9a44d]" />
-                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#8a7033]">
+            <div className="flex flex-col max-h-[90vh]">
+              {/* Header - Fixed at top of modal */}
+              <div className="p-8 pb-4 pt-12 md:p-10 md:pb-6 md:pt-16 text-center">
+                <h1 
+                  className="font-serif text-3xl md:text-4xl leading-tight mb-2"
+                  style={{ color: '#407266', fontWeight: 'bold' }}
+                >
+                  Enquire Now
+                </h1>
+                <div className="mx-auto h-[1.5px] w-12 bg-[#C9A44D] mb-4" />
+                <p 
+                  className="text-[11px] font-bold uppercase tracking-[0.25em]"
+                  style={{ color: '#8A7033' }}
+                >
                   Your private sanctuary awaits
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              {/* Form - Scrollable */}
+              <div className="flex-1 overflow-y-auto no-scrollbar p-8 pt-0 md:p-10 md:pt-0">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-[#2d5644]/60 ml-1">Name</label>
+                  <label className="text-[9px] font-bold uppercase tracking-widest text-[#407266]/60 ml-1">Name</label>
                   <input
                     required
                     type="text"
                     placeholder="Enter your name"
-                    className="w-full rounded-2xl border border-[#2d5644]/10 bg-white px-6 py-4 text-sm outline-none transition-colors focus:border-[#c9a44d]"
+                    className="w-full rounded-xl border border-[#407266]/10 bg-white px-5 py-3.5 text-sm text-black placeholder:text-black/50 outline-none transition-colors focus:border-[#c9a44d]"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
@@ -73,23 +95,23 @@ export default function LeadModal({ isOpen, onClose }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#2d5644]/60 ml-1">Phone No</label>
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#407266]/60 ml-1">Phone No</label>
                     <input
                       required
                       type="tel"
                       placeholder="Phone number"
-                      className="w-full rounded-2xl border border-[#2d5644]/10 bg-white px-6 py-4 text-sm outline-none transition-colors focus:border-[#c9a44d]"
+                      className="w-full rounded-xl border border-[#407266]/10 bg-white px-5 py-3.5 text-sm text-black placeholder:text-black/50 outline-none transition-colors focus:border-[#c9a44d]"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#2d5644]/60 ml-1">Email</label>
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#407266]/60 ml-1">Email</label>
                     <input
                       required
                       type="email"
                       placeholder="Your email"
-                      className="w-full rounded-2xl border border-[#2d5644]/10 bg-white px-6 py-4 text-sm outline-none transition-colors focus:border-[#c9a44d]"
+                      className="w-full rounded-xl border border-[#407266]/10 bg-white px-5 py-3.5 text-sm text-black placeholder:text-black/50 outline-none transition-colors focus:border-[#c9a44d]"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
@@ -98,28 +120,28 @@ export default function LeadModal({ isOpen, onClose }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#2d5644]/60 ml-1">Requirement</label>
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#407266]/60 ml-1">Requirement</label>
                     <select
                       required
-                      className="w-full appearance-none rounded-2xl border border-[#2d5644]/10 bg-white px-6 py-4 text-sm outline-none transition-colors focus:border-[#c9a44d]"
+                      className="w-full appearance-none rounded-xl border border-[#407266]/10 bg-white px-5 py-3.5 text-sm text-black outline-none transition-colors focus:border-[#c9a44d]"
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                     >
-                      <option value="" disabled>Select Price</option>
+                      <option value="" disabled className="text-black/50">Select Price</option>
                       <option value="2bhk-50l">2 BHK @ 50 Lakh</option>
                       <option value="3bhk-60l">3 BHK @ 60 Lakh</option>
                       <option value="4bhk-80l">4 BHK @ 80 Lakh</option>
                     </select>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#2d5644]/60 ml-1">Location</label>
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#407266]/60 ml-1">Location</label>
                     <select
                       required
-                      className="w-full appearance-none rounded-2xl border border-[#2d5644]/10 bg-white px-6 py-4 text-sm outline-none transition-colors focus:border-[#c9a44d]"
+                      className="w-full appearance-none rounded-xl border border-[#407266]/10 bg-white px-5 py-3.5 text-sm text-black outline-none transition-colors focus:border-[#c9a44d]"
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     >
-                      <option value="" disabled>Select City</option>
+                      <option value="" disabled className="text-black/50">Select City</option>
                       <option value="dharapur">Dharapur</option>
                       <option value="guwahati">Guwahati</option>
                     </select>
@@ -127,16 +149,17 @@ export default function LeadModal({ isOpen, onClose }) {
                 </div>
 
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                   type="submit"
-                  className="mt-4 w-full rounded-2xl bg-[#2d5644] py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-white shadow-xl transition-colors hover:bg-[#1f3b2e]"
+                  className="mt-4 w-full rounded-xl bg-[#407266] py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-xl transition-colors hover:bg-[#1f3b2e]"
                 >
                   Confirm Interest
                 </motion.button>
               </form>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
         </div>
       )}
     </AnimatePresence>

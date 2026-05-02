@@ -1,23 +1,24 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { 
-  ShieldCheck, 
-  Eye, 
-  Flame, 
-  Zap, 
-  ArrowUpDown, 
-  Car, 
-  UserPlus, 
-  Home, 
-  Gamepad2, 
-  Baby, 
-  Users, 
-  TreePine, 
-  Droplets, 
-  MoveUp, 
+import {
+  ShieldCheck,
+  Eye,
+  Flame,
+  Zap,
+  ArrowUpDown,
+  Car,
+  UserPlus,
+  Home,
+  Gamepad2,
+  Baby,
+  Users,
+  TreePine,
+  Droplets,
+  MoveUp,
   Medal,
   Activity
 } from "lucide-react";
 import { useState, useRef } from "react";
+import DecorativeElements from "./DecorativeElements";
 
 const amenities = [
   { icon: ShieldCheck, title: "24/7 Security", category: "Safety" },
@@ -55,9 +56,9 @@ export default function AmenitiesSection() {
 
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.5, y: 20 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      scale: 1,
       y: 0,
       transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
@@ -65,13 +66,15 @@ export default function AmenitiesSection() {
 
   return (
     <section id="amenities" className="bg-warm-white section-padding overflow-hidden relative">
+      <DecorativeElements type="leaf" position="right-center" opacity={0.1} size="w-72" />
+      <DecorativeElements type="organic" position="left-bottom" opacity={0.08} size="w-80" />
       {/* Background Decorative Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto relative z-10 px-6 md:px-12 lg:px-16">
         {/* Header */}
         <div className="text-center mb-2 md:mb-8">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, letterSpacing: "1em" }}
             whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
             transition={{ duration: 1 }}
@@ -79,7 +82,7 @@ export default function AmenitiesSection() {
           >
             The Essentials
           </motion.p>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -89,7 +92,7 @@ export default function AmenitiesSection() {
         </div>
 
         {/* Unique Staggered Grid */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -120,8 +123,8 @@ export default function AmenitiesSection() {
 
                 {/* The Icon */}
                 <motion.div
-                   animate={hoveredIndex === i ? { 
-                    y: -10, 
+                  animate={hoveredIndex === i ? {
+                    y: -10,
                     scale: 1.1,
                     rotate: [0, -10, 10, 0],
                   } : { y: 0, scale: 1 }}
@@ -132,15 +135,15 @@ export default function AmenitiesSection() {
                 </motion.div>
 
                 {/* Animated Ring */}
-                <motion.div 
+                <motion.div
                   animate={hoveredIndex === i ? { opacity: 1, scale: 1.4 } : { opacity: 0, scale: 1 }}
                   className="absolute inset-0 border border-[#c5a35c]/40 rounded-full z-0 pointer-events-none"
                 />
               </div>
 
-               <div className="text-center">
-                <motion.h3 
-                  animate={hoveredIndex === i ? { y: -5, color: "#C9A44D" } : { y: 0, color: "#2D5644" }}
+              <div className="text-center">
+                <motion.h3
+                  animate={hoveredIndex === i ? { y: -5, color: "#C9A44D" } : { y: 0, color: "#407266" }}
                   transition={{ duration: 0.4 }}
                   className="text-lg lg:text-xl px-2"
                 >
@@ -155,7 +158,7 @@ export default function AmenitiesSection() {
         </motion.div>
 
         {/* Bottom Decorative Label */}
-         <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           className="mt-40 pt-20 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-10"

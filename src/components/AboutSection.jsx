@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Home, Star, MapPin, Building, Trees, Sparkles, ArrowUpRight } from "lucide-react";
+import DecorativeElements from "./DecorativeElements";
 
 const stats = [
   { label: "Open Green Area", value: "70%", icon: Trees },
@@ -49,6 +50,8 @@ export default function AboutSection() {
       id="experience"
       className="relative bg-deep-green overflow-hidden"
     >
+      <DecorativeElements type="leaf" position="left-center" color="#C9A44D" opacity={0.05} size="w-80" />
+      <DecorativeElements type="organic" position="right-top" color="#C9A44D" opacity={0.04} size="w-[28rem]" />
       {/* ── FULL-WIDTH IMAGE HERO ── */}
       <div className="relative w-full" ref={imageRef}>
 
@@ -60,8 +63,8 @@ export default function AboutSection() {
             className="w-full h-full object-cover object-center"
           />
           {/* Layered gradients for depth */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#2D5644]/55 via-transparent to-[#2D5644]/95" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2D5644]/35 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#407266]/55 via-transparent to-[#407266]/95" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#407266]/35 via-transparent to-transparent" />
         </div>
 
         {/* Vision label — top left */}
@@ -108,10 +111,10 @@ export default function AboutSection() {
       </div>
 
       {/* ── CONTENT BELOW IMAGE ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mt-16 md:mt-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mt-8 md:mt-12">
 
         {/* Intro row */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-24 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 mb-12 items-start">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -145,7 +148,7 @@ export default function AboutSection() {
         </div>
 
         {/* Stats grid — separated by 1px gaps */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden mb-12">
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
@@ -179,7 +182,7 @@ export default function AboutSection() {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-24 origin-left"
+          className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12 origin-left"
         />
 
         {/* USP rows */}
@@ -197,7 +200,7 @@ export default function AboutSection() {
 
               <div className="grid grid-cols-12 items-center gap-6 py-10 px-6 -mx-6 hover:bg-[rgba(201,164,77,0.025)] transition-all duration-500 rounded-xl">
                 <div className="col-span-12 md:col-span-1 flex items-center gap-4 md:flex-col md:items-start md:gap-2">
-                  <span className="uppercase-track text-[10px] text-[#C9A44D]/40 group-hover:text-[#C9A44D] transition-colors duration-300 tabular-nums">
+                  <span className="uppercase-track text-[10px] text-[#C9A44D]/80 group-hover:text-[#C9A44D] transition-colors duration-300 tabular-nums font-bold">
                     {usp.index}
                   </span>
                   <motion.div
@@ -241,7 +244,7 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-12 border-t border-white/8"
+          className="mt-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-8 border-t border-white/8"
         >
           <p className="italic text-[#C9A44D] text-lg md:text-2xl font-light max-w-md leading-snug">
             "A home where nature and luxury live in perfect balance."

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import LeadModal from "./LeadModal";
+import DecorativeElements from "./DecorativeElements";
 
 import hero1 from "/images/hero1.webp";
 import hero2 from "/images/hero2.webp";
@@ -21,12 +21,12 @@ const imageStories = [
   }
 ];
 
-export default function HeroSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function HeroSection({ onOpenModal }) {
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-[#f5efe1] text-[#172018]">
-      <LeadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    <section className="relative h-screen overflow-hidden bg-[#f5efe1] text-[#172018]">
+      <DecorativeElements type="organic" position="left-top" opacity={0.08} size="w-96" />
+      <DecorativeElements type="blob" position="right-bottom" opacity={0.06} size="w-[30rem]" />
       {/* Decorative Background Grid */}
       <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(90deg,#8c7b45_1px,transparent_1px),linear-gradient(0deg,#8c7b45_1px,transparent_1px)] [background-size:4.2rem_4.2rem]" />
 
@@ -37,8 +37,8 @@ export default function HeroSection() {
         transition={{ duration: 46, repeat: Infinity, ease: "linear" }}
       />
 
-      <div className="relative z-10 flex min-h-[100svh] flex-col px-5 py-8 sm:px-10 lg:px-[4.4rem] pt-32 lg:pt-40">
-        <div className="grid flex-1 items-center gap-12 py-14 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="relative z-10 flex h-full flex-col px-5 py-6 sm:px-10 lg:px-[4.4rem] pt-24 lg:pt-28">
+        <div className="grid flex-1 items-center gap-12 py-2 lg:grid-cols-[0.9fr_1.1fr]">
           {/* Text Content */}
           <div className="max-w-2xl lg:pr-12">
             <motion.p
@@ -80,7 +80,7 @@ export default function HeroSection() {
               className="mt-12"
             >
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={onOpenModal}
                 className="inline-flex items-center gap-4 border-b border-[#756329] pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#26311f] group transition-all"
               >
                 Discover More
@@ -94,8 +94,8 @@ export default function HeroSection() {
             {imageStories.map((item, index) => (
               <motion.article
                 key={item.label}
-                className={`relative w-full aspect-[3/5] md:aspect-[3/4.8] rounded-t-[18rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.2)] border-[6px] md:border-[10px] border-[#f5efe1] group ${
-                  index === 0 ? "mb-16 md:mb-24" : "mb-0"
+                className={`relative w-full max-h-[60vh] aspect-[3/4.5] md:aspect-[3/4.5] rounded-t-[18rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.2)] border-[6px] md:border-[10px] border-[#f5efe1] group ${
+                  index === 0 ? "mb-12 md:mb-16" : "mb-0"
                 }`}
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -106,6 +106,7 @@ export default function HeroSection() {
                 <img
                   src={item.src}
                   alt={item.title}
+                  fetchpriority="high"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
@@ -124,10 +125,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Google Fonts */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
-      `}</style>
     </section>
   );
 }

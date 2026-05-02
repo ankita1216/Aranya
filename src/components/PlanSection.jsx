@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ZoomIn, ZoomOut, Maximize } from "lucide-react";
+import DecorativeElements from "./DecorativeElements";
 
 const unitsData = [
   {
@@ -64,6 +65,8 @@ export default function PlanSection() {
 
   return (
     <section id="plans" className="relative bg-deep-green overflow-hidden section-padding">
+      <DecorativeElements type="leaf" position="right-top" color="#C9A44D" opacity={0.06} size="w-72" />
+      <DecorativeElements type="blob" position="left-center" color="#C9A44D" opacity={0.04} size="w-[26rem]" />
       {/* Background aesthetics */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[rgba(201,164,77,0.03)] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[rgba(18,56,42,0.4)] rounded-full blur-[120px] pointer-events-none" />

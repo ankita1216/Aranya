@@ -1,240 +1,184 @@
-import React, { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { 
-  GraduationCap, 
-  HeartPulse, 
-  ShoppingBag, 
-  Plane, 
-  ShieldCheck,
-  MapPin,
-  ChevronLeft,
-  ChevronRight
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  GraduationCap, HeartPulse, ShoppingBag,
+  Plane, ShieldCheck, MapPin, ChevronLeft, ChevronRight
 } from "lucide-react";
 
 const locationData = [
   {
-    id: "education",
-    category: "Education",
-    icon: GraduationCap,
-    places: [
-      { name: "Dharapur Higher Secondary School", distance: "2.2 km" },
-      { name: "Girijananda Chowdhury University", distance: "2.9 km" },
-      { name: "Assam Don Bosco University", distance: "3.5 km" },
-      { name: "Assamese School", distance: "5.2 km" },
-      { name: "Guwahati University", distance: "6.5 km" }
-    ]
-  },
-  {
-    id: "healthcare",
-    category: "Healthcare",
-    icon: HeartPulse,
-    places: [
-      { name: "Guwahati University Hospital", distance: "10.7 km" },
-      { name: "Apollo Excelcare Hospital", distance: "13.2 km" }
-    ]
-  },
-  {
-    id: "shopping",
-    category: "Shopping & Lifestyle",
-    icon: ShoppingBag,
-    places: [
-      { name: "Kiranshree Grand Hotel", distance: "3.7 km" },
-      { name: "University Shopping Complex", distance: "6.6 km" },
-      { name: "Decathlon Azara", distance: "6.7 km" },
-      { name: "NCS Square Mall", distance: "9.0 km" },
-      { name: "Westside", distance: "9.0 km" }
-    ]
-  },
-  {
-    id: "connectivity",
-    category: "Connectivity",
-    icon: Plane,
-    places: [
+    id: "connectivity", category: "Connectivity", icon: Plane, places: [
       { name: "Lokpriya Gopinath Bordoloi Int. Airport", distance: "2 km" },
       { name: "Jalukbari Flyover", distance: "10 km" }
     ]
   },
   {
-    id: "essentials",
-    category: "Essentials",
-    icon: ShieldCheck,
-    places: [
-      { name: "BCPL Petrol Pump Super Service", distance: "650 m" },
+    id: "education", category: "Education", icon: GraduationCap, places: [
+      { name: "Dharapur Higher Secondary School", distance: "2.2 km" },
+      { name: "Girijananda Chowdhury University", distance: "2.9 km" },
+      { name: "Assam Don Bosco University", distance: "3.5 km" },
+      { name: "Guwahati University", distance: "6.5 km" }
+    ]
+  },
+  {
+    id: "shopping", category: "Lifestyle", icon: ShoppingBag, places: [
+      { name: "Kiranshree Grand Hotel", distance: "3.7 km" },
+      { name: "University Shopping Complex", distance: "6.6 km" },
+      { name: "Decathlon Azara", distance: "6.7 km" },
+      { name: "NCS Square Mall", distance: "9.0 km" }
+    ]
+  },
+  {
+    id: "healthcare", category: "Healthcare", icon: HeartPulse, places: [
+      { name: "Guwahati University Hospital", distance: "10.7 km" },
+      { name: "Apollo Excelcare Hospital", distance: "13.2 km" }
+    ]
+  },
+  {
+    id: "essentials", category: "Essentials", icon: ShieldCheck, places: [
+      { name: "BCPL Petrol Pump Service", distance: "650 m" },
       { name: "Dharapur Chariali", distance: "2.2 km" },
-      { name: "Indian Oil Ramani Service Station", distance: "3.7 km" },
       { name: "Azara Police Station", distance: "4.8 km" }
     ]
   }
 ];
 
 export default function LocationSection() {
-  const scrollContainerRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
 
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      // Prevent division by zero if not scrollable
-      if (scrollWidth > clientWidth) {
-        const progress = scrollLeft / (scrollWidth - clientWidth);
-        setScrollProgress(progress);
-      } else {
-        setScrollProgress(0);
-      }
-    }
-  };
-
-  const scroll = (direction) => {
-    if (scrollContainerRef.current) {
-      const { clientWidth } = scrollContainerRef.current;
-      scrollContainerRef.current.scrollBy({
-        left: direction === 'left' ? -clientWidth : clientWidth,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener('scroll', handleScroll);
-      // Initialize progress
-      handleScroll();
-      return () => container.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
+  const nextTab = () => setActiveTab((prev) => (prev + 1) % locationData.length);
+  const prevTab = () => setActiveTab((prev) => (prev - 1 + locationData.length) % locationData.length);
 
   return (
-    <section id="location" className="relative bg-deep-green overflow-hidden section-padding">
-      {/* Hide scrollbar styles */}
-      <style>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-      
-      {/* --- Background Decorative Watermark --- */}
-      <div className="absolute inset-0 flex items-center justify-start pointer-events-none opacity-[0.02] overflow-hidden z-0 pl-10">
-         <h1 className="text-[25vw] whitespace-nowrap text-[#F8F3E7]">
-           ARANYA SURROUNDINGS
-         </h1>
-      </div>
+    <section id="location" className="relative bg-[#5f8975] overflow-hidden py-24 md:py-32">
+      {/* Background Subtle Gradient */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(201,164,77,0.05)_0%,transparent_50%)] pointer-events-none" />
 
       {/* --- Section Header --- */}
-      <div className="max-w-7xl mx-auto w-full relative z-20 mb-2 md:mb-8 shrink-0 px-6 md:px-12 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl"
-        >
-          <div className="flex items-center gap-4 mb-3 md:mb-4">
-            <div className="w-8 md:w-12 h-[1px] bg-gold"></div>
-            <span className="uppercase-track text-gold">Prime Location</span>
-          </div>
-          <h2 className="text-white">
-            Everything You Need,<br/>
-            <span className="text-gold italic">Within Your Reach</span>
-          </h2>
-          <p className="max-w-2xl text-white/80">
-            Aranya is perfectly situated to offer seamless connectivity to key city landmarks, premium healthcare, top educational institutions, and vibrant lifestyle destinations.
-          </p>
-        </motion.div>
-      </div>
-
-      {/* --- Horizontal Scroll Track --- */}
-      <div 
-        ref={scrollContainerRef}
-        className="flex w-full items-center relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-12"
-      >
-         {locationData.map((category, index) => (
-            <div key={category.id} className="min-w-full w-full flex flex-col justify-center px-6 md:px-12 xl:px-24 relative snap-center shrink-0">
-              
-              {/* Category Header */}
-              <div className="mb-12 md:mb-24">
-                  <div className="flex items-center gap-4 md:gap-6 mb-6">
-                    <div className="p-3 md:p-5 bg-white/10 rounded-full border border-white/30">
-                      <category.icon className="text-white" size={36} strokeWidth={1.5} />
-                    </div>
-                    <h2 className="tracking-tight text-white">{category.category}</h2>
-                  </div>
-                 <div className="w-24 md:w-48 h-[1px] bg-gradient-to-r from-[#C9A44D] to-transparent" />
-              </div>
-
-              {/* Timeline Layout */}
-              <div className="relative w-full max-w-7xl mx-auto">
-                 
-                 {/* Central Timeline Line (Desktop Only) */}
-                  <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#F8F3E7]/10 to-transparent -translate-y-1/2 hidden xl:block" />
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:flex xl:flex-row justify-center xl:justify-between gap-6 md:gap-4 relative z-10 w-full">
-                   {category.places.map((place, idx) => {
-                      const isTop = idx % 2 === 0;
-                      
-                      return (
-                          <div key={idx} className={`flex-1 flex flex-col ${isTop ? 'xl:justify-end xl:pb-20' : 'xl:justify-start xl:pt-20'} relative group min-w-0`}>
-                            
-                            {/* Connection Line & Node (Desktop Only) */}
-                             <div className={`hidden xl:block absolute left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-[#C9A44D]/0 via-[#C9A44D]/40 to-[#C9A44D]/0 transition-all duration-700 opacity-50 group-hover:opacity-100 ${isTop ? 'bottom-0 h-20' : 'top-0 h-20'}`} />
-                             <div className={`hidden xl:block absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#12382A] border-[3px] border-[#C9A44D]/50 group-hover:border-[#C9A44D] group-hover:shadow-[0_0_20px_rgba(201,164,77,0.8)] group-hover:bg-[#C9A44D] transition-all duration-500 z-20 ${isTop ? 'bottom-[-8px]' : 'top-[-8px]'}`} />
-
-                            {/* Content Card */}
-                            <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-2 p-4 md:p-6 rounded-2xl bg-[#F8F3E7]/5 border border-transparent group-hover:border-[#C9A44D]/30 group-hover:bg-[#F8F3E7]/10 transition-all duration-500 backdrop-blur-md relative z-30 mx-2 md:mx-4 hover:-translate-y-2 md:hover:-translate-y-0 hover:shadow-2xl w-full min-w-0 overflow-hidden">
-                               <div className="flex items-center gap-3 shrink-0">
-                                 <div className="p-2 rounded-full bg-deep-green border border-white/20 group-hover:border-white transition-colors duration-500">
-                                    <MapPin size={18} className="text-white/40 group-hover:text-white transition-colors" />
-                                 </div>
-                                  <span className="font-serif font-bold text-sm md:text-lg text-white break-normal whitespace-normal">{place.distance}</span>
-                               </div>
-                               <h3 className="text-sm md:text-base md:mt-2 text-left text-white w-full break-normal whitespace-normal leading-tight">{place.name}</h3>
-                            </div>
-
-                         </div>
-                      )
-                   })}
-                 </div>
-              </div>
-
-           </div>
-         ))}
-      </div>
-
-      {/* --- Navigation Controls --- */}
-       <div className="absolute bottom-10 left-0 right-0 px-6 md:px-12 xl:px-24 flex items-center justify-between z-50 pointer-events-none">
-         {/* Left Arrow */}
-          <button 
-            onClick={() => scroll('left')}
-            className={`p-3 md:p-4 rounded-full bg-deep-green border border-white/30 text-white backdrop-blur-md transition-all duration-300 pointer-events-auto hover:bg-white hover:text-deep-green shadow-lg ${scrollProgress <= 0.01 ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0 hover:scale-110'}`}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mb-16 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
           >
-           <ChevronLeft size={24} />
-         </button>
-
-         {/* Scroll Progress Indicator */}
-          <div className="flex flex-col items-center gap-3 pointer-events-auto">
-            <span className="uppercase-track text-white/80 flex items-center gap-2">
-              Explore Surroundings
-            </span>
-            <div className="w-[120px] md:w-[200px] h-[2px] bg-white/10 rounded-full overflow-hidden relative">
-              <motion.div 
-                className="h-full bg-white absolute top-0 left-0"
-                style={{ width: `${scrollProgress * 100}%` }}
-                layout
-              />
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-10 h-[1px] bg-gold" />
+              <span className="uppercase tracking-[0.3em] text-gold text-xs font-medium">The Vicinity</span>
             </div>
-          </div>
+            <h2 className="text-4xl md:text-6xl text-white font-serif leading-tight">
+              A Nexus of <br />
+              <span className="text-gold italic font-light">Sophistication</span>
+            </h2>
+          </motion.div>
 
-         {/* Right Arrow */}
-          <button 
-            onClick={() => scroll('right')}
-            className={`p-3 md:p-4 rounded-full bg-deep-green border border-white/30 text-white backdrop-blur-md transition-all duration-300 pointer-events-auto hover:bg-white hover:text-deep-green shadow-lg ${scrollProgress >= 0.99 ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0 hover:scale-110'}`}
+          {/* Navigation Pills */}
+          <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
+            {locationData.map((item, idx) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(idx)}
+                className={`px-4 py-2 rounded-full text-[10px] uppercase tracking-widest transition-all duration-500 ${activeTab === idx ? "bg-gold text-deep-green" : "text-white/40 hover:text-white"
+                  }`}
+              >
+                {item.category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* --- Content Area --- */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6, ease: "circOut" }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
           >
-           <ChevronRight size={24} />
-         </button>
+            {/* Big Indicator Info */}
+            <div className="lg:col-span-4">
+              <div className="relative">
+                <span className="text-[12rem] font-serif text-white/[0.03] absolute -top-24 -left-10 select-none">
+                  0{activeTab + 1}
+                </span>
+                <div className="relative z-10">
+                  <div className="w-16 h-16 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-6 text-gold">
+                    {React.createElement(locationData[activeTab].icon, { size: 32, strokeWidth: 1.2 })}
+                  </div>
+                  <h3 className="text-3xl text-white font-serif mb-4">{locationData[activeTab].category}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed max-w-xs">
+                    Strategically connected to the heartbeat of Guwahati, ensuring every essential is just minutes away.
+                  </p>
+                </div>
+              </div>
+
+              {/* Arrow Controls */}
+              <div className="flex gap-4 mt-12">
+                <button onClick={prevTab} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-deep-green transition-all duration-500">
+                  <ChevronLeft size={20} />
+                </button>
+                <button onClick={nextTab} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-deep-green transition-all duration-500">
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* Places Grid */}
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {locationData[activeTab].places.map((place, idx) => (
+                <motion.div
+                  key={place.name}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="group relative p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-gold/30 transition-all duration-700 overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 group-hover:text-gold transition-all duration-700">
+                    <MapPin size={16} />
+                  </div>
+
+                  <div className="flex flex-col justify-between h-full">
+                    <span className="text-gold font-serif text-2xl mb-4 group-hover:scale-110 transition-transform duration-500 block origin-left">
+                      {place.distance}
+                    </span>
+                    <div>
+                      <div className="w-8 h-[1px] bg-white/20 mb-3 group-hover:w-full transition-all duration-700" />
+                      <h4 className="text-white group-hover:text-gold transition-colors duration-500 text-sm md:text-base tracking-wide uppercase-track">
+                        {place.name}
+                      </h4>
+                    </div>
+                  </div>
+
+                  {/* Decorative background hover element */}
+                  <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-gold/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* --- Footer Progress --- */}
+      <div className="mt-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex items-center gap-6 opacity-30">
+        <span className="text-white text-[10px] tracking-widest uppercase">Connectivity Hub</span>
+        <div className="flex-1 h-[1px] bg-white/10 relative">
+          <motion.div
+            className="absolute h-full bg-gold top-0 left-0"
+            animate={{ width: `${((activeTab + 1) / locationData.length) * 100}%` }}
+          />
+        </div>
+        <span className="text-white text-[10px] tracking-widest uppercase">LGBI International</span>
+      </div>
+
+      {/* Decorative Large Text Watermark */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.02] translate-y-1/2">
+        <h1 className="text-[20vw] font-serif text-white whitespace-nowrap">
+          ARANYA SURROUNDINGS
+        </h1>
       </div>
     </section>
   );

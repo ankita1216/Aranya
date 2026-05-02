@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mail, MapPin, Phone, Globe } from "lucide-react";
 import { motion } from "framer-motion";
+import DecorativeElements from "./DecorativeElements";
 
 const navLinks = [
   { name: "About", href: "#experience" },
@@ -14,6 +15,8 @@ export default function FooterSection() {
 
   return (
     <footer className="relative bg-[#0B2117] pt-20 pb-10 px-8 md:px-16 lg:px-24 overflow-hidden text-[#F8F3E7]">
+      <DecorativeElements type="organic" position="left-top" color="#C9A44D" opacity={0.04} size="w-64" />
+      <DecorativeElements type="leaf" position="right-center" color="#C9A44D" opacity={0.03} size="w-72" />
       {/* Background Decorative Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C9A44D]/[0.03] rounded-full blur-[120px] pointer-events-none" />
 

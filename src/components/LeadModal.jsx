@@ -10,7 +10,8 @@ export default function LeadModal({ isOpen, onClose }) {
     phone: "",
     email: "",
     price: "",
-    location: ""
+    location: "",
+    message: ""
   });
 
   useEffect(() => {
@@ -147,7 +148,16 @@ export default function LeadModal({ isOpen, onClose }) {
                     </select>
                   </div>
                 </div>
-
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-[#407266]/60 ml-1">Message</label>
+                  <textarea
+                    placeholder="Your message (optional)"
+                    rows={2}
+                    className="w-full rounded-xl border border-[#407266]/10 bg-white px-5 py-3 text-sm text-black placeholder:text-black/50 outline-none transition-colors focus:border-[#c9a44d] resize-none"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  />
+                </div>
                 <motion.button
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}

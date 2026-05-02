@@ -31,6 +31,7 @@ function LandingPage() {
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [isQuoteVisible, setIsQuoteVisible] = useState(false);
   const [hasScrolledForEnquiry, setHasScrolledForEnquiry] = useState(false);
+  const [isTimeElapsed, setIsTimeElapsed] = useState(false);
   const walkthroughRef = useRef(null);
   const quoteRef = useRef(null);
   const footerRef = useRef(null);
@@ -108,6 +109,15 @@ function LandingPage() {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsModalOpen(true);
+      setIsTimeElapsed(true);
+    }, 10000); // 10 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main className="w-full max-w-full overflow-x-hidden" style={{ backgroundColor: '#407266' }}>
       <Navbar isHidden={isHeaderHidden} onOpenModal={() => setIsModalOpen(true)} />
@@ -142,7 +152,7 @@ function LandingPage() {
         </div>
         
         <LeadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        <BottomEnquiryForm isVisible={hasScrolledForEnquiry && !isQuoteVisible && !isFooterVisible && !isModalOpen} />
+        <BottomEnquiryForm isVisible={isTimeElapsed && hasScrolledForEnquiry && !isQuoteVisible && !isFooterVisible && !isModalOpen} />
       </Suspense>
     </main>
   );

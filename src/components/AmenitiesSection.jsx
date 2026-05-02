@@ -12,34 +12,35 @@ import {
   Wind,
   Library,
   Flame,
-  Utensils
+  Utensils,
+  ArrowUpRight
 } from "lucide-react";
 
 const amenities = [
-  { name: "Infinity Pool", icon: Waves, desc: "A serene escape with panoramic views of the horizon." },
-  { name: "Modern Gym", icon: Dumbbell, desc: "State-of-the-art equipment for your daily fitness ritual." },
-  { name: "Zen Gardens", icon: Trees, desc: "Private green alcoves designed for deep meditation." },
-  { name: "Club Lounge", icon: Coffee, desc: "Premium spaces for social connections and quiet work." },
-  { name: "Gaming Zone", icon: Gamepad2, desc: "High-tech indoor recreation area for all age groups." },
-  { name: "24/7 Security", icon: ShieldCheck, desc: "Advanced smart-surveillance and concierge systems." },
-  { name: "Banquet Hall", icon: Users, desc: "Grand venues tailored for your milestone celebrations." },
-  { name: "Wellness Spa", icon: Sparkles, desc: "Curated therapies for total mental and physical rejuvenation." },
-  { name: "Jogging Track", icon: Wind, desc: "Lush, landscaped pathways for your morning runs." },
-  { name: "Reading Room", icon: Library, desc: "A quiet sanctuary for literature and peaceful study." },
-  { name: "BBQ Pavilion", icon: Flame, desc: "Open-air pits for gourmet weekend gatherings." },
-  { name: "Fine Dining", icon: Utensils, desc: "In-house culinary experiences within the complex." },
+  { name: "Infinity Pool", icon: Waves, desc: "A serene escape with panoramic views of the horizon.", size: "lg" },
+  { name: "Modern Gym", icon: Dumbbell, desc: "State-of-the-art equipment for your fitness ritual.", size: "md" },
+  { name: "Zen Gardens", icon: Trees, desc: "Private green alcoves for meditation.", size: "md" },
+  { name: "Club Lounge", icon: Coffee, desc: "Premium spaces for social connections.", size: "md" },
+  { name: "Gaming Zone", icon: Gamepad2, desc: "High-tech indoor recreation area.", size: "md" },
+  { name: "24/7 Security", icon: ShieldCheck, desc: "Advanced smart-surveillance systems.", size: "lg" },
+  { name: "Banquet Hall", icon: Users, desc: "Grand venues for milestone celebrations.", size: "md" },
+  { name: "Wellness Spa", icon: Sparkles, desc: "Curated therapies for rejuvenation.", size: "md" },
+  { name: "Jogging Track", icon: Wind, desc: "Lush pathways for morning runs.", size: "md" },
+  { name: "Reading Room", icon: Library, desc: "A quiet sanctuary for literature.", size: "md" },
+  { name: "BBQ Pavilion", icon: Flame, desc: "Open-air pits for gourmet gatherings.", size: "lg" },
+  { name: "Fine Dining", icon: Utensils, desc: "In-house culinary experiences.", size: "md" },
 ];
 
 export default function AmenitiesSection() {
   return (
     <section id="amenities" className="relative py-24 overflow-hidden bg-[#f5efe1] text-[#172018]">
 
-      {/* --- MATCHING HERO GRID BACKGROUND --- */}
+      {/* --- BG GRID MAINTAINED --- */}
       <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(90deg,#8c7b45_1px,transparent_1px),linear-gradient(0deg,#8c7b45_1px,transparent_1px)] [background-size:4.2rem_4.2rem]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
 
-        {/* Section Header */}
+        {/* Header - Kept same as request */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div className="max-w-2xl">
             <motion.p
@@ -70,50 +71,44 @@ export default function AmenitiesSection() {
           </motion.p>
         </div>
 
-        {/* Amenities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+        {/* --- NEW BENTO GRID DESIGN --- */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
           {amenities.map((item, index) => (
             <motion.div
               key={item.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="group relative"
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="break-inside-avoid group relative bg-white/40 backdrop-blur-sm border border-[#8c7b45]/10 p-8 rounded-3xl hover:bg-white hover:border-[#C9A44D]/30 transition-all duration-500 shadow-sm hover:shadow-2xl"
             >
-              {/* --- PREMIUM ICON DISPLAY --- */}
-              <div className="relative w-16 h-16 mb-8">
-                {/* Decorative background shadow/glow */}
-                <div className="absolute inset-0 bg-[#C9A44D]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                {/* Back Layer (The Offset Plate) */}
-                <div className="absolute inset-0 bg-[#8c7b45]/10 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform duration-500" />
-
-                {/* Front Layer (The Icon Container) */}
-                <div className="absolute inset-0 bg-white border border-[#C9A44D]/20 rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-500">
-                  <item.icon
-                    strokeWidth={1.2}
-                    className="w-8 h-8 text-[#8a7033] group-hover:text-[#172018] transition-colors duration-500"
-                  />
-                </div>
+              {/* Corner Icon Accent */}
+              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <ArrowUpRight className="w-5 h-5 text-[#C9A44D]" />
               </div>
 
-              {/* Text Content */}
-              <h3 className="font-serif text-2xl text-[#172018] mb-3 group-hover:text-[#8a7033] transition-colors duration-300">
+              {/* Icon Container */}
+              <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#172018] text-[#f5efe1] group-hover:bg-[#C9A44D] group-hover:rotate-[360deg] transition-all duration-700">
+                <item.icon strokeWidth={1.5} className="w-6 h-6" />
+              </div>
+
+              {/* Content */}
+              <h3 className="font-serif text-2xl text-[#172018] mb-3">
                 {item.name}
               </h3>
-              <p className="text-[13px] leading-relaxed text-[#314033]/70 font-medium max-w-[240px]">
+
+              <p className="text-[13px] leading-relaxed text-[#314033]/70 font-medium">
                 {item.desc}
               </p>
 
-              {/* Animated Underline */}
-              <div className="mt-6 w-8 h-[1px] bg-[#C9A44D]/30 group-hover:w-full transition-all duration-700 origin-left" />
+              {/* Interaction Stripe */}
+              <div className="mt-8 h-[2px] w-0 bg-[#C9A44D] group-hover:w-12 transition-all duration-500" />
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Decorative Large Watermark */}
+      {/* Watermark maintained */}
       <div className="absolute -bottom-10 right-0 opacity-[0.03] select-none pointer-events-none">
         <h2 className="font-serif text-[15vw] leading-none text-[#172018]">LUXURY</h2>
       </div>

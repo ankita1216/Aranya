@@ -116,7 +116,7 @@ function AmenityCard({ item, index }) {
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, delay: index * 0.035 }}
       className={[
-        "group relative min-h-[17rem] overflow-hidden rounded-lg border shadow-[0_18px_45px_rgba(26,31,24,0.12)] lg:min-h-0",
+        "group relative min-h-[14.5rem] overflow-hidden rounded-lg border shadow-[0_18px_45px_rgba(26,31,24,0.12)] sm:min-h-[15.5rem] md:min-h-[17rem] lg:min-h-0",
         "border-[#d8cba8]/65 bg-[#f7f0e3]",
         item.className,
       ].join(" ")}
@@ -127,7 +127,7 @@ function AmenityCard({ item, index }) {
           <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#c9a44d]/16 blur-2xl" />
         </div>
       ) : item.split ? (
-        <div className="absolute inset-0 grid grid-cols-1 sm:grid-cols-[1.25fr_0.95fr]">
+        <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-[1.25fr_0.95fr]">
           <img
             src={item.image}
             alt=""
@@ -135,7 +135,7 @@ function AmenityCard({ item, index }) {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
-          <div className="relative flex h-full flex-col justify-center bg-[#4b3623] p-6 text-[#fbf5e9]">
+          <div className="relative hidden h-full flex-col justify-center bg-[#4b3623] p-6 text-[#fbf5e9] md:flex">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.13),transparent_44%)]" />
           </div>
         </div>
@@ -163,7 +163,7 @@ function AmenityCard({ item, index }) {
       )}
 
       {item.horizontal ? (
-        <div className="relative z-10 flex h-full min-h-[8.5rem] items-center gap-5 p-5 sm:gap-6 sm:p-6 lg:min-h-0">
+        <div className="relative z-10 flex h-full min-h-[7.5rem] items-center gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 lg:min-h-0">
           <div className="flex h-[3.25rem] w-[3.25rem] shrink-0 items-center justify-center rounded-lg border border-[#c9a44d]/35 bg-[#142419] text-[#f8f0df] shadow-lg">
             <Icon strokeWidth={1.45} className="h-6 w-6" />
           </div>
@@ -175,24 +175,24 @@ function AmenityCard({ item, index }) {
       ) : (
         <div
           className={[
-            "relative z-10 flex h-full flex-col justify-end p-5 sm:p-6",
+            "relative z-10 flex h-full flex-col justify-end p-4 sm:p-5 md:p-6",
             item.light ? "text-[#1a261d]" : "text-[#fbf5e9]",
-            item.split ? "sm:ml-[55%]" : "",
+            item.split ? "md:ml-[55%]" : "",
           ].join(" ")}
         >
-          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-[#c9a44d]/35 bg-[#142419] text-[#f8f0df] shadow-lg">
-            <Icon strokeWidth={1.45} className="h-6 w-6" />
+          <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-[#c9a44d]/35 bg-[#142419] text-[#f8f0df] shadow-lg sm:h-12 sm:w-12">
+            <Icon strokeWidth={1.45} className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>
-          <h3 className="font-serif text-[1.65rem] leading-none">{item.name}</h3>
+          <h3 className="font-serif text-[1.45rem] leading-none sm:text-[1.65rem]">{item.name}</h3>
           <p
             className={[
-              "mt-3 max-w-[15rem] text-[13px] leading-relaxed",
+              "mt-2 max-w-[15rem] text-[12px] leading-relaxed sm:mt-3 sm:text-[13px]",
               item.light ? "text-[#314033]/70" : "text-[#fff8eb]/86",
             ].join(" ")}
           >
             {item.desc}
           </p>
-          <span className="mt-5 block h-[2px] w-9 bg-[#c9a44d]" />
+          <span className="mt-4 block h-[2px] w-9 bg-[#c9a44d] sm:mt-5" />
         </div>
       )}
     </motion.article>
@@ -229,7 +229,7 @@ function AmenitiesFinish() {
 
 export default function AmenitiesSection() {
   return (
-    <section id="amenities" className="relative w-full max-w-full overflow-hidden bg-[#f5efe1] py-20 text-[#172018] md:py-24">
+    <section id="amenities" className="relative w-full max-w-full overflow-hidden bg-[#f5efe1] py-14 text-[#172018] md:py-24">
 
       <div className="pointer-events-none absolute -right-28 -top-20 h-96 w-96 rounded-full bg-[#d9c080]/20 blur-3xl" />
       <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 opacity-[0.1] [background:repeating-conic-gradient(from_18deg,#2d3c2f_0deg_3deg,transparent_3deg_10deg)] [clip-path:ellipse(54%_70%_at_100%_0%)]" />
@@ -237,13 +237,13 @@ export default function AmenitiesSection() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1420px] px-5 sm:px-8 lg:px-12">
 
-        <div className="mb-12 grid min-w-0 gap-8 lg:mb-14">
+        <div className="mb-9 grid min-w-0 gap-8 md:mb-12 lg:mb-14">
           <div className="min-w-0">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-5 flex max-w-full items-center gap-5 text-[11px] font-semibold uppercase tracking-[0.36em] text-[#9b7422] opacity-100 sm:gap-7 sm:tracking-[0.48em]"
+              className="mb-4 flex max-w-full items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#9b7422] opacity-100 sm:mb-5 sm:gap-7 sm:text-[11px] sm:tracking-[0.42em]"
             >
               <span className="h-[1px] w-9 bg-[#9b7422]" /> Lifestyle Elevated
             </motion.p>
@@ -251,14 +251,14 @@ export default function AmenitiesSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-[58rem] font-serif text-[clamp(3rem,6vw,5.6rem)] font-normal leading-[0.95] text-[#102016] drop-shadow-[0_1px_0_rgba(255,255,255,0.75)]"
+              className="max-w-[58rem] font-serif text-[clamp(2.55rem,12vw,5.6rem)] font-normal leading-[0.95] text-[#102016] drop-shadow-[0_1px_0_rgba(255,255,255,0.75)]"
             >
               The <span className="italic text-[#bd8f2a]">Amenities</span> <span className="block xl:inline">Selection</span>
             </motion.h2>
           </div>
         </div>
 
-        <div className="grid min-w-0 auto-rows-[8.25rem] grid-cols-1 gap-5 sm:grid-cols-2 lg:auto-rows-[7.25rem] lg:[grid-auto-flow:dense] lg:[grid-template-columns:repeat(12,minmax(0,1fr))]">
+        <div className="grid min-w-0 auto-rows-auto grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:auto-rows-[7.25rem] lg:[grid-auto-flow:dense] lg:[grid-template-columns:repeat(12,minmax(0,1fr))]">
           {amenities.map((item, index) => (
             <AmenityCard key={item.name} item={item} index={index} />
           ))}

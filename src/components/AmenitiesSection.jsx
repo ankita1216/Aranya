@@ -68,7 +68,7 @@ export default function AmenitiesSection() {
       {/* Background Decorative Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto relative z-10 px-4 md:px-0">
+      <div className="max-w-7xl mx-auto relative z-10 px-6 md:px-12 lg:px-16">
         {/* Header */}
         <div className="text-center mb-2 md:mb-8">
           <motion.p 

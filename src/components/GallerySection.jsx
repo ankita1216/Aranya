@@ -74,10 +74,10 @@ export default function GallerySection() {
   return (
     <section
       id="gallery"
-      className="bg-deep-green section-padding overflow-hidden relative"
+      className="bg-warm-white section-padding overflow-hidden relative"
     >
       {/* ── Header ── */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 px-4 md:px-0">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function GallerySection() {
           <p className="uppercase-track text-gold mb-2">
             The Gallery
           </p>
-          <h2 className="text-white">
+          <h2 className="text-deep-green">
             Endless <em className="text-gold italic">Elegance</em>
           </h2>
         </motion.div>
@@ -105,8 +105,8 @@ export default function GallerySection() {
               key={cat}
               onClick={() => handleCategory(cat)}
               className={`uppercase-track text-[9px] px-4 py-2 border transition-all duration-300 ${activeCategory === cat
-                  ? "bg-gold text-deep-green border-gold"
-                  : "bg-transparent text-white/40 border-white/10 hover:border-white/30"
+                  ? "bg-gold text-white border-gold"
+                  : "bg-transparent text-deep-green/40 border-deep-green/10 hover:border-deep-green/30"
                 }`}
             >
               {cat}
@@ -116,7 +116,7 @@ export default function GallerySection() {
       </div>
 
       {/* ── Main area: image + sidebar ── */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 px-4 md:px-0">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
 
         {/* LEFT: active image — natural size, no crop */}
         <div style={{ position: "relative" }}>
@@ -165,7 +165,7 @@ export default function GallerySection() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "14px 0",
-                borderBottom: "1px solid rgba(201,164,77,0.15)",
+                borderBottom: "1px solid rgba(45,86,68,0.15)",
               }}
             >
               <div>
@@ -178,14 +178,14 @@ export default function GallerySection() {
                 </span>
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 20, fontWeight: 400, color: "#F0E8D5",
+                  fontSize: 20, fontWeight: 400, color: "#2D5644",
                 }}>
                   {current?.title}
                 </span>
               </div>
               <span style={{
                 fontFamily: "sans-serif", fontSize: 10,
-                letterSpacing: "0.2em", color: "rgba(240,232,213,0.25)",
+                letterSpacing: "0.2em", color: "rgba(45,86,68,0.25)",
               }}>
                 {String(safeIndex + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
               </span>
@@ -198,27 +198,27 @@ export default function GallerySection() {
               onClick={() => goTo((safeIndex - 1 + filtered.length) % filtered.length)}
               style={{
                 width: 44, height: 44, background: "transparent",
-                border: "1px solid rgba(240,232,213,0.12)",
-                color: "rgba(240,232,213,0.45)",
+                border: "1px solid rgba(45,86,68,0.12)",
+                color: "rgba(45,86,68,0.45)",
                 cursor: "pointer", fontSize: 18,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 transition: "all 0.2s",
               }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "#C9A44D"; e.currentTarget.style.color = "#C9A44D"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(240,232,213,0.12)"; e.currentTarget.style.color = "rgba(240,232,213,0.45)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(45,86,68,0.12)"; e.currentTarget.style.color = "rgba(45,86,68,0.45)"; }}
             >←</button>
             <button
               onClick={() => goTo((safeIndex + 1) % filtered.length)}
               style={{
                 width: 44, height: 44, background: "transparent",
-                border: "1px solid rgba(240,232,213,0.12)",
-                color: "rgba(240,232,213,0.45)",
+                border: "1px solid rgba(45,86,68,0.12)",
+                color: "rgba(45,86,68,0.45)",
                 cursor: "pointer", fontSize: 18,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 transition: "all 0.2s",
               }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "#C9A44D"; e.currentTarget.style.color = "#C9A44D"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(240,232,213,0.12)"; e.currentTarget.style.color = "rgba(240,232,213,0.45)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(45,86,68,0.12)"; e.currentTarget.style.color = "rgba(45,86,68,0.45)"; }}
             >→</button>
           </div>
         </div>
@@ -230,7 +230,7 @@ export default function GallerySection() {
           maxHeight: "80vh",
           overflowY: "auto",
           scrollbarWidth: "none",
-          borderLeft: "1px solid rgba(240,232,213,0.06)",
+          borderLeft: "1px solid rgba(45,86,68,0.06)",
           paddingLeft: 2,
         }}>
           {filtered.map((item, i) => {
@@ -249,14 +249,14 @@ export default function GallerySection() {
                   padding: "10px 16px",
                   background: isActive ? "rgba(201,164,77,0.07)" : "transparent",
                   border: "none",
-                  borderBottom: "1px solid rgba(240,232,213,0.05)",
+                  borderBottom: "1px solid rgba(45,86,68,0.05)",
                   borderLeft: isActive ? "2px solid #C9A44D" : "2px solid transparent",
                   cursor: "pointer",
                   textAlign: "left",
                   transition: "all 0.2s ease",
                   flexShrink: 0,
                 }}
-                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = "rgba(240,232,213,0.025)"; }}
+                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = "rgba(45,86,68,0.025)"; }}
                 onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = "transparent"; }}
               >
                 {/* Thumb */}
@@ -275,10 +275,10 @@ export default function GallerySection() {
 
                 {/* Label */}
                 <div className="flex-1 min-w-0">
-                  <p className={`uppercase-track text-[9px] mb-1 transition-colors duration-300 ${isActive ? "text-gold" : "text-white/20"}`}>
+                  <p className={`uppercase-track text-[9px] mb-1 transition-colors duration-300 ${isActive ? "text-gold" : "text-deep-green/20"}`}>
                     {item.category}
                   </p>
-                  <p className={`font-serif text-sm transition-colors duration-300 truncate ${isActive ? "text-warm-white" : "text-white/40"}`}>
+                  <p className={`font-serif text-sm transition-colors duration-300 truncate ${isActive ? "text-deep-green" : "text-deep-green/40"}`}>
                     {item.title}
                   </p>
                 </div>

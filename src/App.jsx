@@ -12,10 +12,34 @@ import FooterSection from './components/FooterSection'
 import SectionWrapper from './components/SectionWrapper'
 import AranyaHighlight from './components/AranyaHighlight'
 
+import { useState, useEffect, useRef } from 'react'
+
 function LandingPage() {
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const walkthroughRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeaderHidden(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // Hide when at least 10% of walkthrough is visible
+    );
+
+    if (walkthroughRef.current) {
+      observer.observe(walkthroughRef.current);
+    }
+
+    return () => {
+      if (walkthroughRef.current) {
+        observer.unobserve(walkthroughRef.current);
+      }
+    };
+  }, []);
+
   return (
     <main style={{ backgroundColor: '#2D5644' }}>
-      <Navbar />
+      <Navbar isHidden={isHeaderHidden} />
       
       {/* Hero stays static/sticky as intended, wrapped in its original dark bg */}
       <div style={{ backgroundColor: '#06100B' }}>
@@ -27,19 +51,18 @@ function LandingPage() {
       </SectionWrapper>
 
       <AmenitiesSection />
+      
+      <div ref={walkthroughRef}>
+        <VideoWalkthrough />
+      </div>
 
-      <LocationSection />
+      <GallerySection />
+
+      <PlanSection />
 
       <AranyaHighlight />
 
-      <SectionWrapper id="plans">
-        <PlanSection />
-      </SectionWrapper>
-
-      {/* Video Walkthrough is a scroll-portal, usually best without extra wrapper scale */}
-      <VideoWalkthrough />
-
-      <GallerySection />
+      <LocationSection />
       
       <FooterSection />
     </main>

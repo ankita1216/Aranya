@@ -63,7 +63,7 @@ export default function PlanSection() {
   };
 
   return (
-    <section id="plans" className="relative  bg-deep-green overflow-hidden">
+    <section id="plans" className="relative bg-deep-green overflow-hidden section-padding">
       {/* Background aesthetics */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[rgba(201,164,77,0.03)] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[rgba(18,56,42,0.4)] rounded-full blur-[120px] pointer-events-none" />

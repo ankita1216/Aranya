@@ -111,10 +111,10 @@ export default function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
                 
                 <div className="absolute bottom-8 md:bottom-12 left-6 md:left-10 right-6 md:right-10 text-center">
-                  <span className="inline-block px-3 py-1 border border-white/40 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] text-white mb-3">
+                  <span className="inline-block px-3 py-1 border border-white/40 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] !text-white mb-3">
                     {item.label}
                   </span>
-                  <h3 className="font-serif text-lg md:text-2xl text-white leading-tight">
+                  <h3 className="font-serif text-lg md:text-2xl !text-white leading-tight">
                     {item.title}
                   </h3>
                 </div>

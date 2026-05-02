@@ -70,7 +70,7 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="absolute top-10 left-8 md:left-16 flex items-center gap-3"
+          className="absolute top-10 left-6 md:left-12 lg:left-16 flex items-center gap-3"
         >
           <div className="w-6 h-[1px] bg-[#C9A44D]" />
           <span className="uppercase-track text-[10px] text-[#C9A44D] tracking-[0.25em]">The Vision</span>
@@ -82,14 +82,14 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="absolute top-8 right-8 md:right-16 flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-[#C9A44D]/40 bg-[rgba(45,86,68,0.55)] backdrop-blur-md"
+          className="absolute top-8 right-6 md:right-12 lg:right-16 flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-[#C9A44D]/40 bg-[rgba(45,86,68,0.55)] backdrop-blur-md"
         >
           <span className="text-2xl md:text-3xl font-bold text-[#C9A44D]">70%</span>
           <span className="uppercase-track text-[7px] text-white/60 text-center leading-tight mt-1 px-2">Open Green</span>
         </motion.div>
 
         {/* Title overlay at bottom of image */}
-        <div className="absolute bottom-0 left-0 right-0 px-8 md:px-16 pb-12 md:pb-20">
+        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 lg:px-16 pb-12 md:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ export default function AboutSection() {
       </div>
 
       {/* ── CONTENT BELOW IMAGE ── */}
-      <div className="relative z-10 max-w-7xl mx-auto mt-16 md:mt-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mt-16 md:mt-24">
 
         {/* Intro row */}
         <div className="grid lg:grid-cols-2 gap-12 mb-24 items-start">

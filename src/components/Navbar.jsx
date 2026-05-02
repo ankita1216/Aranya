@@ -11,7 +11,7 @@ const navLinks = [
   { name: "Gallery", href: "#gallery" }
 ];
 
-export default function Navbar() {
+export default function Navbar({ isHidden }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHero, setIsHero] = useState(true);
 
@@ -32,9 +32,16 @@ export default function Navbar() {
   return (
     <>
       {/* --- Navigation --- */}
-      <nav className={`fixed top-0 left-0 w-full z-50 px-6 lg:px-16 py-5 flex justify-between items-center transition-all duration-500 ${
-        isHero ? "bg-transparent" : "bg-[#2D5644]/90 backdrop-blur-md shadow-lg"
-      }`}>
+      <nav 
+        className={`fixed top-0 left-0 w-full z-50 px-6 lg:px-16 py-5 flex justify-between items-center transition-all duration-500 ${
+          isHero ? "bg-transparent" : "bg-[#2D5644]/90 backdrop-blur-md shadow-lg"
+        }`}
+        style={{
+          transform: isHidden ? "translateY(-100%)" : "translateY(0)",
+          opacity: isHidden ? 0 : 1,
+          pointerEvents: isHidden ? "none" : "auto"
+        }}
+      >
         {/* Logo */}
         <div className="flex items-center gap-2">
           <img 

@@ -125,7 +125,7 @@ export default function LocationSection() {
       </div>
 
       {/* --- Section Header --- */}
-      <div className="max-w-7xl mx-auto w-full relative z-20 mb-2 md:mb-8 shrink-0 px-4 md:px-0">
+      <div className="max-w-7xl mx-auto w-full relative z-20 mb-2 md:mb-8 shrink-0 px-6 md:px-12 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

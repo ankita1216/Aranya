@@ -73,7 +73,7 @@ export default function AranyaHighlight() {
                   <div className="w-12 h-[1px] bg-gold/50" />
                 </div>
                 
-                <h2 className="text-white mb-10 drop-shadow-2xl">
+                <h2 className="!text-white mb-10 drop-shadow-2xl">
                   Nature's <br />
                   <span className="italic text-gold font-light">Grandeur</span>
                 </h2>
@@ -81,7 +81,7 @@ export default function AranyaHighlight() {
 
               <div className="w-24 h-[1px] bg-gold mx-auto mb-10" />
               
-              <p className="text-white/80 text-lg md:text-4xl font-light tracking-wide leading-relaxed max-w-4xl mx-auto italic font-serif">
+              <p className="!text-white/80 text-lg md:text-4xl font-light tracking-wide leading-relaxed max-w-4xl mx-auto italic font-serif">
                 "A masterpiece where every corner whispers the story of grace."
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function AranyaHighlight() {
       </div>
       
       {/* Scroll Hint */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 opacity-40">
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 opacity-80">
         <span className="uppercase-track text-[9px] text-deep-green tracking-[0.4em]">Explore the Vision</span>
         <div className="w-[1px] h-16 bg-gradient-to-b from-deep-green to-transparent" />
       </div>

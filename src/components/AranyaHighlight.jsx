@@ -1,109 +1,149 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
-import DecorativeElements from "./DecorativeElements";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
+
+const aranyaViews = [
+  {
+    src: "/images/Aranya.webp",
+    label: "Arrival View",
+    note: "Arrival framed by landscape.",
+  },
+  {
+    src: "/images/Aranya2.png",
+    label: "Garden Edge",
+    note: "Homes layered with open greens.",
+  },
+  {
+    src: "/images/Aranya3.png",
+    label: "Evening Mood",
+    note: "A warmer evening perspective.",
+  },
+  {
+    src: "/images/Aranya4.png",
+    label: "Wide Perspective",
+    note: "The complete Aranya canvas.",
+  },
+];
 
 export default function AranyaHighlight() {
   const containerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeView = aranyaViews[activeIndex];
 
-  // Track scroll progress for the cinematic expansion
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const frameScale = useTransform(smoothProgress, [0.1, 0.45], [0.84, 1]);
+  const frameRadius = useTransform(smoothProgress, [0.1, 0.45], ["42px", "0px"]);
+  const frameOpacity = useTransform(smoothProgress, [0.04, 0.12, 0.84, 0.94], [0, 1, 1, 0]);
+  const imageScale = useTransform(smoothProgress, [0.1, 0.8], [1.12, 1]);
+  const imageY = useTransform(smoothProgress, [0.1, 0.8], ["-4%", "4%"]);
+  const contentOpacity = useTransform(smoothProgress, [0.14, 0.28], [0, 1]);
+  const contentY = useTransform(smoothProgress, [0.14, 0.28], [20, 0]);
 
-  // Frame expansion logic: Starts as a contained box and grows to full screen
-  const frameScale = useTransform(smoothProgress, [0.1, 0.45], [0.85, 1]);
-  const frameRadius = useTransform(smoothProgress, [0.1, 0.45], ["40px", "0px"]);
-  const frameOpacity = useTransform(smoothProgress, [0.05, 0.15, 0.85, 0.95], [0, 1, 1, 0]);
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % aranyaViews.length);
+    }, 4200);
 
-  // Internal image parallax/zoom
-  const imageScale = useTransform(smoothProgress, [0.1, 0.8], [1.15, 1]);
-  const imageY = useTransform(smoothProgress, [0.1, 0.8], ["-5%", "5%"]);
-
-  // Text reveal logic
-  const contentOpacity = useTransform(smoothProgress, [0.1, 0.25], [0, 1]);
-  const contentY = useTransform(smoothProgress, [0.1, 0.25], [40, 0]);
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative h-[180vh] bg-warm-white z-20"
-    >
-      <DecorativeElements type="leaf" position="left-top" opacity={0.06} size="w-72" />
-      <DecorativeElements type="organic" position="right-bottom" opacity={0.08} size="w-80" />
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+    <section ref={containerRef} className="relative z-20 h-[116vh] bg-[#f8f0df] sm:h-[124vh]">
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
         <motion.div
           style={{
             scale: frameScale,
             borderRadius: frameRadius,
-            opacity: frameOpacity
+            opacity: frameOpacity,
           }}
-          className="relative w-[100%] h-full md:h-screen overflow-hidden bg-[#06100B] shadow-[0_0_100px_rgba(0,0,0,0.4)]"
+          className="relative h-full w-full overflow-hidden bg-[#06100B] shadow-[0_0_100px_rgba(0,0,0,0.36)] md:h-screen"
         >
-          {/* Main Background Image */}
-          <motion.div
-            className="w-full h-full relative"
-            style={{ y: imageY }}
-          >
-            <motion.img
-              style={{ scale: imageScale }}
-              src="/images/Aranya.webp"
-              alt="Aranya Landmark"
-              className="w-full h-full object-cover"
-            />
-
-            {/* Cinematic Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40" />
+          <motion.div className="relative h-full w-full" style={{ y: imageY }}>
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeView.src}
+                src={activeView.src}
+                alt={activeView.label}
+                style={{ scale: imageScale }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/8 to-black/18" />
           </motion.div>
 
-          {/* Floating Content Overlay */}
           <motion.div
             style={{ opacity: contentOpacity, y: contentY }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-20"
+            className="absolute inset-x-0 bottom-12 z-10 flex justify-end px-4 text-right sm:bottom-16 sm:px-8 lg:px-14"
           >
-            <div className="relative z-10">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1 }}
-                className="mb-8"
-              >
-                <div className="flex items-center justify-center gap-4 mb-6">
-                  <div className="w-12 h-[1px] bg-gold/50" />
-                  <span className="uppercase-track text-gold text-xs md:text-sm tracking-[0.6em]">The Landmark</span>
-                  <div className="w-12 h-[1px] bg-gold/50" />
-                </div>
-
-                <h2 className="!text-white mb-10 drop-shadow-2xl">
-                  Nature's <br />
-                  <span className="italic text-gold font-light">Grandeur</span>
-                </h2>
-              </motion.div>
-
-              <div className="w-24 h-[1px] bg-gold mx-auto mb-10" />
-
-              <p className="!text-white/80 text-lg md:text-4xl font-light tracking-wide leading-relaxed max-w-4xl mx-auto italic font-serif">
-                "A masterpiece where every corner whispers the story of grace."
-              </p>
+            <div className="max-w-[17rem] rounded-lg border border-white/20 bg-black/34 px-4 py-3 text-white shadow-[0_20px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:max-w-xs sm:px-5 sm:py-4">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeView.note}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.45 }}
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#f1d48a] opacity-100">
+                    {activeView.label}
+                  </p>
+                  <p className="mt-2 text-sm font-medium leading-6 text-white/86 opacity-100">
+                    {activeView.note}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </motion.div>
 
-          {/* Decorative Elements */}
-          <div className="absolute top-12 left-12 w-20 h-20 border-t border-l border-gold/10 hidden md:block" />
-          <div className="absolute bottom-12 right-12 w-20 h-20 border-b border-r border-gold/10 hidden md:block" />
+          <div className="absolute left-6 top-6 hidden h-20 w-20 border-l border-t border-[#c9a44d]/18 md:block" />
+          <div className="absolute bottom-6 right-6 hidden h-20 w-20 border-b border-r border-[#c9a44d]/18 md:block" />
+
+          <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3">
+            {aranyaViews.map((view, index) => (
+              <button
+                key={view.src}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                aria-label={`Show ${view.label}`}
+                className={[
+                  "h-2.5 rounded-full transition-all",
+                  activeIndex === index ? "w-10 bg-[#c9a44d]" : "w-2.5 bg-white/55 hover:bg-white",
+                ].join(" ")}
+              />
+            ))}
+          </div>
         </motion.div>
       </div>
 
-      {/* Scroll Hint */}
-      {/* <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 opacity-80">
-        <span className="uppercase-track text-[9px] text-deep-green tracking-[0.4em]">Explore the Vision</span>
-        <div className="w-[1px] h-16 bg-gradient-to-b from-deep-green to-transparent" />
-      </div> */}
+      <div className="absolute inset-x-0 bottom-0 z-30 bg-[#f8f0df] px-5 py-4 sm:px-8 sm:py-5 lg:px-14">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto flex max-w-6xl flex-col gap-3 border-t border-[#c9a44d]/35 pt-4 md:flex-row md:items-end md:justify-between"
+        >
+          <div>
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.36em] text-[#a87923] opacity-100">
+              After the View
+            </p>
+            <h3 className="max-w-3xl font-serif text-xl leading-tight text-[#172018] sm:text-2xl md:text-4xl">
+              Some places impress you once. Aranya is made to stay with you.
+            </h3>
+          </div>
+          <p className="max-w-sm text-sm font-medium leading-6 text-[#314033]/72 opacity-100">
+            A quieter return, a softer evening, a home that feels personal before it feels grand.
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 }
-
-
-

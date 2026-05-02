@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, HeartPulse, ShoppingBag,
-  Plane, ShieldCheck, MapPin, ChevronLeft, ChevronRight
+  Plane, ShieldCheck, MapPin, ChevronLeft, ChevronRight, Navigation
 } from "lucide-react";
 
 const locationData = [
@@ -43,141 +43,196 @@ const locationData = [
   }
 ];
 
+const mapUrl = "https://www.google.com/maps/search/?api=1&query=RH%20Aerocity%20Dharapur%20Palashbari%20Road%20Assam%20781017";
+
 export default function LocationSection() {
   const [activeTab, setActiveTab] = useState(0);
+  const activeLocation = locationData[activeTab];
 
   const nextTab = () => setActiveTab((prev) => (prev + 1) % locationData.length);
   const prevTab = () => setActiveTab((prev) => (prev - 1 + locationData.length) % locationData.length);
 
   return (
-    <section id="location" className="relative bg-[#407266] overflow-hidden py-24 md:py-32">
-      {/* Background Subtle Gradient for depth */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.03)_0%,transparent_50%)] pointer-events-none" />
+    <section id="location" className="relative overflow-hidden bg-[#08180f] py-14 text-white sm:py-18 md:py-24">
+      <img
+        src="/images/Entrance Cam_rang Homes.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#07140d]/96 via-[#07140d]/72 to-[#07140d]/28" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#07140d] via-transparent to-[#07140d]/42" />
+      <div className="pointer-events-none absolute -right-28 top-16 h-96 w-96 rounded-full bg-[#c9a44d]/18 blur-3xl" />
 
-      {/* --- Section Header --- */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mb-16 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-8 grid gap-6 sm:mb-10 sm:gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,0.75fr)] lg:items-end">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-10 h-[1px] bg-gold" />
-              <span className="uppercase tracking-[0.3em] text-gold text-xs font-semibold">The Vicinity</span>
+            <div className="mb-4 flex items-center gap-3">
+              <span className="h-[2px] w-9 bg-[#c9a44d]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.42em] text-[#f1d48a] opacity-100">The Address</span>
             </div>
-            <h2 className="text-4xl md:text-6xl text-white font-serif leading-tight">
-              A Nexus of <br />
-              <span className="text-gold italic font-light">Sophistication</span>
+            <h2 className="max-w-4xl font-serif text-4xl font-light leading-[1.02] text-white sm:text-5xl md:text-7xl">
+              Project Location <br />
+              <span className="font-light italic text-[#f1d48a]">& Nearby Places</span>
             </h2>
+            <p className="mt-5 max-w-2xl text-sm font-light leading-7 text-white/72 opacity-100 sm:mt-7 sm:text-base sm:leading-8">
+              Aranya sits where the city begins to slow down: close to the airport, connected to everyday essentials, yet held inside a calmer residential edge.
+            </p>
           </motion.div>
 
-          {/* Navigation Pills */}
-          <div className="flex flex-wrap items-center gap-2 bg-white/10 p-1.5 rounded-full border border-white/20 backdrop-blur-md">
-            {locationData.map((item, idx) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(idx)}
-                className={`px-4 py-2 rounded-full text-[10px] uppercase tracking-widest font-medium transition-all duration-500 ${activeTab === idx
-                  ? "bg-gold text-white"
-                  : "text-white/60 hover:text-white hover:bg-white/5"
-                  }`}
-              >
-                {item.category}
-              </button>
-            ))}
+          <div className="rounded-3xl border border-white/14 bg-white/[0.08] p-4 shadow-[0_28px_90px_rgba(0,0,0,0.26)] backdrop-blur-xl sm:p-5">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.34em] text-[#f1d48a] opacity-100">
+              Site Address
+            </p>
+            <div className="flex items-start gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#c9a44d]/35 bg-[#c9a44d]/12 text-[#f1d48a]">
+                <MapPin size={22} />
+              </span>
+              <div>
+                <h3 className="font-serif text-2xl leading-tight text-white sm:text-3xl">RH Aerocity, Dharapur</h3>
+                <p className="mt-2 text-sm leading-7 text-white/68 opacity-100">
+                  Palashbari Road, Assam 781017
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* --- Content Area --- */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6, ease: "circOut" }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
-          >
-            {/* Big Indicator Info */}
-            <div className="lg:col-span-4">
-              <div className="relative">
-                <span className="text-[12rem] font-serif text-white/[0.07] absolute -top-24 -left-10 select-none">
-                  0{activeTab + 1}
-                </span>
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 text-gold shadow-xl">
-                    {React.createElement(locationData[activeTab].icon, { size: 32, strokeWidth: 1.2 })}
-                  </div>
-                  <h3 className="text-3xl text-white font-serif mb-4">{locationData[activeTab].category}</h3>
-                  <p className="text-white/80 text-sm leading-relaxed max-w-xs font-light">
-                    Strategically connected to the heartbeat of Guwahati, ensuring every essential is just minutes away.
-                  </p>
-                </div>
-              </div>
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+          <aside className="rounded-3xl border border-white/12 bg-black/24 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+            <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-1">
+              {locationData.map((item, idx) => {
+                const Icon = item.icon;
+                const isActive = activeTab === idx;
 
-              {/* Arrow Controls */}
-              <div className="flex gap-4 mt-12">
-                <button onClick={prevTab} className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-gold hover:border-gold transition-all duration-500">
-                  <ChevronLeft size={20} />
-                </button>
-                <button onClick={nextTab} className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-gold hover:border-gold transition-all duration-500">
-                  <ChevronRight size={20} />
-                </button>
-              </div>
-            </div>
-
-            {/* Places Grid */}
-            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {locationData[activeTab].places.map((place, idx) => (
-                <motion.div
-                  key={place.name}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-gold/50 hover:bg-white/10 transition-all duration-700 overflow-hidden shadow-lg"
-                >
-                  <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 group-hover:text-gold transition-all duration-700">
-                    <MapPin size={16} />
-                  </div>
-
-                  <div className="flex flex-col justify-between h-full">
-                    <span className="text-gold font-serif text-3xl mb-4 group-hover:scale-105 transition-transform duration-500 block origin-left">
-                      {place.distance}
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(idx)}
+                    className={[
+                      "flex min-w-0 items-center gap-3 rounded-2xl border p-3 text-left transition-all",
+                      isActive
+                        ? "border-[#c9a44d]/55 bg-[#c9a44d] text-[#172018] shadow-[0_18px_38px_rgba(201,164,77,0.22)]"
+                        : "border-white/10 bg-white/[0.055] text-white/68 hover:border-[#c9a44d]/45 hover:text-white",
+                    ].join(" ")}
+                  >
+                    <span
+                      className={[
+                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border",
+                        isActive ? "border-[#172018]/20 bg-[#172018] text-[#f1d48a]" : "border-white/10 bg-white/8 text-[#f1d48a]",
+                      ].join(" ")}
+                    >
+                      <Icon size={19} strokeWidth={1.6} />
                     </span>
-                    <div>
-                      <div className="w-8 h-[1px] bg-white/30 mb-3 group-hover:w-full transition-all duration-700" />
-                      <h4 className="text-white group-hover:text-gold font-medium transition-colors duration-500 text-sm md:text-base tracking-wide uppercase">
+                    <span className="min-w-0">
+                      <span className="block text-[10px] font-bold uppercase tracking-[0.24em] opacity-70">
+                        0{idx + 1}
+                      </span>
+                      <span className="block truncate text-sm font-semibold">
+                        {item.category}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </aside>
+
+          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_400px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeLocation.id}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.45, ease: "circOut" }}
+                className="rounded-3xl border border-white/12 bg-white/[0.09] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:p-6"
+              >
+                <div className="mb-6 flex items-start justify-between gap-5">
+                  <div>
+                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.34em] text-[#f1d48a] opacity-100">
+                      Route Notes
+                    </p>
+                    <h3 className="font-serif text-3xl leading-tight text-white md:text-4xl">
+                      {activeLocation.category}
+                    </h3>
+                  </div>
+                  <div className="flex gap-3">
+                    <button onClick={prevTab} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/14 bg-white/8 text-white transition hover:border-[#c9a44d] hover:text-[#f1d48a]">
+                      <ChevronLeft size={19} />
+                    </button>
+                    <button onClick={nextTab} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/14 bg-white/8 text-white transition hover:border-[#c9a44d] hover:text-[#f1d48a]">
+                      <ChevronRight size={19} />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  {activeLocation.places.map((place, idx) => (
+                    <motion.div
+                      key={place.name}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.06 }}
+                      className="group rounded-2xl border border-white/10 bg-black/20 p-5 transition hover:border-[#c9a44d]/50 hover:bg-black/28"
+                    >
+                      <div className="mb-5 flex items-center justify-between gap-4">
+                        <span className="font-serif text-3xl leading-none text-[#f1d48a]">
+                          {place.distance}
+                        </span>
+                        <MapPin size={16} className="text-white/44 transition group-hover:text-[#f1d48a]" />
+                      </div>
+                      <div className="mb-3 h-px w-10 bg-[#c9a44d]/55 transition group-hover:w-full" />
+                      <h4 className="text-sm font-semibold uppercase tracking-[0.12em] text-white/82">
                         {place.name}
                       </h4>
-                    </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="relative min-h-[22rem] overflow-hidden rounded-3xl border border-white/12 bg-[#06100b]/74 p-5 text-white shadow-[0_26px_70px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:min-h-[28rem] sm:p-6">
+              <img
+                src="/images/Shot_07_5KShot_07_5K.webp"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover opacity-34"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#06100b] via-[#06100b]/72 to-[#06100b]/40" />
+
+              <div className="relative z-10 flex h-full flex-col justify-between">
+                <div>
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-[#c9a44d]/35 bg-[#c9a44d]/12 text-[#f1d48a]">
+                    <Navigation size={24} />
                   </div>
-                </motion.div>
-              ))}
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.36em] text-[#f1d48a] opacity-100">
+                    Map Access
+                  </p>
+                  <h3 className="font-serif text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
+                    The route home should feel simple.
+                  </h3>
+                  <p className="mt-4 max-w-xs text-sm leading-7 text-white/68 opacity-100">
+                    Open the exact project location and let the journey begin from wherever you are.
+                  </p>
+                </div>
+
+                <a
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-10 inline-flex items-center justify-center rounded-full bg-[#c9a44d] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.28em] text-[#142419] transition hover:bg-white"
+                >
+                  View Google Map
+                </a>
+              </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* --- Footer Progress --- */}
-      <div className="mt-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex items-center gap-6 opacity-60">
-        <span className="text-white text-[10px] font-bold tracking-widest uppercase">Connectivity Hub</span>
-        <div className="flex-1 h-[1px] bg-white/20 relative">
-          <motion.div
-            className="absolute h-full bg-gold top-0 left-0 shadow-[0_0_8px_rgba(201,164,77,0.8)]"
-            animate={{ width: `${((activeTab + 1) / locationData.length) * 100}%` }}
-          />
+          </div>
         </div>
-        <span className="text-white text-[10px] font-bold tracking-widest uppercase">LGBI International</span>
-      </div>
-
-      {/* Decorative Large Text Watermark */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.03] translate-y-1/2">
-        <h1 className="text-[20vw] font-serif text-white whitespace-nowrap">
-          ARANYA SURROUNDINGS
-        </h1>
       </div>
     </section>
   );

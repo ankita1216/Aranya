@@ -11,10 +11,12 @@ const AmenitiesSection = lazy(() => import('./components/AmenitiesSection'))
 const LocationSection = lazy(() => import('./components/LocationSection'))
 const PlanSection = lazy(() => import('./components/PlanSection'))
 const VideoWalkthrough = lazy(() => import('./components/VideoWalkthrough'))
+const PhotoSection = lazy(() => import('./components/PhotoSection'))
 const GallerySection = lazy(() => import('./components/GallerySection'))
 const FooterSection = lazy(() => import('./components/FooterSection'))
 const AranyaHighlight = lazy(() => import('./components/AranyaHighlight'))
 const LeadModal = lazy(() => import('./components/LeadModal'))
+const BottomEnquiryForm = lazy(() => import('./components/BottomEnquiryForm'))
 const ThankYou = lazy(() => import('./components/ThankYou'))
 
 const Loader = () => (
@@ -26,7 +28,12 @@ const Loader = () => (
 function LandingPage() {
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [isQuoteVisible, setIsQuoteVisible] = useState(false);
+  const [hasScrolledForEnquiry, setHasScrolledForEnquiry] = useState(false);
   const walkthroughRef = useRef(null);
+  const quoteRef = useRef(null);
+  const footerRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,19 +43,73 @@ function LandingPage() {
       { threshold: 0.1 } // Hide when at least 10% of walkthrough is visible
     );
 
-    if (walkthroughRef.current) {
-      observer.observe(walkthroughRef.current);
+    const walkthroughNode = walkthroughRef.current;
+
+    if (walkthroughNode) {
+      observer.observe(walkthroughNode);
     }
 
     return () => {
-      if (walkthroughRef.current) {
-        observer.unobserve(walkthroughRef.current);
+      if (walkthroughNode) {
+        observer.unobserve(walkthroughNode);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsQuoteVisible(entry.isIntersecting);
+      },
+      { threshold: 0.18 }
+    );
+
+    const quoteNode = quoteRef.current;
+
+    if (quoteNode) {
+      observer.observe(quoteNode);
+    }
+
+    return () => {
+      if (quoteNode) {
+        observer.unobserve(quoteNode);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolledForEnquiry(window.scrollY > window.innerHeight * 0.75);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.08 }
+    );
+
+    const footerNode = footerRef.current;
+
+    if (footerNode) {
+      observer.observe(footerNode);
+    }
+
+    return () => {
+      if (footerNode) {
+        observer.unobserve(footerNode);
       }
     };
   }, []);
 
   return (
-    <main style={{ backgroundColor: '#407266' }}>
+    <main className="w-full max-w-full overflow-x-hidden" style={{ backgroundColor: '#407266' }}>
       <Navbar isHidden={isHeaderHidden} onOpenModal={() => setIsModalOpen(true)} />
       
       <HeroSection onOpenModal={() => setIsModalOpen(true)} />
@@ -68,13 +129,20 @@ function LandingPage() {
 
         <PlanSection />
 
-        <AranyaHighlight />
+        <PhotoSection />
+
+        <div ref={quoteRef}>
+          <AranyaHighlight />
+        </div>
 
         <LocationSection />
         
-        <FooterSection />
+        <div ref={footerRef}>
+          <FooterSection />
+        </div>
         
         <LeadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <BottomEnquiryForm isVisible={hasScrolledForEnquiry && !isQuoteVisible && !isFooterVisible && !isModalOpen} />
       </Suspense>
     </main>
   );

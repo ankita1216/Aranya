@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
 import DecorativeElements from "./DecorativeElements";
 
 import hero1 from "/images/hero1.webp";

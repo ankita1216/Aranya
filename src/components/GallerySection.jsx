@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ZoomIn, ZoomOut, Maximize2, RotateCcw, ChevronRight, ChevronLeft } from "lucide-react";
-import DecorativeElements from "./DecorativeElements";
+import { X, Maximize2, ChevronRight, ChevronLeft } from "lucide-react";
 
 const galleryData = [
   { src: "/images/Entrance Cam_rang Homes.webp", title: "Grand Entrance", category: "Exteriors" },
@@ -32,49 +31,53 @@ export default function GallerySection() {
     const n = ((i % galleryData.length) + galleryData.length) % galleryData.length;
     setActiveIndex(n);
     setZoomScale(1);
-  }, [galleryData.length]);
+  }, []);
 
   return (
-    <section id="gallery" className="bg-warm-white py-24 overflow-hidden relative">
-      <DecorativeElements type="organic" position="left-top" opacity={0.08} size="w-80" />
-      <DecorativeElements type="leaf" position="right-bottom" opacity={0.06} size="w-64" />
+    <section id="gallery" className="relative overflow-hidden bg-[#f8f0df] py-24 text-[#172018]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/45 to-transparent" />
+      <div className="pointer-events-none absolute -right-32 top-10 h-80 w-80 rounded-full bg-[#c9a44d]/14 blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 bottom-10 h-72 w-72 rounded-full bg-white/55 blur-3xl" />
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
 
         {/* --- HEADER SECTION --- */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-          <div className="relative">
+        <div className="relative mb-14 flex flex-col justify-between gap-8 overflow-visible md:flex-row md:items-end">
+          <div className="relative min-h-[9rem] overflow-visible pb-2 pr-28 sm:pr-44 md:pr-56">
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               key={`bg-num-${activeIndex}`}
-              className="text-[120px] font-bold font-serif text-gold/10 absolute -top-16 -left-4 pointer-events-none select-none"
+              className="pointer-events-none absolute right-0 top-1/2 z-0 -translate-y-1/2 select-none font-serif text-[76px] font-bold leading-none text-[#bd8f2a]/42 sm:text-[118px] md:-right-8 md:text-[138px] lg:-right-16"
             >
               {String(activeIndex + 1).padStart(2, "0")}
             </motion.span>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="uppercase tracking-[0.4em] text-[12px] font-bold text-gold mb-4 flex items-center gap-3"
+              className="relative z-10 mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.42em] text-[#a87923] opacity-100"
             >
-              <span className="w-8 h-[2px] bg-gold" /> Curated Spaces
+              <span className="h-[2px] w-8 bg-[#a87923]" /> Gallery Section
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-bold font-serif text-deep-green leading-tight"
+              className="relative z-10 font-serif text-4xl font-semibold leading-tight text-[#132019] md:text-6xl"
             >
-              The <span className="italic text-gold font-medium">Visual</span> Collection
+              The <span className="font-medium italic text-[#bd8f2a]">Gallery</span> Collection
             </motion.h2>
           </div>
+          <p className="max-w-sm text-sm font-medium leading-7 text-[#314033]/72 opacity-100">
+            A refined view of interiors, amenities, arrivals, and open-air moments across Aranya.
+          </p>
         </div>
 
         {/* --- MAIN STAGE --- */}
-        <div className="grid grid-cols-12 gap-4 items-center">
+        <div className="grid grid-cols-12 items-stretch gap-5 lg:gap-7">
 
           {/* Hero Image Container */}
-          <div className="col-span-12 lg:col-span-9 relative group rounded-sm overflow-hidden shadow-2xl">
-            <div className="aspect-[16/9] overflow-hidden bg-stone-200">
+          <div className="group relative col-span-12 overflow-hidden rounded-lg border border-[#d8cba8]/70 bg-white shadow-[0_26px_70px_rgba(47,42,28,0.16)] lg:col-span-9">
+            <div className="aspect-[16/9] overflow-hidden bg-[#efe4cd]">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={current?.src}
@@ -83,44 +86,39 @@ export default function GallerySection() {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 1.05, opacity: 0 }}
                   transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               </AnimatePresence>
             </div>
 
-            {/* Subtler bottom-up gradient for text readability, slightly increased from previous to further ensure readability with dark green text */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/82 via-black/22 to-black/10" />
 
             {/* Navigation Arrows for Mobile/Tablet */}
-            <div className="absolute inset-y-0 left-0 right-0 flex justify-between items-center px-4 lg:hidden pointer-events-none">
+            <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 lg:hidden">
               <button
                 onClick={() => goTo(activeIndex - 1)}
-                className="w-12 h-12 rounded-full bg-white/40 backdrop-blur-md flex items-center justify-center text-deep-green pointer-events-auto shadow-lg"
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/70 text-[#172018] shadow-lg backdrop-blur-md"
               >
                 <ChevronLeft size={24} strokeWidth={2.5} />
               </button>
               <button
                 onClick={() => goTo(activeIndex + 1)}
-                className="w-12 h-12 rounded-full bg-white/40 backdrop-blur-md flex items-center justify-center text-deep-green pointer-events-auto shadow-lg"
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/70 text-[#172018] shadow-lg backdrop-blur-md"
               >
                 <ChevronRight size={24} strokeWidth={2.5} />
               </button>
             </div>
 
-            {/* --- LABEL SECTION (UPDATED TO GREEN WITH ENHANCED READABILITY) --- */}
-            <div className="absolute bottom-12 left-12 z-10 pointer-events-none">
+            <div className="pointer-events-none absolute bottom-7 left-6 z-10 sm:bottom-10 sm:left-10 lg:bottom-12 lg:left-12">
               <motion.div
                 key={current?.title}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                // text-shadow added via inline style for precision and enhanced readability on image
-                style={{ textShadow: '2px 2px 10px rgba(0,0,0,0.9), 0px 0px 5px rgba(0,0,0,0.7)' }}
               >
-                <p className="text-[12px] uppercase tracking-[0.4em] font-black text-gold mb-2 drop-shadow-lg">
+                <p className="mb-2 text-[11px] font-black uppercase tracking-[0.4em] !text-white opacity-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
                   {current?.category}
                 </p>
-                {/* Text color changed from text-white to text-deep-green, additional drop-shadow for visibility against darker image areas */}
-                <h3 className="text-4xl md:text-6xl font-bold font-serif text-deep-green tracking-tight drop-shadow-2xl">
+                <h3 className="font-serif text-4xl font-semibold tracking-tight !text-white drop-shadow-[0_3px_18px_rgba(0,0,0,0.9)] md:text-6xl">
                   {current?.title}
                 </h3>
               </motion.div>
@@ -129,17 +127,17 @@ export default function GallerySection() {
             {/* Lightbox Trigger */}
             <button
               onClick={() => setShowLightbox(true)}
-              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-xl"
+              className="absolute right-6 top-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-white/24 text-white opacity-0 shadow-xl backdrop-blur-md transition-opacity group-hover:opacity-100"
             >
               <Maximize2 size={18} />
             </button>
           </div>
 
           {/* Sidebar Navigation */}
-          <div className="hidden lg:flex col-span-3 flex-col gap-6 pl-8">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-deep-green/40 italic">Next Perspective</p>
+          <div className="col-span-3 hidden flex-col gap-6 rounded-lg border border-[#d8cba8]/70 bg-[#fff8eb]/78 p-5 shadow-[0_22px_54px_rgba(47,42,28,0.10)] lg:flex">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-[#7c642d] opacity-100">Next Perspective</p>
             <div
-              className="relative aspect-[4/5] overflow-hidden cursor-pointer group rounded-sm"
+              className="group relative aspect-[4/5] cursor-pointer overflow-hidden rounded-lg bg-[#efe4cd]"
               onClick={() => goTo(activeIndex + 1)}
             >
               <AnimatePresence mode="wait">
@@ -149,25 +147,25 @@ export default function GallerySection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
                 />
               </AnimatePresence>
-              <div className="absolute inset-0 bg-deep-green/10 group-hover:bg-transparent transition-colors" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/42 via-transparent to-transparent transition-colors group-hover:from-black/25" />
               <div className="absolute bottom-4 right-4 text-white drop-shadow-md">
                 <ChevronRight size={40} strokeWidth={1.5} />
               </div>
             </div>
 
             {/* Progress Counter */}
-            <div className="flex items-center gap-4 mt-4">
-              <span className="text-gold font-bold font-serif text-2xl">{String(activeIndex + 1).padStart(2, '0')}</span>
-              <div className="flex-1 h-[2px] bg-gold/20 relative">
+            <div className="mt-2 flex items-center gap-4">
+              <span className="font-serif text-2xl font-bold text-[#bd8f2a]">{String(activeIndex + 1).padStart(2, '0')}</span>
+              <div className="relative h-[2px] flex-1 bg-[#c9a44d]/22">
                 <motion.div
                   animate={{ width: `${((activeIndex + 1) / galleryData.length) * 100}%` }}
-                  className="absolute inset-y-0 left-0 bg-gold"
+                  className="absolute inset-y-0 left-0 bg-[#bd8f2a]"
                 />
               </div>
-              <span className="text-deep-green/40 font-bold text-[12px]">{String(galleryData.length).padStart(2, '0')}</span>
+              <span className="text-[12px] font-bold text-[#314033]/48">{String(galleryData.length).padStart(2, '0')}</span>
             </div>
           </div>
         </div>
@@ -186,8 +184,8 @@ export default function GallerySection() {
             >
               <X size={32} strokeWidth={1.5} />
             </button>
-            <div className="relative w-full max-w-6xl aspect-video flex items-center justify-center">
-              <button onClick={() => goTo(activeIndex - 1)} className="absolute -left-16 text-white/20 hover:text-gold transition-colors">
+            <div className="relative w-full max-w-6xl aspect-video flex items-center justify-center overflow-hidden lg:overflow-visible">
+              <button onClick={() => goTo(activeIndex - 1)} className="absolute left-2 lg:-left-16 text-white/50 lg:text-white/20 hover:text-gold transition-colors">
                 <ChevronLeft size={64} strokeWidth={1} />
               </button>
               <motion.img
@@ -197,7 +195,7 @@ export default function GallerySection() {
                 animate={{ scale: zoomScale, opacity: 1 }}
                 className="max-h-[80vh] object-contain shadow-2xl"
               />
-              <button onClick={() => goTo(activeIndex + 1)} className="absolute -right-16 text-white/20 hover:text-gold transition-colors">
+              <button onClick={() => goTo(activeIndex + 1)} className="absolute right-2 lg:-right-16 text-white/50 lg:text-white/20 hover:text-gold transition-colors">
                 <ChevronRight size={64} strokeWidth={1} />
               </button>
             </div>

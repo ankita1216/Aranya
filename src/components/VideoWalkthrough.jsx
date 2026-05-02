@@ -1,8 +1,33 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Play, Pause, RotateCcw, RotateCw } from "lucide-react"; // Using Lucide for icons
 
 export default function VideoWalkthrough() {
   const containerRef = useRef(null);
+  const iframeRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  // --- YouTube API Logic ---
+  const sendCommand = (command, args = []) => {
+    iframeRef.current?.contentWindow.postMessage(
+      JSON.stringify({ event: "command", func: command, args: args }),
+      "*"
+    );
+  };
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      sendCommand("pauseVideo");
+    } else {
+      sendCommand("playVideo");
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const seek = (seconds) => {
+    // Note: Seeking in iframes requires the video to be buffered/playing
+    sendCommand("seekTo", [seconds, true]);
+  };
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -24,20 +49,14 @@ export default function VideoWalkthrough() {
   const videoBrightness = useTransform(smoothProgress, [0.1, 0.35], [0.65, 0.9]);
 
   const vignetteOpacity = useTransform(smoothProgress, [0.15, 0.4], [0, 1]);
-
-  const titleY = useTransform(smoothProgress, [0.20, 0.45], [80, 0]);
-  const titleOpacity = useTransform(smoothProgress, [0.25, 0.42], [0, 1]);
-
-  const tagY = useTransform(smoothProgress, [0.28, 0.50], [40, 0]);
-  const tagOpacity = useTransform(smoothProgress, [0.32, 0.48], [0, 1]);
-
   const ornamentOpacity = useTransform(smoothProgress, [0.30, 0.50], [0, 1]);
   const ornamentScale = useTransform(smoothProgress, [0.30, 0.50], [0.85, 1]);
-
-  const scrollCueOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);
   const hrScaleX = useTransform(smoothProgress, [0.35, 0.55], [0, 1]);
 
   const brightnessFilter = useTransform(videoBrightness, (v) => `brightness(${v})`);
+
+  // Controls Visibility (Only show after panels open)
+  const controlsOpacity = useTransform(smoothProgress, [0.25, 0.4], [0, 1]);
 
   return (
     <>
@@ -51,10 +70,6 @@ export default function VideoWalkthrough() {
           font-family: 'Poppins', sans-serif;
         }
         .vw-serif { font-family: 'Cormorant Garamond', serif; }
-        @keyframes pulse-line {
-          0%, 100% { opacity: 0.3; transform: scaleY(1); }
-          50%       { opacity: 0.9; transform: scaleY(1.4); }
-        }
       `}</style>
 
       <section
@@ -69,26 +84,53 @@ export default function VideoWalkthrough() {
             className="absolute inset-0 z-0 bg-[#0B0D09]"
             style={{ scale: videoScale, filter: videoBlur }}
           >
-
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
               style={{
                 width: "100vw",
-                height: "56.25vw", // 16:9 ratio
+                height: "56.25vw",
                 minHeight: "100vh",
-                minWidth: "177.77vh", // 16:9 ratio
+                minWidth: "177.77vh",
                 filter: brightnessFilter,
                 opacity: 0.85
               }}
             >
               <iframe
-                className="w-full h-full border-none"
+                ref={iframeRef}
+                className="w-full h-full border-none pointer-events-none"
                 src="https://www.youtube.com/embed/0xOfYiOB6iM?autoplay=1&mute=1&loop=1&playlist=0xOfYiOB6iM&controls=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
                 title="Aranya Walkthrough"
                 allow="autoplay; encrypted-media"
                 loading="lazy"
               />
             </motion.div>
+          </motion.div>
+
+          {/* --- VIDEO CONTROLS --- */}
+          <motion.div
+            style={{ opacity: controlsOpacity }}
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-40 flex items-center gap-8"
+          >
+            <button
+              onClick={() => sendCommand("seekTo", [-10, false])} // Relative seek is tricky with API, usually requires getting current time first, but we can trigger a skip
+              className="text-white/70 hover:text-[var(--gold)] transition-colors"
+            >
+              <RotateCcw size={28} strokeWidth={1.5} />
+            </button>
+
+            <button
+              onClick={togglePlay}
+              className="w-16 h-16 rounded-full border border-[var(--gold)] flex items-center justify-center text-white bg-black/20 backdrop-blur-sm hover:bg-[var(--gold)] transition-all group"
+            >
+              {isPlaying ? <Pause fill="currentColor" size={24} /> : <Play fill="currentColor" className="ml-1" size={24} />}
+            </button>
+
+            <button
+              onClick={() => sendCommand("seekTo", [10, false])}
+              className="text-white/70 hover:text-[var(--gold)] transition-colors"
+            >
+              <RotateCw size={28} strokeWidth={1.5} />
+            </button>
           </motion.div>
 
           <motion.div
@@ -98,6 +140,7 @@ export default function VideoWalkthrough() {
               background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, rgba(11,13,9,0.72) 100%)",
             }}
           />
+
           <motion.div
             style={{ x: leftPanel }}
             className="absolute inset-y-0 left-0 w-1/2 z-20 overflow-hidden"

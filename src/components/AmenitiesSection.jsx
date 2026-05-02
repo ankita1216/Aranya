@@ -1,183 +1,122 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import {
-  ShieldCheck,
-  Eye,
-  Flame,
-  Zap,
-  ArrowUpDown,
-  Car,
-  UserPlus,
-  Home,
+  Dumbbell,
+  Waves,
+  Trees,
+  Coffee,
   Gamepad2,
-  Baby,
+  ShieldCheck,
   Users,
-  TreePine,
-  Droplets,
-  MoveUp,
-  Medal,
-  Activity
+  Sparkles,
+  Wind,
+  Library,
+  Flame,
+  Utensils
 } from "lucide-react";
-import { useState, useRef } from "react";
-import DecorativeElements from "./DecorativeElements";
 
 const amenities = [
-  { icon: ShieldCheck, title: "24/7 Security", category: "Safety" },
-  { icon: Eye, title: "CCTV Monitoring", category: "Safety" },
-  { icon: Flame, title: "Fire Safety Systems", category: "Safety" },
-  { icon: Activity, title: "Earthquake Resistant", category: "Structure" },
-  { icon: Zap, title: "Power Backup", category: "Utilities" },
-  { icon: ArrowUpDown, title: "Spacious Lifts", category: "Utilities" },
-  { icon: Car, title: "Ample Parking", category: "Parking" },
-  { icon: UserPlus, title: "Visitor Parking", category: "Parking" },
-  { icon: Home, title: "Exclusive Clubhouse", category: "Lifestyle" },
-  { icon: Gamepad2, title: "Indoor Games", category: "Lifestyle" },
-  { icon: Baby, title: "Children's Play Area", category: "Lifestyle" },
-  { icon: Users, title: "Community Hall", category: "Lifestyle" },
-  { icon: TreePine, title: "Landscaped Gardens", category: "Nature" },
-  { icon: Droplets, title: "Sewage Treatment", category: "Utilities" },
-  { icon: MoveUp, title: "Wide Staircases", category: "Structure" },
-  { icon: Medal, title: "Quality Materials", category: "Structure" },
+  { name: "Infinity Pool", icon: Waves, desc: "A serene escape with panoramic views of the horizon." },
+  { name: "Modern Gym", icon: Dumbbell, desc: "State-of-the-art equipment for your daily fitness ritual." },
+  { name: "Zen Gardens", icon: Trees, desc: "Private green alcoves designed for deep meditation." },
+  { name: "Club Lounge", icon: Coffee, desc: "Premium spaces for social connections and quiet work." },
+  { name: "Gaming Zone", icon: Gamepad2, desc: "High-tech indoor recreation area for all age groups." },
+  { name: "24/7 Security", icon: ShieldCheck, desc: "Advanced smart-surveillance and concierge systems." },
+  { name: "Banquet Hall", icon: Users, desc: "Grand venues tailored for your milestone celebrations." },
+  { name: "Wellness Spa", icon: Sparkles, desc: "Curated therapies for total mental and physical rejuvenation." },
+  { name: "Jogging Track", icon: Wind, desc: "Lush, landscaped pathways for your morning runs." },
+  { name: "Reading Room", icon: Library, desc: "A quiet sanctuary for literature and peaceful study." },
+  { name: "BBQ Pavilion", icon: Flame, desc: "Open-air pits for gourmet weekend gatherings." },
+  { name: "Fine Dining", icon: Utensils, desc: "In-house culinary experiences within the complex." },
 ];
 
 export default function AmenitiesSection() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const containerRef = useRef(null);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.5, y: 20 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
-
   return (
-    <section id="amenities" className="bg-warm-white section-padding overflow-hidden relative">
-      <DecorativeElements type="leaf" position="right-center" opacity={0.1} size="w-72" />
-      <DecorativeElements type="organic" position="left-bottom" opacity={0.08} size="w-80" />
-      {/* Background Decorative Element */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
+    <section id="amenities" className="relative py-24 overflow-hidden bg-[#f5efe1] text-[#172018]">
 
-      <div className="max-w-7xl mx-auto relative z-10 px-6 md:px-12 lg:px-16">
-        {/* Header */}
-        <div className="text-center mb-2 md:mb-8">
+      {/* --- MATCHING HERO GRID BACKGROUND --- */}
+      <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(90deg,#8c7b45_1px,transparent_1px),linear-gradient(0deg,#8c7b45_1px,transparent_1px)] [background-size:4.2rem_4.2rem]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div className="max-w-2xl">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="uppercase tracking-[0.3em] text-[10px] font-bold text-[#8a7033] mb-4 flex items-center gap-3"
+            >
+              <span className="w-8 h-[1px] bg-[#8a7033]/40" /> Lifestyle Elements
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-serif text-5xl md:text-6xl text-[#172018] leading-tight"
+            >
+              The <span className="text-[#C9A44D] italic">Amenities</span> <br />
+              Selection
+            </motion.h2>
+          </div>
           <motion.p
-            initial={{ opacity: 0, letterSpacing: "1em" }}
-            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
-            transition={{ duration: 1 }}
-            className="uppercase-track text-gold mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-[#314033]/60 text-sm max-w-xs pb-2"
           >
-            The Essentials
+            A meticulously curated collection of spaces designed to elevate every facet of your daily life.
           </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Crafted for <span className="italic text-gold">Precision.</span>
-          </motion.h2>
         </div>
 
-        {/* Unique Staggered Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-24 lg:gap-y-32 [&>*:nth-child(even)]:translate-y-12 lg:[&>*:nth-child(even)]:translate-y-20"
-        >
-          {amenities.map((item, i) => (
+        {/* Amenities Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+          {amenities.map((item, index) => (
             <motion.div
-              key={i}
-              variants={itemVariants}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="relative flex flex-col items-center group cursor-crosshair"
+              key={item.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.05 }}
+              className="group relative"
             >
-              {/* Floating Icon Base */}
-              <div className="relative mb-8">
-                {/* Glow Effect */}
-                <AnimatePresence>
-                  {hoveredIndex === i && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1.2 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      className="absolute inset-0 bg-gold/20 rounded-full blur-2xl z-0"
-                    />
-                  )}
-                </AnimatePresence>
+              {/* --- PREMIUM ICON DISPLAY --- */}
+              <div className="relative w-16 h-16 mb-8">
+                {/* Decorative background shadow/glow */}
+                <div className="absolute inset-0 bg-[#C9A44D]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                {/* The Icon */}
-                <motion.div
-                  animate={hoveredIndex === i ? {
-                    y: -10,
-                    scale: 1.1,
-                    rotate: [0, -10, 10, 0],
-                  } : { y: 0, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="relative z-10 p-6 rounded-2xl border border-black/5 bg-white text-black/40 group-hover:text-gold group-hover:border-gold/50 transition-colors duration-500 shadow-sm"
-                >
-                  <item.icon size={32} strokeWidth={1.5} />
-                </motion.div>
+                {/* Back Layer (The Offset Plate) */}
+                <div className="absolute inset-0 bg-[#8c7b45]/10 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform duration-500" />
 
-                {/* Animated Ring */}
-                <motion.div
-                  animate={hoveredIndex === i ? { opacity: 1, scale: 1.4 } : { opacity: 0, scale: 1 }}
-                  className="absolute inset-0 border border-[#c5a35c]/40 rounded-full z-0 pointer-events-none"
-                />
+                {/* Front Layer (The Icon Container) */}
+                <div className="absolute inset-0 bg-white border border-[#C9A44D]/20 rounded-2xl flex items-center justify-center shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-500">
+                  <item.icon
+                    strokeWidth={1.2}
+                    className="w-8 h-8 text-[#8a7033] group-hover:text-[#172018] transition-colors duration-500"
+                  />
+                </div>
               </div>
 
-              <div className="text-center">
-                <motion.h3
-                  animate={hoveredIndex === i ? { y: -5, color: "#C9A44D" } : { y: 0, color: "#407266" }}
-                  transition={{ duration: 0.4 }}
-                  className="text-lg lg:text-xl px-2"
-                >
-                  {item.title}
-                </motion.h3>
-              </div>
+              {/* Text Content */}
+              <h3 className="font-serif text-2xl text-[#172018] mb-3 group-hover:text-[#8a7033] transition-colors duration-300">
+                {item.name}
+              </h3>
+              <p className="text-[13px] leading-relaxed text-[#314033]/70 font-medium max-w-[240px]">
+                {item.desc}
+              </p>
 
-              {/* Connecting Line (Subtle) */}
-              <div className="absolute top-1/2 -right-4 w-8 h-[1px] bg-black/5 hidden lg:block" />
+              {/* Animated Underline */}
+              <div className="mt-6 w-8 h-[1px] bg-[#C9A44D]/30 group-hover:w-full transition-all duration-700 origin-left" />
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Bottom Decorative Label */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="mt-40 pt-20 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-10"
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-[1px] bg-gold/50" />
-            <p className="uppercase-track text-black/40">Engineered Excellence</p>
-          </div>
-          <p className="max-w-md italic text-lg text-black/60 text-center md:text-right leading-relaxed">
-            "A harmony of safety, utility, and leisure, hidden within the minimalist architecture."
-          </p>
-        </motion.div>
+        </div>
       </div>
 
-      <style>{`
-        .cursor-crosshair:hover {
-          cursor: crosshair;
-        }
-      `}</style>
+      {/* Decorative Large Watermark */}
+      <div className="absolute -bottom-10 right-0 opacity-[0.03] select-none pointer-events-none">
+        <h2 className="font-serif text-[15vw] leading-none text-[#172018]">LUXURY</h2>
+      </div>
     </section>
   );
 }

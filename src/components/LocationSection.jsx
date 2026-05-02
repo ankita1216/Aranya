@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, HeartPulse, ShoppingBag,
@@ -50,9 +50,9 @@ export default function LocationSection() {
   const prevTab = () => setActiveTab((prev) => (prev - 1 + locationData.length) % locationData.length);
 
   return (
-    <section id="location" className="relative bg-[#5f8975] overflow-hidden py-24 md:py-32">
-      {/* Background Subtle Gradient */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(201,164,77,0.05)_0%,transparent_50%)] pointer-events-none" />
+    <section id="location" className="relative bg-[#407266] overflow-hidden py-24 md:py-32">
+      {/* Background Subtle Gradient for depth */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.03)_0%,transparent_50%)] pointer-events-none" />
 
       {/* --- Section Header --- */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mb-16 relative z-10">
@@ -64,7 +64,7 @@ export default function LocationSection() {
           >
             <div className="flex items-center gap-3 mb-4">
               <span className="w-10 h-[1px] bg-gold" />
-              <span className="uppercase tracking-[0.3em] text-gold text-xs font-medium">The Vicinity</span>
+              <span className="uppercase tracking-[0.3em] text-gold text-xs font-semibold">The Vicinity</span>
             </div>
             <h2 className="text-4xl md:text-6xl text-white font-serif leading-tight">
               A Nexus of <br />
@@ -73,12 +73,14 @@ export default function LocationSection() {
           </motion.div>
 
           {/* Navigation Pills */}
-          <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
+          <div className="flex flex-wrap items-center gap-2 bg-white/10 p-1.5 rounded-full border border-white/20 backdrop-blur-md">
             {locationData.map((item, idx) => (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(idx)}
-                className={`px-4 py-2 rounded-full text-[10px] uppercase tracking-widest transition-all duration-500 ${activeTab === idx ? "bg-gold text-deep-green" : "text-white/40 hover:text-white"
+                className={`px-4 py-2 rounded-full text-[10px] uppercase tracking-widest font-medium transition-all duration-500 ${activeTab === idx
+                  ? "bg-gold text-white"
+                  : "text-white/60 hover:text-white hover:bg-white/5"
                   }`}
               >
                 {item.category}
@@ -102,15 +104,15 @@ export default function LocationSection() {
             {/* Big Indicator Info */}
             <div className="lg:col-span-4">
               <div className="relative">
-                <span className="text-[12rem] font-serif text-white/[0.03] absolute -top-24 -left-10 select-none">
+                <span className="text-[12rem] font-serif text-white/[0.07] absolute -top-24 -left-10 select-none">
                   0{activeTab + 1}
                 </span>
                 <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-6 text-gold">
+                  <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 text-gold shadow-xl">
                     {React.createElement(locationData[activeTab].icon, { size: 32, strokeWidth: 1.2 })}
                   </div>
                   <h3 className="text-3xl text-white font-serif mb-4">{locationData[activeTab].category}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed max-w-xs">
+                  <p className="text-white/80 text-sm leading-relaxed max-w-xs font-light">
                     Strategically connected to the heartbeat of Guwahati, ensuring every essential is just minutes away.
                   </p>
                 </div>
@@ -118,10 +120,10 @@ export default function LocationSection() {
 
               {/* Arrow Controls */}
               <div className="flex gap-4 mt-12">
-                <button onClick={prevTab} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-deep-green transition-all duration-500">
+                <button onClick={prevTab} className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-gold hover:border-gold transition-all duration-500">
                   <ChevronLeft size={20} />
                 </button>
-                <button onClick={nextTab} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-deep-green transition-all duration-500">
+                <button onClick={nextTab} className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-gold hover:border-gold transition-all duration-500">
                   <ChevronRight size={20} />
                 </button>
               </div>
@@ -135,26 +137,23 @@ export default function LocationSection() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="group relative p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-gold/30 transition-all duration-700 overflow-hidden"
+                  className="group relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-gold/50 hover:bg-white/10 transition-all duration-700 overflow-hidden shadow-lg"
                 >
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 group-hover:text-gold transition-all duration-700">
+                  <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 group-hover:text-gold transition-all duration-700">
                     <MapPin size={16} />
                   </div>
 
                   <div className="flex flex-col justify-between h-full">
-                    <span className="text-gold font-serif text-2xl mb-4 group-hover:scale-110 transition-transform duration-500 block origin-left">
+                    <span className="text-gold font-serif text-3xl mb-4 group-hover:scale-105 transition-transform duration-500 block origin-left">
                       {place.distance}
                     </span>
                     <div>
-                      <div className="w-8 h-[1px] bg-white/20 mb-3 group-hover:w-full transition-all duration-700" />
-                      <h4 className="text-white group-hover:text-gold transition-colors duration-500 text-sm md:text-base tracking-wide uppercase-track">
+                      <div className="w-8 h-[1px] bg-white/30 mb-3 group-hover:w-full transition-all duration-700" />
+                      <h4 className="text-white group-hover:text-gold font-medium transition-colors duration-500 text-sm md:text-base tracking-wide uppercase">
                         {place.name}
                       </h4>
                     </div>
                   </div>
-
-                  {/* Decorative background hover element */}
-                  <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-gold/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 </motion.div>
               ))}
             </div>
@@ -163,19 +162,19 @@ export default function LocationSection() {
       </div>
 
       {/* --- Footer Progress --- */}
-      <div className="mt-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex items-center gap-6 opacity-30">
-        <span className="text-white text-[10px] tracking-widest uppercase">Connectivity Hub</span>
-        <div className="flex-1 h-[1px] bg-white/10 relative">
+      <div className="mt-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex items-center gap-6 opacity-60">
+        <span className="text-white text-[10px] font-bold tracking-widest uppercase">Connectivity Hub</span>
+        <div className="flex-1 h-[1px] bg-white/20 relative">
           <motion.div
-            className="absolute h-full bg-gold top-0 left-0"
+            className="absolute h-full bg-gold top-0 left-0 shadow-[0_0_8px_rgba(201,164,77,0.8)]"
             animate={{ width: `${((activeTab + 1) / locationData.length) * 100}%` }}
           />
         </div>
-        <span className="text-white text-[10px] tracking-widest uppercase">LGBI International</span>
+        <span className="text-white text-[10px] font-bold tracking-widest uppercase">LGBI International</span>
       </div>
 
       {/* Decorative Large Text Watermark */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.02] translate-y-1/2">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.03] translate-y-1/2">
         <h1 className="text-[20vw] font-serif text-white whitespace-nowrap">
           ARANYA SURROUNDINGS
         </h1>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn, ZoomOut, Maximize2, RotateCcw, ChevronRight, ChevronLeft } from "lucide-react";
 import DecorativeElements from "./DecorativeElements";
@@ -21,32 +21,24 @@ const galleryData = [
   { src: "/images/Cam-02_Revised.webp", title: "Exterior Facade", category: "Exteriors" },
 ];
 
-const CATEGORIES = ["All", "Exteriors", "Interiors", "Amenities"];
-
 export default function GallerySection() {
-  const [activeCategory, setActiveCategory] = useState("All");
   const [activeIndex, setActiveIndex] = useState(0);
   const [showLightbox, setShowLightbox] = useState(false);
   const [zoomScale, setZoomScale] = useState(1);
-  const filmRef = useRef(null);
 
-  const filtered = activeCategory === "All"
-    ? galleryData
-    : galleryData.filter(i => i.category === activeCategory);
-
-  const safeIndex = Math.min(activeIndex, filtered.length - 1);
-  const current = filtered[safeIndex];
+  const current = galleryData[activeIndex];
 
   const goTo = useCallback((i) => {
-    const n = ((i % filtered.length) + filtered.length) % filtered.length;
+    const n = ((i % galleryData.length) + galleryData.length) % galleryData.length;
     setActiveIndex(n);
     setZoomScale(1);
-  }, [filtered.length]);
+  }, [galleryData.length]);
 
   return (
     <section id="gallery" className="bg-warm-white py-24 overflow-hidden relative">
       <DecorativeElements type="organic" position="left-top" opacity={0.08} size="w-80" />
       <DecorativeElements type="leaf" position="right-bottom" opacity={0.06} size="w-64" />
+
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
 
         {/* --- HEADER SECTION --- */}
@@ -55,9 +47,10 @@ export default function GallerySection() {
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
+              key={`bg-num-${activeIndex}`}
               className="text-[120px] font-serif text-gold/5 absolute -top-16 -left-4 pointer-events-none select-none"
             >
-              {String(safeIndex + 1).padStart(2, "0")}
+              {String(activeIndex + 1).padStart(2, "0")}
             </motion.span>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -73,23 +66,6 @@ export default function GallerySection() {
             >
               The <span className="italic text-gold">Visual</span> Collection
             </motion.h2>
-          </div>
-
-          {/* Minimalist Category Filter */}
-          <div className="flex gap-8 overflow-x-auto pb-2 no-scrollbar">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => { setActiveCategory(cat); setActiveIndex(0); }}
-                className={`text-[10px] uppercase tracking-[0.3em] transition-all relative pb-2 whitespace-nowrap ${activeCategory === cat ? "text-gold" : "text-deep-green/40 hover:text-gold/60"
-                  }`}
-              >
-                {cat}
-                {activeCategory === cat && (
-                  <motion.div layoutId="underline" className="absolute bottom-0 left-0 right-0 h-[1px] bg-gold" />
-                )}
-              </button>
-            ))}
           </div>
         </div>
 
@@ -110,6 +86,22 @@ export default function GallerySection() {
                   className="w-full h-full object-cover"
                 />
               </AnimatePresence>
+            </div>
+
+            {/* Navigation Arrows for Mobile/Tablet (Visible when no sidebar) */}
+            <div className="absolute inset-y-0 left-0 right-0 flex justify-between items-center px-4 lg:hidden pointer-events-none">
+              <button
+                onClick={() => goTo(activeIndex - 1)}
+                className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white pointer-events-auto"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={() => goTo(activeIndex + 1)}
+                className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white pointer-events-auto"
+              >
+                <ChevronRight size={20} />
+              </button>
             </div>
 
             {/* Image Overlay Label */}
@@ -139,12 +131,18 @@ export default function GallerySection() {
             <p className="text-[10px] uppercase tracking-widest text-deep-green/30 italic">Next Perspective</p>
             <div
               className="relative aspect-[4/5] overflow-hidden cursor-pointer group"
-              onClick={() => goTo(safeIndex + 1)}
+              onClick={() => goTo(activeIndex + 1)}
             >
-              <img
-                src={filtered[(safeIndex + 1) % filtered.length]?.src}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={galleryData[(activeIndex + 1) % galleryData.length]?.src}
+                  src={galleryData[(activeIndex + 1) % galleryData.length]?.src}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
+              </AnimatePresence>
               <div className="absolute inset-0 bg-deep-green/20 group-hover:bg-transparent transition-colors" />
               <div className="absolute bottom-4 right-4 text-white">
                 <ChevronRight size={32} strokeWidth={1} />
@@ -153,32 +151,15 @@ export default function GallerySection() {
 
             {/* Progress Counter */}
             <div className="flex items-center gap-4 mt-4">
-              <span className="text-gold font-serif text-xl">{String(safeIndex + 1).padStart(2, '0')}</span>
+              <span className="text-gold font-serif text-xl">{String(activeIndex + 1).padStart(2, '0')}</span>
               <div className="flex-1 h-[1px] bg-gold/20 relative">
                 <motion.div
-                  animate={{ width: `${((safeIndex + 1) / filtered.length) * 100}%` }}
+                  animate={{ width: `${((activeIndex + 1) / galleryData.length) * 100}%` }}
                   className="absolute inset-y-0 left-0 bg-gold"
                 />
               </div>
-              <span className="text-deep-green/30 text-[10px]">{String(filtered.length).padStart(2, '0')}</span>
+              <span className="text-deep-green/30 text-[10px]">{String(galleryData.length).padStart(2, '0')}</span>
             </div>
-          </div>
-        </div>
-
-        {/* --- THUMBNAIL STRIP --- */}
-        <div className="mt-12 flex items-center gap-6">
-          <div className="flex gap-3 overflow-x-auto no-scrollbar py-4">
-            {filtered.map((item, i) => (
-              <motion.div
-                key={i}
-                onClick={() => goTo(i)}
-                whileHover={{ y: -5 }}
-                className={`flex-shrink-0 cursor-pointer transition-all duration-500 ${i === safeIndex ? "w-32 h-20 ring-1 ring-gold ring-offset-4 ring-offset-warm-white" : "w-20 h-20 opacity-40 grayscale hover:opacity-100"
-                  }`}
-              >
-                <img src={item.src} className="w-full h-full object-cover" loading="lazy" />
-              </motion.div>
-            ))}
           </div>
         </div>
       </div>
@@ -198,7 +179,7 @@ export default function GallerySection() {
             </button>
 
             <div className="relative w-full max-w-6xl aspect-video flex items-center justify-center">
-              <button onClick={() => goTo(safeIndex - 1)} className="absolute -left-16 text-white/20 hover:text-gold">
+              <button onClick={() => goTo(activeIndex - 1)} className="absolute -left-16 text-white/20 hover:text-gold">
                 <ChevronLeft size={48} strokeWidth={1} />
               </button>
 
@@ -210,7 +191,7 @@ export default function GallerySection() {
                 className="max-h-[80vh] object-contain shadow-2xl"
               />
 
-              <button onClick={() => goTo(safeIndex + 1)} className="absolute -right-16 text-white/20 hover:text-gold">
+              <button onClick={() => goTo(activeIndex + 1)} className="absolute -right-16 text-white/20 hover:text-gold">
                 <ChevronRight size={48} strokeWidth={1} />
               </button>
             </div>

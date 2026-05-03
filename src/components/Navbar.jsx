@@ -49,7 +49,7 @@ export default function Navbar({ isHidden, onOpenModal }) {
 
             {/* ── Logo lockup ── */}
             <a href="#" className="flex min-w-0 items-center group">
-              <div className="flex h-16 w-16 md:h-18 md:w-18 shrink-0 items-center justify-center overflow-hidden transition">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center transition">
                 <img
                   src="/logo/trust.webp"
                   alt="Aranya Logo"
@@ -87,17 +87,17 @@ export default function Navbar({ isHidden, onOpenModal }) {
                 Download Brochure
                 <ArrowUpRight size={13} />
               </button>
-
-              {/* Hamburger */}
-              <button
-                type="button"
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/8 text-white transition hover:border-white/30 lg:hidden"
-                aria-label="Open menu"
-              >
-                <Menu size={20} />
-              </button>
             </div>
+
+            {/* Hamburger - visible only on mobile/tablet */}
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/8 text-white transition hover:border-white/30 lg:hidden"
+              aria-label="Open menu"
+            >
+              <Menu size={20} />
+            </button>
           </div>
         </div>
       </nav>

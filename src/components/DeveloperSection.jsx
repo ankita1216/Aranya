@@ -158,57 +158,6 @@ export default function DeveloperSection() {
         </div>
 
 
-        {/* ── TEAM ── */}
-        <motion.div
-          variants={fadeUp}
-          custom={4}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="mb-14"
-        >
-          <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.38em] text-[#C9A44D]">
-            Design &amp; Consulting Team
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {teamPartners.map((t) => (
-              <div
-                key={t.role}
-                className="rounded-xl border border-white/8 bg-white/[0.035] px-5 py-4"
-              >
-                <p className="mb-1 text-[8px] font-bold uppercase tracking-[0.28em] text-[#C9A44D]/70">
-                  {t.role}
-                </p>
-                <p className="font-serif text-lg text-white/85">{t.name}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ── DISCLAIMER ── */}
-        <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-7 md:p-9">
-          <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.35em] text-[#C9A44D]/70">
-            Disclaimer
-          </p>
-          <p className="text-[11px] font-light leading-7 text-white/38">
-            The floor plans are as per the approved plans and specifications as
-            of date. These plans may vary by +/- 3% and are subject to changes.
-            The furniture, accessories, etc. shown in the plans does not form a
-            part of the offering. Customers are requested to visit the site
-            office and apprise themselves of all the necessary details prior to
-            making any purchase decisions. Views &amp; photographs used in this
-            brochure are artist's impression for illustration purpose only. The
-            information, features, offerings and other details herein are only
-            indicative and the developer/owner reserves its right to change any
-            or all of these in its discretion subject to grant of approval from
-            relevant authorities. This printed material does not constitute an
-            offer, an invitation to an offer and/or commitment of any nature
-            between the developer/owner and recipients. Costs, designs and
-            facilities and/or specifications may be subject to change without
-            notice. Any decorative item and furniture shown in any
-            unit/private terrace/private area are not a part of our offering.
-          </p>
-        </div>
       </div>
     </section>
   );

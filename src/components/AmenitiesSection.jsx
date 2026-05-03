@@ -12,6 +12,7 @@ import {
   Library,
   Flame,
   Utensils,
+  Infinity,
 } from "lucide-react";
 import StyleAccents from "./StyleAccents";
 
@@ -117,15 +118,15 @@ function AmenityCard({ item, index }) {
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, delay: index * 0.035 }}
       className={[
-        "group relative min-h-[14.5rem] overflow-hidden rounded-lg border shadow-[0_18px_45px_rgba(26,31,24,0.12)] sm:min-h-[15.5rem] md:min-h-[17rem] lg:min-h-0",
-        "border-[#C9A44D]/65 bg-[#f7f0e3]",
+        "group relative min-h-[14.5rem] overflow-hidden rounded-lg border shadow-[0_18px_45px_rgba(114,129,110,0.12)] sm:min-h-[15.5rem] md:min-h-[17rem] lg:min-h-0",
+        "border-[#72816e]/40 bg-[#f8f0df]",
         item.className,
       ].join(" ")}
     >
       {item.plain ? (
-        <div className="absolute inset-0 bg-[#fbf6eb]">
-          <div className="absolute inset-0 opacity-[0.28] [background-image:linear-gradient(90deg,#C9A44D_1px,transparent_1px),linear-gradient(0deg,#C9A44D_1px,transparent_1px)] [background-size:2.6rem_2.6rem]" />
-          <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#C9A44D]/16 blur-2xl" />
+        <div className="absolute inset-0 bg-[#f8f0df]">
+          <div className="absolute inset-0 opacity-[0.28] [background-image:linear-gradient(90deg,#407266_1px,transparent_1px),linear-gradient(0deg,#407266_1px,transparent_1px)] [background-size:2.6rem_2.6rem]" />
+          <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#407266]/16 blur-2xl" />
         </div>
       ) : item.split ? (
         <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-[1.25fr_0.95fr]">
@@ -136,7 +137,7 @@ function AmenityCard({ item, index }) {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
-          <div className="relative hidden h-full flex-col justify-center bg-[#1f4d3f] p-6 text-[#fbf5e9] md:flex">
+          <div className="relative hidden h-full flex-col justify-center bg-[#407266] p-6 text-[#f8f0df] md:flex">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.13),transparent_44%)]" />
           </div>
         </div>
@@ -148,7 +149,7 @@ function AmenityCard({ item, index }) {
             aria-hidden="true"
             className={[
               "absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105",
-              item.light ? "opacity-90" : "",
+              item.light ? "opacity-90 mix-blend-multiply" : "",
             ].join(" ")}
             loading="lazy"
           />
@@ -156,8 +157,8 @@ function AmenityCard({ item, index }) {
             className={[
               "absolute inset-0",
               item.light
-                ? "bg-gradient-to-r from-[#f4ead8]/92 via-[#f4ead8]/62 to-transparent"
-                : "bg-gradient-to-t from-[#101a12]/96 via-[#101a12]/52 to-transparent",
+                ? "bg-gradient-to-r from-[#f8f0df]/95 via-[#f8f0df]/60 to-transparent"
+                : "bg-gradient-to-t from-[#112018]/96 via-[#112018]/50 to-transparent",
             ].join(" ")}
           />
         </>
@@ -165,35 +166,41 @@ function AmenityCard({ item, index }) {
 
       {item.horizontal ? (
         <div className="relative z-10 flex h-full min-h-[7.5rem] items-center gap-4 p-4 sm:gap-5 sm:p-5 md:gap-6 md:p-6 lg:min-h-0">
-          <div className="flex h-[3.25rem] w-[3.25rem] shrink-0 items-center justify-center rounded-lg border border-[#C9A44D]/35 bg-[#0b2117] text-[#f8f0df] shadow-lg">
+          <div className="flex h-[3.25rem] w-[3.25rem] shrink-0 items-center justify-center rounded-lg border border-[#407266]/40 bg-[#407266]/10 text-[#407266] shadow-sm backdrop-blur-md">
             <Icon strokeWidth={1.45} className="h-6 w-6" />
           </div>
           <div className="min-w-0">
             <h3 className="font-serif text-2xl leading-none text-[#112018]">{item.name}</h3>
-            <p className="mt-2 max-w-sm text-[12px] leading-relaxed text-[#314033]/78 opacity-100 lg:mt-3 lg:text-[13px]">{item.desc}</p>
+            <p className="mt-2 max-w-sm text-[12px] font-medium leading-relaxed text-[#112018]/70 opacity-100 lg:mt-3 lg:text-[13px]">{item.desc}</p>
           </div>
         </div>
       ) : (
         <div
           className={[
             "relative z-10 flex h-full flex-col justify-end p-4 sm:p-5 md:p-6",
-            item.light ? "text-[#112018]" : "text-[#fbf5e9]",
+            item.light ? "text-[#112018]" : "text-[#f8f0df]",
             item.split ? "md:ml-[55%]" : "",
           ].join(" ")}
         >
-          <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-[#C9A44D]/35 bg-[#0b2117] text-[#f8f0df] shadow-lg sm:h-12 sm:w-12">
+          <div className={[
+            "mb-4 flex h-11 w-11 items-center justify-center rounded-lg border shadow-lg sm:h-12 sm:w-12 backdrop-blur-md",
+            item.light ? "border-[#407266]/30 bg-[#407266]/10 text-[#407266]" : "border-white/20 bg-white/10 text-white"
+          ].join(" ")}>
             <Icon strokeWidth={1.45} className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>
           <h3 className="font-serif text-[1.45rem] leading-none sm:text-[1.65rem]">{item.name}</h3>
           <p
             className={[
-              "mt-2 max-w-[15rem] text-[12px] leading-relaxed sm:mt-3 sm:text-[13px]",
-              item.light ? "text-[#314033]/70" : "text-[#fff8eb]/86",
+              "mt-2 max-w-[15rem] text-[12px] font-medium leading-relaxed sm:mt-3 sm:text-[13px]",
+              item.light ? "text-[#112018]/70" : "text-[#f8f0df]/80",
             ].join(" ")}
           >
             {item.desc}
           </p>
-          <span className="mt-4 block h-[2px] w-9 bg-[#C9A44D] sm:mt-5" />
+          <span className={[
+            "mt-4 block h-[2px] w-9 sm:mt-5",
+            item.light ? "bg-[#407266]" : "bg-[#f8f0df]/80"
+          ].join(" ")} />
         </div>
       )}
     </motion.article>
@@ -207,21 +214,21 @@ function AmenitiesFinish() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55 }}
-      className="relative mt-5 overflow-hidden rounded-lg border border-[#C9A44D]/70 bg-[#0b2117] px-6 py-8 text-[#fbf5e9] shadow-[0_18px_45px_rgba(26,31,24,0.14)] sm:px-8 lg:mt-6"
+      className="relative mt-5 overflow-hidden rounded-lg border border-[#72816e]/40 bg-[#112018] px-6 py-8 text-[#f8f0df] shadow-[0_18px_45px_rgba(114,129,110,0.2)] sm:px-8 lg:mt-6"
     >
-      <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(90deg,#C9A44D_1px,transparent_1px),linear-gradient(0deg,#C9A44D_1px,transparent_1px)] [background-size:3rem_3rem]" />
-      <div className="absolute -right-12 -top-20 h-48 w-48 rounded-full bg-[#C9A44D]/20 blur-3xl" />
+      <div className="absolute inset-0 opacity-[0.15] [background-image:linear-gradient(90deg,#407266_1px,transparent_1px),linear-gradient(0deg,#407266_1px,transparent_1px)] [background-size:3rem_3rem]" />
+      <div className="absolute -right-12 -top-20 h-48 w-48 rounded-full bg-[#407266]/30 blur-3xl" />
       <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.38em] text-[#C9A44D] opacity-100">
+          <p className="text-[10px] font-bold uppercase tracking-[0.38em] text-[#407266] opacity-100">
             Wellness Crafted
           </p>
-          <h3 className="mt-3 max-w-3xl font-serif text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] text-[#fff8eb]">
+          <h3 className="mt-3 max-w-3xl font-serif text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] text-[#f8f0df]">
             Spaces composed for calm, connection, and celebration.
           </h3>
         </div>
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-[#C9A44D]/45 bg-[#f8f0df] text-[#0b2117] shadow-lg">
-          <Sparkles strokeWidth={1.45} className="h-7 w-7" />
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-[#72816e]/50 bg-[#407266] text-[#f8f0df] shadow-lg">
+          <Infinity strokeWidth={1.45} className="h-7 w-7" />
         </div>
       </div>
     </motion.div>
@@ -230,12 +237,12 @@ function AmenitiesFinish() {
 
 export default function AmenitiesSection() {
   return (
-    <section id="amenities" className="relative w-full max-w-full overflow-hidden bg-[#f6efe1] bg-gradient-to-b from-[#f8f0df] via-[#f6efe1] to-[#edf0e6] py-14 text-[#112018] md:py-24">
+    <section id="amenities" className="relative w-full max-w-full overflow-hidden bg-[#e4e9e3] bg-gradient-to-b from-[#f8f0df] via-[#e4e9e3] to-[#72816e]/40 py-14 text-[#112018] md:py-24">
 
-      <StyleAccents variant="style_1" position="top-right" size="w-64 sm:w-80 lg:w-[28rem]" opacity={0.24} rotate={18} />
-      <StyleAccents variant="style_2" position="bottom-left" size="w-64 sm:w-80 lg:w-[30rem]" opacity={0.18} rotate={-16} flip />
-      <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 opacity-[0.1] [background:repeating-conic-gradient(from_18deg,#7f917b_0deg_3deg,transparent_3deg_10deg)] [clip-path:ellipse(54%_70%_at_100%_0%)]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#f8f0df] via-[#f8f0df]/88 to-transparent" />
+      <StyleAccents variant="style_1" position="top-right" size="w-64 sm:w-80 lg:w-[28rem]" opacity={0.15} rotate={18} color="#72816e" />
+      <StyleAccents variant="style_2" position="bottom-left" size="w-64 sm:w-80 lg:w-[30rem]" opacity={0.15} rotate={-16} flip color="#72816e" />
+      <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 opacity-[0.1] [background:repeating-conic-gradient(from_18deg,#407266_0deg_3deg,transparent_3deg_10deg)] [clip-path:ellipse(54%_70%_at_100%_0%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#f8f0df] via-[#f8f0df]/80 to-transparent" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1420px] px-5 sm:px-8 lg:px-12">
 
@@ -245,17 +252,17 @@ export default function AmenitiesSection() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-4 flex max-w-full items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#C9A44D] opacity-100 sm:mb-5 sm:gap-7 sm:text-[11px] sm:tracking-[0.42em]"
+              className="mb-4 flex max-w-full items-center gap-4 text-[10px] font-bold uppercase tracking-[0.22em] text-[#407266] opacity-100 sm:mb-5 sm:gap-7 sm:text-[11px] sm:tracking-[0.42em]"
             >
-              <span className="h-[1px] w-9 bg-[#C9A44D]" /> Lifestyle Elevated
+              <span className="h-[1px] w-9 bg-[#407266]" /> Lifestyle Elevated
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-[58rem] font-serif text-[clamp(2.55rem,12vw,5.6rem)] font-normal leading-[0.95] text-[#112018] drop-shadow-[0_1px_0_rgba(255,255,255,0.75)]"
+              className="max-w-[58rem] font-serif text-[clamp(2.55rem,12vw,5.6rem)] font-normal leading-[0.95] text-[#112018] drop-shadow-sm"
             >
-              The <span className="italic text-[#C9A44D]">Amenities</span> <span className="block xl:inline">Selection</span>
+              The <span className="italic text-[#407266]">Amenities</span> <span className="block xl:inline">Selection</span>
             </motion.h2>
           </div>
         </div>

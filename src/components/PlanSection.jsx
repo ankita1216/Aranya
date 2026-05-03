@@ -94,7 +94,7 @@ export default function PlanSection() {
           <h2 className="text-[#112018]">
             Floor <span className="italic text-[#1f4d3f]">Plans</span>
           </h2>
-          <p className="max-w-2xl text-[#112018]/80 font-medium">
+          <p className="mt-6 max-w-2xl text-[#112018]/80 font-medium">
             Meticulously crafted spaces designed for elevated living, combining functional brilliance with aesthetic grace.
           </p>
         </motion.div>

@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import SectionWrapper from './components/SectionWrapper'
-import BottomEnquiryForm from './components/BottomEnquiryForm'
 
 // Lazy load sections below the fold
 const AboutSection = lazy(() => import('./components/AboutSection'))
@@ -18,6 +17,7 @@ const ContactSection = lazy(() => import('./components/ContactSection'))
 const AranyaHighlight = lazy(() => import('./components/AranyaHighlight'))
 const LeadModal = lazy(() => import('./components/LeadModal'))
 const ThankYou = lazy(() => import('./components/ThankYou'))
+const DeveloperSection = lazy(() => import('./components/DeveloperSection'))
 
 const Loader = () => (
   <div className="h-screen w-full bg-[#0b2117] flex items-center justify-center">
@@ -149,6 +149,8 @@ function LandingPage() {
 
         <ContactSection />
 
+        <DeveloperSection />
+
         <div ref={footerRef}>
           <FooterSection />
         </div>
@@ -157,7 +159,7 @@ function LandingPage() {
 
       </Suspense>
 
-      <BottomEnquiryForm isVisible={hasScrolledForEnquiry && !isFooterVisible} />
+
     </main>
   );
 }

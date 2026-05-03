@@ -6,7 +6,7 @@ import StyleAccents from "./StyleAccents";
 
 const stats = [
   { label: "Open Green Area", value: "70%", icon: Trees },
-  { label: "Clubhouse", value: "1535 SQM", icon: Building },
+  { label: "Clubhouse", value: "1535 sqm", icon: Building },
   { label: "Total Units", value: "257", icon: Building },
   { label: "Completion", value: "2031", icon: Sparkles },
 ];
@@ -195,14 +195,21 @@ export default function AboutSection() {
               transition={{ delay: i * 0.15, duration: 0.7 }}
               className="flex flex-col gap-4 border-t border-[#7f917b]/40 pt-6 group"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <stat.icon size={20} style={{ color: "#7f917b" }} className="opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
                 <p
-                  className="text-4xl md:text-5xl font-serif transition-transform duration-500 group-hover:-translate-y-1"
-                  style={{ color: "#112018" }}
+                  className="text-3xl md:text-4xl transition-transform duration-500 group-hover:-translate-y-1"
+                  style={{ color: "#112018", fontFamily: "'Playfair Display', serif" }}
                 >
-                  {stat.value}
+                  {stat.value.includes("sqm") ? (
+                    <>
+                      {stat.value.split(" ")[0]}
+                      <span className="ml-2 text-sm md:text-base opacity-80 uppercase tracking-wider font-sans">sqm</span>
+                    </>
+                  ) : (
+                    stat.value
+                  )}
                 </p>
-                <stat.icon size={22} style={{ color: "#7f917b" }} className="opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <p
                 className="uppercase-track text-[10px] tracking-[0.2em] font-bold"

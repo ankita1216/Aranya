@@ -3,12 +3,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X, Phone } from "lucide-react";
 
 const navLinks = [
-  { name: "About",       href: "#experience"  },
-  { name: "Amenities",  href: "#amenities"   },
-  { name: "Location",   href: "#location"    },
-  { name: "Plans",      href: "#plans"       },
-  { name: "Walkthrough",href: "#walkthrough" },
-  { name: "Gallery",    href: "#gallery"     },
+  { name: "Overview", href: "#about" },
+  { name: "Amenities", href: "#amenities" },
+  { name: "Walkthrough Video", href: "#walkthrough" },
+  { name: "Gallery", href: "#gallery" },
+  { name: "Plan", href: "#plans" },
+  { name: "Location", href: "#location" },
+  { name: "About Us", href: "#developer" },
 ];
 
 export default function Navbar({ isHidden, onOpenModal }) {
@@ -95,7 +96,7 @@ export default function Navbar({ isHidden, onOpenModal }) {
                   boxShadow: "0 2px 16px rgba(201,164,77,0.3)",
                 }}
               >
-                Enquire Now
+                Download Brochure
                 <ArrowUpRight size={13} />
               </button>
 

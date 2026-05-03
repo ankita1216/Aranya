@@ -59,9 +59,9 @@ export default function HeroSection({ onOpenModal }) {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.8, delay: 0.08 }}
             >
-              Private <span className="text-[#C9A44D]">greens.</span>
+              Private <span className="text-[#C9A44D]">greens</span>
               <br />
-              Public <span className="text-[#C9A44D]">calm.</span>
+              Public <span className="text-[#C9A44D]">calm</span>
             </motion.h1>
             <motion.p
               className="mt-8 max-w-md text-lg leading-relaxed text-[#314033]/80"
@@ -96,9 +96,8 @@ export default function HeroSection({ onOpenModal }) {
             {imageStories.map((item, index) => (
               <motion.article
                 key={item.label}
-                className={`relative w-full max-h-[60vh] aspect-[3/4.5] md:aspect-[3/4.5] rounded-t-[18rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.2)] border-[6px] md:border-[10px] border-[#f5efe1] group ${
-                  index === 0 ? "mb-12 md:mb-16" : "mb-0"
-                }`}
+                className={`relative w-full max-h-[60vh] aspect-[3/4.5] md:aspect-[3/4.5] rounded-t-[18rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.2)] border-[6px] md:border-[10px] border-[#f5efe1] group ${index === 0 ? "mb-12 md:mb-16" : "mb-0"
+                  }`}
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -15, scale: 1.02 }}
@@ -112,7 +111,7 @@ export default function HeroSection({ onOpenModal }) {
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
-                
+
                 <div className="absolute bottom-8 md:bottom-12 left-6 md:left-10 right-6 md:right-10 text-center">
                   <span className="inline-block px-3 py-1 border border-white/40 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] !text-white mb-3">
                     {item.label}

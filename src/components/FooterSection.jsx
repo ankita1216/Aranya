@@ -92,13 +92,15 @@ export default function FooterSection() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="footer" className="relative bg-[#06100b] text-[#F8F3E7] overflow-hidden">
+    <footer id="footer" className="relative bg-[#0b2117] text-[#F8F3E7] overflow-hidden">
 
       {/* ══════════════════════════════════════════
           HERO BANNER — full-bleed cinematic close
       ══════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          HERO BANNER — full-bleed cinematic close
+      ══════════════════════════════════════════
       <div className="relative h-[70vh] min-h-[500px] overflow-hidden">
-        {/* CSS fixed-background parallax — never shows black edges */}
         <div
           aria-hidden="true"
           style={{
@@ -109,11 +111,9 @@ export default function FooterSection() {
           }}
           className="absolute inset-0"
         />
-        {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-[#06100b]" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
 
-        {/* Hero text */}
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-20 md:px-14 lg:px-20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -131,23 +131,24 @@ export default function FooterSection() {
           </motion.div>
         </div>
       </div>
+      */}
 
       {/* ══════════════════════════════════════════
           STORY — Developer narrative with image
       ══════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          STORY — Developer narrative with image
+      ══════════════════════════════════════════
       <section className="relative px-6 py-24 md:px-14 lg:px-20">
-        {/* faint radial glow */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(201,164,77,0.07),transparent)]" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
 
-            {/* Left — image stack */}
             <motion.div
               variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="relative"
             >
-              {/* Main image */}
               <div className="relative overflow-hidden rounded-3xl aspect-[4/5]">
                 <img
                   src="/images/Entrance Cam_rang Homes.webp"
@@ -156,7 +157,6 @@ export default function FooterSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
-              {/* Floating accent card */}
               <div className="absolute -bottom-6 -right-4 md:-right-8 w-52 overflow-hidden rounded-2xl border border-white/15 bg-[#0b2117]/90 p-5 shadow-2xl backdrop-blur-xl">
                 <p className="font-serif text-4xl font-light text-[#C9A44D]">600<span className="text-2xl">+</span></p>
                 <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.3em] text-white/50">Homes Delivered</p>
@@ -165,14 +165,12 @@ export default function FooterSection() {
               </div>
             </motion.div>
 
-            {/* Right — story text */}
             <motion.div
               variants={fadeUp} custom={1} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="lg:pl-8"
             >
               <Label>About the Developer</Label>
 
-              {/* Logo + name */}
               <div className="mt-6 mb-8 flex items-center gap-4">
                 <div className="rounded-xl bg-white p-2.5 shadow-lg shrink-0">
                   <img src="/images/RANG HOMES-New1.webp" alt="Indo Group Logo" className="h-9 w-auto object-contain" />
@@ -190,7 +188,6 @@ export default function FooterSection() {
                 Built on a foundation of integrity and craftsmanship, every project reflects our belief that quality must be consistent, details must be deliberate, and every home must stand as a <span className="text-white/90 font-normal">long-term asset</span> for its residents.
               </p>
 
-              {/* Stats row */}
               <div className="mt-10 grid grid-cols-3 gap-6 border-t border-white/10 pt-10">
                 {[
                   { val: "8+",   label: "Years of Excellence"  },
@@ -207,14 +204,16 @@ export default function FooterSection() {
           </div>
         </div>
       </section>
+      */}
 
       {/* ══════════════════════════════════════════
           CONTACT CARDS — glass on dark
       ══════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          CONTACT CARDS — glass on dark
+      ══════════════════════════════════════════
       <section className="relative px-6 pb-24 md:px-14 lg:px-20">
         <div className="mx-auto max-w-7xl">
-
-          {/* Full-bleed image with glass cards on top */}
           <div className="relative overflow-hidden rounded-[2.5rem]">
             <img
               src="/images/Club Cam_rang Homes_rev.webp"
@@ -223,7 +222,6 @@ export default function FooterSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#06100b]/90 via-[#06100b]/60 to-[#06100b]/20" />
 
-            {/* Cards over image */}
             <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-12 lg:px-16">
               <motion.div
                 variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
@@ -233,7 +231,6 @@ export default function FooterSection() {
               </motion.div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl">
-                {/* Card 1 — Aranya site */}
                 <motion.div
                   variants={fadeUp} custom={1} initial="hidden" whileInView="show" viewport={{ once: true }}
                   className="rounded-2xl border border-white/15 bg-white/8 p-6 backdrop-blur-2xl"
@@ -250,7 +247,6 @@ export default function FooterSection() {
                   </a>
                 </motion.div>
 
-                {/* Card 2 — Corporate */}
                 <motion.div
                   variants={fadeUp} custom={2} initial="hidden" whileInView="show" viewport={{ once: true }}
                   className="rounded-2xl border border-white/15 bg-white/8 p-6 backdrop-blur-2xl"
@@ -267,7 +263,6 @@ export default function FooterSection() {
                   </a>
                 </motion.div>
 
-                {/* Card 3 — Email / Web */}
                 <motion.div
                   variants={fadeUp} custom={3} initial="hidden" whileInView="show" viewport={{ once: true }}
                   className="rounded-2xl border border-white/15 bg-white/8 p-6 backdrop-blur-2xl"
@@ -281,7 +276,6 @@ export default function FooterSection() {
                       <Globe size={14} /> www.indogroup.in
                     </a>
                   </div>
-                  {/* Social */}
                   <div className="mt-6 flex gap-2">
                     {socialLinks.map((s) => {
                       const Icon = s.icon;
@@ -299,10 +293,14 @@ export default function FooterSection() {
           </div>
         </div>
       </section>
+      */}
 
       {/* ══════════════════════════════════════════
           DELIVERED PROJECTS — image cards
       ══════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          DELIVERED PROJECTS — image cards
+      ══════════════════════════════════════════
       <section className="px-6 pb-24 md:px-14 lg:px-20">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -331,10 +329,8 @@ export default function FooterSection() {
                   alt={proj.name}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-108"
                 />
-                {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
-                {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6">
                   <span className="mb-3 self-start rounded-full border border-[#C9A44D]/50 px-3 py-1 text-[8px] font-bold uppercase tracking-widest text-[#C9A44D]">
                     {proj.tag}
@@ -350,10 +346,14 @@ export default function FooterSection() {
           </div>
         </div>
       </section>
+      */}
 
       {/* ══════════════════════════════════════════
           DESIGN TEAM — minimal dark grid
       ══════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          DESIGN TEAM — minimal dark grid
+      ══════════════════════════════════════════
       <section className="px-6 pb-20 md:px-14 lg:px-20">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -383,10 +383,14 @@ export default function FooterSection() {
           </div>
         </div>
       </section>
+      */}
 
       {/* ══════════════════════════════════════════
           DISCLAIMER
       ══════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          DISCLAIMER
+      ══════════════════════════════════════════
       <section className="px-6 pb-16 md:px-14 lg:px-20">
         <div className="mx-auto max-w-7xl rounded-2xl border border-white/6 bg-white/[0.02] px-8 py-7">
           <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.35em] text-[#C9A44D]/50">Disclaimer</p>
@@ -395,6 +399,7 @@ export default function FooterSection() {
           </p>
         </div>
       </section>
+      */}
 
       {/* ══════════════════════════════════════════
           BOTTOM BAR — nav + quote + copyright

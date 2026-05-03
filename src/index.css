@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;0,500;0,600;0,700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;0,500;0,600;0,700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
-@theme{
+@theme {
   --color-gold: #C9A44D;
   --color-deep-green: #1f4d3f;
   --color-hero-bg: #06100B;
@@ -48,6 +48,7 @@ footer {
 }
 
 @supports (overflow-x: clip) {
+
   :root,
   html,
   body,
@@ -66,7 +67,7 @@ h1 {
 
 h2 {
   font-family: var(--font-serif);
-  font-size: 50px;
+  font-size: 80px;
   font-weight: 300;
   line-height: 1.1;
   color: inherit;
@@ -120,6 +121,8 @@ p {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }

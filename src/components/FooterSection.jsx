@@ -28,18 +28,8 @@ export default function FooterSection() {
       {/* ══════════════════════════════════════════
           MINIMALIST GET IN TOUCH SECTION
       ══════════════════════════════════════════ */}
-      <section className="px-6 pt-24 pb-16 md:px-14 lg:px-20 border-t border-white/5">
+      <section className="px-6 pt-16 pb-16 md:px-14 lg:px-20 border-t border-white/5">
         <div className="mx-auto max-w-7xl">
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="mb-14"
-          >
-            <p className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.42em] text-[#C9A44D]">
-              <span className="h-px w-8 bg-[#C9A44D]" />
-              Contact Us
-            </p>
-            <h3 className="mt-4 font-serif text-3xl font-light text-white md:text-4xl">Get in Touch</h3>
-          </motion.div>
 
           <div className="grid gap-12 sm:grid-cols-2 lg:gap-24">
             {/* Corporate Office */}

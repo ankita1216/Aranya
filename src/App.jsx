@@ -11,12 +11,10 @@ const AmenitiesSection = lazy(() => import('./components/AmenitiesSection'))
 const LocationSection = lazy(() => import('./components/LocationSection'))
 const PlanSection = lazy(() => import('./components/PlanSection'))
 const VideoWalkthrough = lazy(() => import('./components/VideoWalkthrough'))
-const PhotoSection = lazy(() => import('./components/PhotoSection'))
 const GallerySection = lazy(() => import('./components/GallerySection'))
 const FooterSection = lazy(() => import('./components/FooterSection'))
 const AranyaHighlight = lazy(() => import('./components/AranyaHighlight'))
 const LeadModal = lazy(() => import('./components/LeadModal'))
-const BottomEnquiryForm = lazy(() => import('./components/BottomEnquiryForm'))
 const ThankYou = lazy(() => import('./components/ThankYou'))
 
 const Loader = () => (
@@ -121,7 +119,7 @@ function LandingPage() {
   return (
     <main className="w-full max-w-full overflow-x-hidden" style={{ backgroundColor: '#407266' }}>
       <Navbar isHidden={isHeaderHidden} onOpenModal={() => setIsModalOpen(true)} />
-      
+
       <HeroSection onOpenModal={() => setIsModalOpen(true)} />
 
       <Suspense fallback={<div className="h-96 bg-[#407266]" />}>
@@ -130,7 +128,7 @@ function LandingPage() {
         </SectionWrapper>
 
         <AmenitiesSection />
-        
+
         <div ref={walkthroughRef}>
           <VideoWalkthrough />
         </div>
@@ -139,20 +137,20 @@ function LandingPage() {
 
         <PlanSection />
 
-        <PhotoSection />
+
 
         <div ref={quoteRef}>
           <AranyaHighlight />
         </div>
 
         <LocationSection />
-        
+
         <div ref={footerRef}>
           <FooterSection />
         </div>
-        
+
         <LeadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        <BottomEnquiryForm isVisible={isTimeElapsed && hasScrolledForEnquiry && !isQuoteVisible && !isFooterVisible && !isModalOpen} />
+
       </Suspense>
     </main>
   );

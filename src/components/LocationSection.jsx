@@ -53,16 +53,23 @@ export default function LocationSection() {
   const prevTab = () => setActiveTab((prev) => (prev - 1 + locationData.length) % locationData.length);
 
   return (
-    <section id="location" className="relative overflow-hidden bg-[#08180f] py-14 text-white sm:py-18 md:py-24">
+    <section id="location" className="relative overflow-hidden bg-[#f8f0df] py-14 text-[#112018] sm:py-18 md:py-24">
+      {/* BACKGROUND IMAGE FIX: Increased opacity, removed multiply blend mode */}
       <img
         src="/images/Entrance Cam_rang Homes.webp"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover opacity-60"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#07140d]/96 via-[#07140d]/72 to-[#07140d]/28" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#07140d] via-transparent to-[#07140d]/42" />
-      <div className="pointer-events-none absolute -right-28 top-16 h-96 w-96 rounded-full bg-[#c9a44d]/18 blur-3xl" />
+      {/* 
+        OVERLAY FIX: 
+        Left side is mostly solid cream for text readability. 
+        Right side fades to transparent so the image shows clearly! 
+      */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#f8f0df]/95 via-[#f8f0df]/70 to-[#f8f0df]/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#f8f0df] via-transparent to-[#f8f0df]/80" />
+
+      <div className="pointer-events-none absolute -right-28 top-16 h-96 w-96 rounded-full bg-[#f8f0df]/50 blur-[100px]" />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-8 grid gap-6 sm:mb-10 sm:gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,0.75fr)] lg:items-end">
@@ -72,29 +79,29 @@ export default function LocationSection() {
             viewport={{ once: true }}
           >
             <div className="mb-4 flex items-center gap-3">
-              <span className="h-[2px] w-9 bg-[#c9a44d]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.42em] text-[#f1d48a] opacity-100">The Address</span>
+              <span className="h-[2px] w-9 bg-[#407266]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.42em] text-[#407266] opacity-100">The Address</span>
             </div>
-            <h2 className="max-w-4xl font-serif text-4xl font-light leading-[1.02] text-white sm:text-5xl md:text-7xl">
+            <h2 className="max-w-4xl font-serif text-4xl font-light leading-[1.02] text-[#112018] sm:text-5xl md:text-7xl">
               Project Location <br />
-              <span className="font-light italic text-[#f1d48a]">& Nearby Places</span>
+              <span className="font-light italic text-[#407266]">& Nearby Places</span>
             </h2>
-            <p className="mt-5 max-w-2xl text-sm font-light leading-7 text-white/72 opacity-100 sm:mt-7 sm:text-base sm:leading-8">
+            <p className="mt-5 max-w-2xl text-sm font-medium leading-7 text-[#112018]/80 opacity-100 sm:mt-7 sm:text-base sm:leading-8">
               Aranya sits where the city begins to slow down: close to the airport, connected to everyday essentials, yet held inside a calmer residential edge.
             </p>
           </motion.div>
 
-          <div className="rounded-3xl border border-white/14 bg-white/[0.08] p-4 shadow-[0_28px_90px_rgba(0,0,0,0.26)] backdrop-blur-xl sm:p-5">
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.34em] text-[#f1d48a] opacity-100">
+          <div className="rounded-3xl border border-[#72816e]/30 bg-white/40 p-4 shadow-[0_28px_90px_rgba(114,129,110,0.15)] backdrop-blur-xl sm:p-5">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.34em] text-[#407266] opacity-100">
               Site Address
             </p>
             <div className="flex items-start gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#c9a44d]/35 bg-[#c9a44d]/12 text-[#f1d48a]">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#407266]/30 bg-[#407266]/10 text-[#407266]">
                 <MapPin size={22} />
               </span>
               <div>
-                <h3 className="font-serif text-2xl leading-tight text-white sm:text-3xl">RH Aerocity, Dharapur</h3>
-                <p className="mt-2 text-sm leading-7 text-white/68 opacity-100">
+                <h3 className="font-serif text-2xl leading-tight text-[#112018] sm:text-3xl">RH Aerocity, Dharapur</h3>
+                <p className="mt-2 text-sm font-medium leading-7 text-[#112018]/70 opacity-100">
                   Palashbari Road, Assam 781017
                 </p>
               </div>
@@ -103,7 +110,7 @@ export default function LocationSection() {
         </div>
 
         <div className="grid gap-4 sm:gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
-          <aside className="rounded-3xl border border-white/12 bg-black/24 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+          <aside className="rounded-3xl border border-[#72816e]/30 bg-white/40 p-3 shadow-[0_24px_70px_rgba(114,129,110,0.15)] backdrop-blur-xl">
             <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-1">
               {locationData.map((item, idx) => {
                 const Icon = item.icon;
@@ -116,14 +123,14 @@ export default function LocationSection() {
                     className={[
                       "flex min-w-0 items-center gap-3 rounded-2xl border p-3 text-left transition-all",
                       isActive
-                        ? "border-[#c9a44d]/55 bg-[#c9a44d] text-[#172018] shadow-[0_18px_38px_rgba(201,164,77,0.22)]"
-                        : "border-white/10 bg-white/[0.055] text-white/68 hover:border-[#c9a44d]/45 hover:text-white",
+                        ? "border-[#407266]/50 bg-[#407266] text-[#f8f0df] shadow-[0_18px_38px_rgba(64,114,102,0.25)]"
+                        : "border-[#72816e]/20 bg-white/30 text-[#112018]/70 hover:border-[#407266]/40 hover:text-[#112018]",
                     ].join(" ")}
                   >
                     <span
                       className={[
                         "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border",
-                        isActive ? "border-[#172018]/20 bg-[#172018] text-[#f1d48a]" : "border-white/10 bg-white/8 text-[#f1d48a]",
+                        isActive ? "border-[#112018]/20 bg-[#112018] text-[#f8f0df]" : "border-[#72816e]/30 bg-white/50 text-[#407266]",
                       ].join(" ")}
                     >
                       <Icon size={19} strokeWidth={1.6} />
@@ -150,22 +157,22 @@ export default function LocationSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.45, ease: "circOut" }}
-                className="rounded-3xl border border-white/12 bg-white/[0.09] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:p-6"
+                className="rounded-3xl border border-[#72816e]/30 bg-white/40 p-5 shadow-[0_24px_70px_rgba(114,129,110,0.15)] backdrop-blur-xl sm:p-6"
               >
                 <div className="mb-6 flex items-start justify-between gap-5">
                   <div>
-                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.34em] text-[#f1d48a] opacity-100">
+                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.34em] text-[#407266] opacity-100">
                       Route Notes
                     </p>
-                    <h3 className="font-serif text-3xl leading-tight text-white md:text-4xl">
+                    <h3 className="font-serif text-3xl leading-tight text-[#112018] md:text-4xl">
                       {activeLocation.category}
                     </h3>
                   </div>
                   <div className="flex gap-3">
-                    <button onClick={prevTab} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/14 bg-white/8 text-white transition hover:border-[#c9a44d] hover:text-[#f1d48a]">
+                    <button onClick={prevTab} className="flex h-11 w-11 items-center justify-center rounded-full border border-[#72816e]/30 bg-white/50 text-[#407266] transition hover:border-[#407266] hover:text-[#112018]">
                       <ChevronLeft size={19} />
                     </button>
-                    <button onClick={nextTab} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/14 bg-white/8 text-white transition hover:border-[#c9a44d] hover:text-[#f1d48a]">
+                    <button onClick={nextTab} className="flex h-11 w-11 items-center justify-center rounded-full border border-[#72816e]/30 bg-white/50 text-[#407266] transition hover:border-[#407266] hover:text-[#112018]">
                       <ChevronRight size={19} />
                     </button>
                   </div>
@@ -178,16 +185,16 @@ export default function LocationSection() {
                       initial={{ opacity: 0, y: 14 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.06 }}
-                      className="group rounded-2xl border border-white/10 bg-black/20 p-5 transition hover:border-[#c9a44d]/50 hover:bg-black/28"
+                      className="group rounded-2xl border border-[#72816e]/20 bg-white/30 p-5 transition hover:border-[#407266]/50 hover:bg-white/60"
                     >
                       <div className="mb-5 flex items-center justify-between gap-4">
-                        <span className="font-serif text-3xl leading-none text-[#f1d48a]">
+                        <span className="font-serif text-3xl leading-none text-[#407266]">
                           {place.distance}
                         </span>
-                        <MapPin size={16} className="text-white/44 transition group-hover:text-[#f1d48a]" />
+                        <MapPin size={16} className="text-[#112018]/40 transition group-hover:text-[#407266]" />
                       </div>
-                      <div className="mb-3 h-px w-10 bg-[#c9a44d]/55 transition group-hover:w-full" />
-                      <h4 className="text-sm font-semibold uppercase tracking-[0.12em] text-white/82">
+                      <div className="mb-3 h-px w-10 bg-[#407266]/40 transition group-hover:w-full" />
+                      <h4 className="text-sm font-semibold uppercase tracking-[0.12em] text-[#112018]/80">
                         {place.name}
                       </h4>
                     </motion.div>
@@ -196,27 +203,28 @@ export default function LocationSection() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="relative min-h-[22rem] overflow-hidden rounded-3xl border border-white/12 bg-[#06100b]/74 p-5 text-white shadow-[0_26px_70px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:min-h-[28rem] sm:p-6">
+            <div className="relative min-h-[22rem] overflow-hidden rounded-3xl border border-[#72816e]/30 bg-[#f8f0df]/80 p-5 text-[#112018] shadow-[0_26px_70px_rgba(114,129,110,0.15)] backdrop-blur-xl sm:min-h-[28rem] sm:p-6">
+              {/* IMAGE FIX: Boosted opacity and removed multiply blend */}
               <img
                 src="/images/Shot_07_5KShot_07_5K.webp"
                 alt=""
                 aria-hidden="true"
-                className="absolute inset-0 h-full w-full object-cover opacity-34"
+                className="absolute inset-0 h-full w-full object-cover opacity-50"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#06100b] via-[#06100b]/72 to-[#06100b]/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#f8f0df]/90 via-[#f8f0df]/60 to-[#f8f0df]/30" />
 
               <div className="relative z-10 flex h-full flex-col justify-between">
                 <div>
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-[#c9a44d]/35 bg-[#c9a44d]/12 text-[#f1d48a]">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-[#407266]/30 bg-[#407266]/10 text-[#407266]">
                     <Navigation size={24} />
                   </div>
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.36em] text-[#f1d48a] opacity-100">
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.36em] text-[#407266] opacity-100">
                     Map Access
                   </p>
-                  <h3 className="font-serif text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
+                  <h3 className="font-serif text-3xl leading-tight text-[#112018] sm:text-4xl md:text-5xl">
                     The route home should feel simple.
                   </h3>
-                  <p className="mt-4 max-w-xs text-sm leading-7 text-white/68 opacity-100">
+                  <p className="mt-4 max-w-xs text-sm font-medium leading-7 text-[#112018]/80 opacity-100">
                     Open the exact project location and let the journey begin from wherever you are.
                   </p>
                 </div>
@@ -225,7 +233,7 @@ export default function LocationSection() {
                   href={mapUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-10 inline-flex items-center justify-center rounded-full bg-[#c9a44d] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.28em] text-[#142419] transition hover:bg-white"
+                  className="mt-10 inline-flex items-center justify-center rounded-full bg-[#407266] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.28em] text-white transition hover:bg-[#112018]"
                 >
                   View Google Map
                 </a>

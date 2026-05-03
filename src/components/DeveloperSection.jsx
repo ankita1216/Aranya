@@ -125,123 +125,38 @@ export default function DeveloperSection() {
               </div>
             </div>
 
-            {/* Right — Contact */}
             <div className="bg-[#0b2117]/95 p-8 md:p-10">
-              <h4 className="mb-7 font-serif text-xl font-light text-white">
-                Get in Touch
-              </h4>
-
-              {/* Corporate Office */}
-              <div className="mb-6">
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#C9A44D]">
-                  Corporate Office
-                </p>
-                <div className="flex items-start gap-3">
-                  <Building2 size={15} className="mt-0.5 shrink-0 text-[#C9A44D]" />
-                  <p className="text-sm font-light leading-7 text-white/65">
-                    12 C &amp; D, 2nd Floor, Vasant Square Mall,
-                    <br />
-                    B-5 Vasant Kunj, New Delhi – 110070
-                  </p>
-                </div>
-                <div className="mt-3 flex flex-col gap-2 pl-[22px]">
-                  <a
-                    href="tel:01171834410"
-                    className="flex items-center gap-2 text-sm text-white/55 transition hover:text-[#C9A44D]"
+              <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.38em] text-[#C9A44D]">
+                Delivered Projects
+              </p>
+              
+              <div className="flex flex-col gap-4">
+                {deliveredProjects.map((proj) => (
+                  <div
+                    key={proj.name}
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-[#C9A44D]/30 hover:bg-white/[0.07]"
                   >
-                    <Phone size={13} />
-                    011-71834410/11
-                  </a>
-                  <a
-                    href="mailto:info@indogroup.in"
-                    className="flex items-center gap-2 text-sm text-white/55 transition hover:text-[#C9A44D]"
-                  >
-                    <Mail size={13} />
-                    info@indogroup.in
-                  </a>
-                  <a
-                    href="https://www.indogroup.in"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm text-white/55 transition hover:text-[#C9A44D]"
-                  >
-                    <Globe size={13} />
-                    www.indogroup.in
-                  </a>
-                </div>
-              </div>
-
-              {/* Divider */}
-              <div className="my-6 h-px bg-white/10" />
-
-              {/* Site Address */}
-              <div>
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#C9A44D]">
-                  Site Address
-                </p>
-                <div className="flex items-start gap-3">
-                  <MapPin size={15} className="mt-0.5 shrink-0 text-[#C9A44D]" />
-                  <p className="text-sm font-light leading-7 text-white/65">
-                    RH Aerocity, Dharapur,
-                    <br />
-                    Palashbari Road, Assam – 781017
-                  </p>
-                </div>
-                <div className="mt-3 pl-[22px]">
-                  <a
-                    href="tel:18001201255555"
-                    className="flex items-center gap-2 text-sm text-white/55 transition hover:text-[#C9A44D]"
-                  >
-                    <Phone size={13} />
-                    1800 12012 5555
-                  </a>
-                </div>
+                    <span className="mb-3 inline-block rounded-full border border-[#C9A44D]/40 px-3 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#C9A44D]">
+                      {proj.tag}
+                    </span>
+                    <h4 className="font-serif text-lg font-light text-white">
+                      {proj.name}
+                    </h4>
+                    <div className="mt-2 flex items-center gap-2 text-[12px] text-white/45">
+                      <MapPin size={11} />
+                      {proj.location}
+                    </div>
+                    <CheckCircle2
+                      size={16}
+                      className="absolute right-5 top-5 text-[#C9A44D]/30 transition group-hover:text-[#C9A44D]/60"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* ── DELIVERED PROJECTS ── */}
-        <motion.div
-          variants={fadeUp}
-          custom={2}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="mb-14"
-        >
-          <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.38em] text-[#C9A44D]">
-            Delivered Projects
-          </p>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {deliveredProjects.map((proj, i) => (
-              <motion.div
-                key={proj.name}
-                variants={fadeUp}
-                custom={i * 0.15 + 2.5}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-7 transition hover:border-[#C9A44D]/30 hover:bg-white/[0.07]"
-              >
-                <span className="mb-4 inline-block rounded-full border border-[#C9A44D]/40 px-3 py-1 text-[8px] font-bold uppercase tracking-widest text-[#C9A44D]">
-                  {proj.tag}
-                </span>
-                <h4 className="font-serif text-xl font-light text-white">
-                  {proj.name}
-                </h4>
-                <div className="mt-3 flex items-center gap-2 text-sm text-white/45">
-                  <MapPin size={12} />
-                  {proj.location}
-                </div>
-                <CheckCircle2
-                  size={18}
-                  className="absolute right-6 top-6 text-[#C9A44D]/30 transition group-hover:text-[#C9A44D]/60"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* ── TEAM ── */}
         <motion.div

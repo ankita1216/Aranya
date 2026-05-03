@@ -106,8 +106,8 @@ export default function AboutSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="mb-5 flex justify-center"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#C9A44D]/40 bg-[#C9A44D]/10 px-5 py-1.5 text-[9px] font-bold uppercase tracking-[0.45em] text-[#8a6520] shadow-sm backdrop-blur-sm">
-                <span className="h-1 w-1 rounded-full bg-[#C9A44D]" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#407266]/40 bg-[#407266]/10 px-6 py-2 text-[11px] font-bold uppercase tracking-[0.45em] text-[#407266] shadow-sm backdrop-blur-sm">
+                <span className="h-1 w-1 rounded-full bg-[#407266]" />
                 Introducing
               </span>
             </motion.div>
@@ -117,9 +117,9 @@ export default function AboutSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
               className="font-serif leading-[0.88] drop-shadow-sm"
-              style={{ fontSize: "clamp(4rem, 12vw, 9rem)", color: "#0f2318" }}
+              style={{ fontSize: "clamp(4rem, 12vw, 9rem)", color: "#407266" }}
             >
-              Ar<span style={{ color: "#407266" }}>anya</span>
+              Aranya
             </motion.h2>
 
             {/* Animated gold underline */}
@@ -133,11 +133,11 @@ export default function AboutSection() {
             />
           </div>
 
-          {/* Editorial two-col tagline */}
-          <div className="mt-14 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-16">
+          {/* Editorial Tagline Section */}
+          <div className="mt-14 flex flex-col items-center text-center max-w-3xl mx-auto gap-8">
             <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             >
@@ -150,16 +150,17 @@ export default function AboutSection() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-              className="flex flex-col gap-6"
+              className="flex flex-col items-center gap-10"
             >
-              <p className="text-[15px] font-light leading-8" style={{ color: "#2b4a3f" }}>
+              <p className="text-[15px] font-light leading-8 max-w-2xl" style={{ color: "#2b4a3f" }}>
                 Homes shaped around open greens, quiet views, and the comfort of returning to something more personal.
               </p>
-              <div className="flex flex-wrap gap-3">
+              
+              <div className="flex flex-wrap justify-center gap-4">
                 {[
                   { icon: Home, label: "Nature-First Design" },
                   { icon: Star, label: "Vaastu Compliant" },
@@ -170,9 +171,9 @@ export default function AboutSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.55 + i * 0.1 }}
-                    className="flex items-center gap-2 rounded-full border border-[#407266]/30 bg-white/55 px-4 py-2 shadow-sm backdrop-blur-md"
+                    className="flex items-center gap-2 rounded-full border border-[#407266]/30 bg-white/55 px-6 py-3 shadow-sm backdrop-blur-md"
                   >
-                    <Icon size={13} style={{ color: "#1f4d3f" }} />
+                    <Icon size={14} style={{ color: "#1f4d3f" }} />
                     <span className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "#112018" }}>
                       {label}
                     </span>

@@ -48,43 +48,31 @@ export default function Navbar({ isHidden, onOpenModal }) {
           >
 
             {/* ── Logo lockup ── */}
-            <a href="#" className="flex min-w-0 items-center gap-4 group">
-              <div className={[
-                "flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border bg-white p-2 transition shadow-md",
-                scrolled ? "border-[#C9A44D]/40" : "border-white/40",
-              ].join(" ")}>
+            <a href="#" className="flex min-w-0 items-center group">
+              <div className="flex h-16 w-16 md:h-18 md:w-18 shrink-0 items-center justify-center overflow-hidden transition">
                 <img
                   src="/logo/trust.webp"
                   alt="Aranya Logo"
                   className="h-full w-full object-contain"
                 />
               </div>
-              <div className="hidden leading-none sm:block">
-                <span className="block font-serif text-2xl tracking-[0.12em] text-white drop-shadow-sm">
-                  ARANYA
-                </span>
-                <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A44D]">
-                  By Rang Homes
-                </span>
-              </div>
             </a>
 
-            {/* ── Desktop nav links ── */}
-            <div className="hidden items-center gap-1 lg:flex">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="relative rounded-lg px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition duration-200 hover:text-[#C9A44D]
-                    after:absolute after:bottom-1 after:left-3.5 after:right-3.5 after:h-px after:scale-x-0 after:bg-[#C9A44D] after:transition-transform after:duration-200 hover:after:scale-x-100"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-
-            {/* ── Right actions ── */}
-            <div className="flex items-center gap-4">
+            {/* ── Desktop nav + Right actions ── */}
+            <div className="flex items-center gap-6 lg:gap-8">
+              {/* Nav links */}
+              <div className="hidden items-center gap-1 lg:flex">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="relative whitespace-nowrap rounded-lg px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition duration-200 hover:text-[#C9A44D]
+                      after:absolute after:bottom-1 after:left-3.5 after:right-3.5 after:h-px after:scale-x-0 after:bg-[#C9A44D] after:transition-transform after:duration-200 hover:after:scale-x-100"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
 
               {/* CTA button */}
               <button

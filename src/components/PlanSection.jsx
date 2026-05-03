@@ -90,11 +90,10 @@ export default function PlanSection() {
             <div className="w-8 md:w-12 h-[1px] bg-[#1f4d3f]"></div>
             <span className="uppercase-track text-[#1f4d3f] font-bold tracking-widest">Architectural Excellence</span>
           </div>
-          {/* Text changed to dark deep green for visibility */}
-          <h2 className="text-[#112018]">
-            Floor <span className="italic text-[#1f4d3f]">Plans</span>
+          <h2 className="!text-[#112018] drop-shadow-sm">
+            Floor <span className="italic !text-[#407266]">Plans</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-[#112018]/80 font-medium">
+          <p className="mt-6 max-w-2xl !text-[#112018] font-semibold leading-relaxed">
             Meticulously crafted spaces designed for elevated living, combining functional brilliance with aesthetic grace.
           </p>
         </motion.div>

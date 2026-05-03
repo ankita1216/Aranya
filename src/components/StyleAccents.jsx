@@ -11,7 +11,7 @@ export default function StyleAccents({
   variant = "style_2",
   position = "top-right",
   size = "w-72",
-  opacity = 0.18,
+  opacity = 1,
   rotate = 0,
   flip = false,
   className = "",
@@ -29,10 +29,11 @@ export default function StyleAccents({
       <img
         src={`/images/${variant}.png`}
         alt=""
-        className="h-auto w-full object-contain"
+        className="h-auto w-full object-contain mix-blend-normal"
         loading="lazy"
         style={{
-          opacity,
+          opacity: 0.7,
+          filter: "saturate(1.1) contrast(1.05) brightness(1.1)",
           transform: `${flip ? "scaleX(-1) " : ""}rotate(${rotate}deg)`,
         }}
       />

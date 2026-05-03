@@ -205,41 +205,15 @@ export default function LocationSection() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="relative min-h-[22rem] overflow-hidden rounded-3xl border border-[#7f917b]/30 bg-[#f8f0df]/80 p-5 text-[#112018] shadow-[0_26px_70px_rgba(114,129,110,0.15)] backdrop-blur-xl sm:min-h-[28rem] sm:p-6">
-              {/* IMAGE FIX: Boosted opacity and removed multiply blend */}
-              <img
-                src="/images/Shot_07_5KShot_07_5K.webp"
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 h-full w-full object-cover opacity-50"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#f8f0df]/90 via-[#f8f0df]/60 to-[#f8f0df]/30" />
-
-              <div className="relative z-10 flex h-full flex-col justify-between">
-                <div>
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-[#1f4d3f]/30 bg-[#1f4d3f]/10 text-[#1f4d3f]">
-                    <Navigation size={24} />
-                  </div>
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.36em] text-[#1f4d3f] opacity-100">
-                    Map Access
-                  </p>
-                  <h3 className="font-serif text-3xl leading-tight text-[#112018] sm:text-4xl md:text-5xl">
-                    The route home should feel simple.
-                  </h3>
-                  <p className="mt-4 max-w-xs text-sm font-medium leading-7 text-[#112018]/80 opacity-100">
-                    Open the exact project location and let the journey begin from wherever you are.
-                  </p>
-                </div>
-
-                <a
-                  href={mapUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-10 inline-flex items-center justify-center rounded-full bg-[#1f4d3f] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.28em] text-white transition hover:bg-[#112018]"
-                >
-                  View Google Map
-                </a>
-              </div>
+            <div className="relative min-h-[22rem] overflow-hidden rounded-3xl border border-[#7f917b]/30 bg-[#f8f0df]/80 shadow-[0_26px_70px_rgba(114,129,110,0.15)] backdrop-blur-xl sm:min-h-[28rem]">
+              <iframe
+                src="https://www.google.com/maps?q=Aranya%20by%20Rang%20Homes&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full"
+              ></iframe>
             </div>
           </div>
         </div>

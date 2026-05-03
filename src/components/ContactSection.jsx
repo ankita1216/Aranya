@@ -67,8 +67,7 @@ export default function ContactSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
 
-        {/* ── Header ── */}
-        <div className="mb-16 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="mb-16">
           <motion.div
             variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
           >
@@ -78,29 +77,9 @@ export default function ContactSection() {
             </p>
             <h2 className="font-serif text-4xl font-light leading-tight text-[#112018] md:text-5xl lg:text-6xl drop-shadow-sm">
               Let's find your{" "}
-              <em className="inline-block not-italic text-[#f8f0df] px-3 py-1 bg-[#407266] rounded-lg whitespace-nowrap">perfect home</em>
+              <em className="not-italic text-[#407266] font-medium whitespace-nowrap">perfect home</em>
               <br className="hidden md:block" /> at Aranya.
             </h2>
-          </motion.div>
-
-          {/* Contact quick-links */}
-          <motion.div
-            variants={fadeUp} custom={1} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="flex flex-col gap-3 lg:items-end"
-          >
-            {contactInfo.map(({ icon: Icon, label, value, href }) => (
-              <a key={label} href={href}
-                className="flex items-center gap-3 group"
-              >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#112018]/20 bg-white/40 text-[#407266] group-hover:border-[#407266] group-hover:bg-[#407266] group-hover:text-white transition shadow-sm">
-                  <Icon size={15} />
-                </span>
-                <div className="lg:text-right">
-                  <p className="text-[8px] font-bold uppercase tracking-[0.3em] text-[#112018]/60">{label}</p>
-                  <p className="text-sm font-semibold text-[#112018] group-hover:text-[#407266] transition">{value}</p>
-                </div>
-              </a>
-            ))}
           </motion.div>
         </div>
 

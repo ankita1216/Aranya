@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Pause, Play, RotateCcw, RotateCw } from "lucide-react";
+import StyleAccents from "./StyleAccents";
 
 export default function VideoWalkthrough() {
   const iframeRef = useRef(null);
@@ -28,10 +29,10 @@ export default function VideoWalkthrough() {
   };
 
   return (
-    <section id="walkthrough" className="relative overflow-hidden bg-white py-14 text-[#172018] sm:py-20 md:py-24">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#f8f0df] to-white" />
-      <div className="pointer-events-none absolute -right-28 top-16 h-80 w-80 rounded-full bg-[#c9a44d]/14 blur-3xl" />
-      <div className="pointer-events-none absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-[#f5efe1] blur-3xl" />
+    <section id="walkthrough" className="relative overflow-hidden bg-[#f8f0df] bg-gradient-to-b from-[#edf0e6] via-[#f8f0df] to-[#f5efe1] py-14 text-[#112018] sm:py-20 md:py-24">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#edf0e6] to-transparent" />
+      <StyleAccents variant="style_2" position="top-right" size="w-56 sm:w-72 lg:w-96" opacity={0.2} rotate={22} />
+      <StyleAccents variant="style_1" position="bottom-left" size="w-56 sm:w-72 lg:w-96" opacity={0.18} rotate={-20} flip />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-8 flex flex-col justify-between gap-5 sm:mb-10 sm:gap-6 md:flex-row md:items-end">
@@ -40,17 +41,17 @@ export default function VideoWalkthrough() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.42em] text-[#a87923] opacity-100"
+              className="mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.42em] text-[#C9A44D] opacity-100"
             >
-              <span className="h-[2px] w-8 bg-[#a87923]" /> Video Walkthrough
+              <span className="h-[2px] w-8 bg-[#C9A44D]" /> Video Walkthrough
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-4xl font-serif text-3xl font-semibold leading-tight text-[#132019] sm:text-4xl md:text-6xl"
+              className="max-w-4xl font-serif text-3xl font-semibold leading-tight text-[#112018] sm:text-4xl md:text-6xl"
             >
-              Experience <span className="font-medium italic text-[#bd8f2a]">Aranya</span> in Motion
+              Experience <span className="font-medium italic text-[#C9A44D]">Aranya</span> in Motion
             </motion.h2>
           </div>
           <p className="max-w-sm text-sm font-medium leading-7 text-[#314033]/72 opacity-100">
@@ -63,7 +64,7 @@ export default function VideoWalkthrough() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.65 }}
-          className="overflow-hidden rounded-xl border border-[#d8cba8]/70 bg-[#0b0d09] shadow-[0_32px_90px_rgba(22,28,18,0.20)]"
+          className="overflow-hidden rounded-xl border border-[#C9A44D]/70 bg-[#0b0d09] shadow-[0_32px_90px_rgba(22,28,18,0.20)]"
         >
           <div className="relative aspect-video min-h-[24rem] overflow-hidden bg-[#0b0d09] max-sm:min-h-[34rem]">
             <iframe

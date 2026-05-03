@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ZoomIn, ZoomOut, Maximize } from "lucide-react";
 import DecorativeElements from "./DecorativeElements";
+import StyleAccents from "./StyleAccents";
 
 const unitsData = [
   {
@@ -67,14 +68,15 @@ export default function PlanSection() {
     <section
       id="plans"
       // Applied the requested gradient: Green at top, cream in middle, green at bottom
-      className="relative overflow-hidden section-padding bg-[#e4e9e3] bg-gradient-to-b from-[#72816e]/60 via-[#f8f0df] via-50% to-[#72816e]/70"
+      className="relative overflow-hidden section-padding bg-[#e7eadf] bg-gradient-to-b from-[#7f917b]/45 via-[#f8f0df] via-50% to-[#7f917b]/50"
     >
-      <DecorativeElements type="leaf" position="right-top" color="#72816e" opacity={0.15} size="w-72" />
-      <DecorativeElements type="blob" position="left-center" color="#72816e" opacity={0.1} size="w-[26rem]" />
+      <DecorativeElements type="leaf" position="right-top" color="#7f917b" opacity={0.15} size="w-72" />
+      <DecorativeElements type="blob" position="left-center" color="#7f917b" opacity={0.1} size="w-[26rem]" />
+      <StyleAccents variant="style_2" position="top-right" size="w-64 lg:w-[30rem]" opacity={0.2} rotate={18} />
+      <StyleAccents variant="style_1" position="bottom-left" size="w-64 lg:w-[28rem]" opacity={0.18} rotate={-18} flip />
 
       {/* Background aesthetics tailored for the light theme */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#f8f0df]/40 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#72816e]/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#e7eadf]/80 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full relative z-20 mb-2 md:mb-8 px-4 md:px-0">
         <motion.div
@@ -85,12 +87,12 @@ export default function PlanSection() {
           className="max-w-3xl"
         >
           <div className="flex items-center gap-4 mb-3 md:mb-4">
-            <div className="w-8 md:w-12 h-[1px] bg-[#407266]"></div>
-            <span className="uppercase-track text-[#407266] font-bold tracking-widest">Architectural Excellence</span>
+            <div className="w-8 md:w-12 h-[1px] bg-[#1f4d3f]"></div>
+            <span className="uppercase-track text-[#1f4d3f] font-bold tracking-widest">Architectural Excellence</span>
           </div>
           {/* Text changed to dark deep green for visibility */}
           <h2 className="text-[#112018]">
-            Floor <span className="italic text-[#407266]">Plans</span>
+            Floor <span className="italic text-[#1f4d3f]">Plans</span>
           </h2>
           <p className="max-w-2xl text-[#112018]/80 font-medium">
             Meticulously crafted spaces designed for elevated living, combining functional brilliance with aesthetic grace.
@@ -102,7 +104,7 @@ export default function PlanSection() {
         {/* Tabs Container */}
         <div className="flex flex-col gap-8">
           {/* Primary Tabs */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 md:gap-12 border-b border-[#72816e]/30 pb-4 relative">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 md:gap-12 border-b border-[#7f917b]/30 pb-4 relative">
             {unitsData.map((unit) => {
               const isActive = activeUnit === unit.id;
               return (
@@ -116,7 +118,7 @@ export default function PlanSection() {
                   {isActive && (
                     <motion.div
                       layoutId="primary-tab-indicator"
-                      className="absolute left-0 right-0 bottom-[-16px] h-[2px] bg-[#407266]"
+                      className="absolute left-0 right-0 bottom-[-16px] h-[2px] bg-[#1f4d3f]"
                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     />
                   )}
@@ -143,8 +145,8 @@ export default function PlanSection() {
                       key={plan.id}
                       onClick={() => { setActiveSubTab(plan.id); setZoom(1); }}
                       className={`relative uppercase-track text-[9px] font-bold py-2 px-4 rounded-full border transition-all duration-300 ${isActive
-                          ? "border-[#407266] text-[#407266] bg-[#407266]/10 shadow-[0_0_15px_rgba(64,114,102,0.15)]"
-                          : "border-[#72816e]/30 text-[#112018]/60 hover:border-[#72816e]/60 hover:text-[#112018]"
+                          ? "border-[#1f4d3f] text-[#1f4d3f] bg-[#1f4d3f]/10 shadow-[0_0_15px_rgba(64,114,102,0.15)]"
+                          : "border-[#7f917b]/30 text-[#112018]/60 hover:border-[#7f917b]/60 hover:text-[#112018]"
                         }`}
                     >
                       {plan.label}
@@ -159,7 +161,7 @@ export default function PlanSection() {
           <div
             ref={containerRef}
             // Lightened the background container to match the cream aesthetic
-            className="relative w-full aspect-square md:aspect-video bg-white/40 rounded-2xl border border-[#72816e]/20 overflow-hidden flex items-center justify-center p-6 md:p-12 mt-2 backdrop-blur-sm shadow-sm"
+            className="relative w-full aspect-square md:aspect-video bg-white/40 rounded-2xl border border-[#7f917b]/20 overflow-hidden flex items-center justify-center p-6 md:p-12 mt-2 backdrop-blur-sm shadow-sm"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -186,14 +188,14 @@ export default function PlanSection() {
             </AnimatePresence>
 
             {/* Zoom Controls */}
-            <div className="absolute bottom-6 md:bottom-10 right-6 md:right-10 flex gap-2 bg-white/60 p-2 rounded-xl backdrop-blur-md border border-[#72816e]/20 z-20 shadow-sm">
-              <button onClick={() => setZoom(z => Math.min(z + 0.5, 4))} className="p-2 text-[#407266] hover:bg-[#407266]/10 rounded-lg transition-colors">
+            <div className="absolute bottom-6 md:bottom-10 right-6 md:right-10 flex gap-2 bg-white/60 p-2 rounded-xl backdrop-blur-md border border-[#7f917b]/20 z-20 shadow-sm">
+              <button onClick={() => setZoom(z => Math.min(z + 0.5, 4))} className="p-2 text-[#1f4d3f] hover:bg-[#1f4d3f]/10 rounded-lg transition-colors">
                 <ZoomIn size={18} />
               </button>
-              <button onClick={() => setZoom(1)} className="p-2 text-[#407266] hover:bg-[#407266]/10 rounded-lg transition-colors">
+              <button onClick={() => setZoom(1)} className="p-2 text-[#1f4d3f] hover:bg-[#1f4d3f]/10 rounded-lg transition-colors">
                 <Maximize size={18} />
               </button>
-              <button onClick={() => setZoom(z => Math.max(z - 0.5, 1))} className="p-2 text-[#407266] hover:bg-[#407266]/10 rounded-lg transition-colors">
+              <button onClick={() => setZoom(z => Math.max(z - 0.5, 1))} className="p-2 text-[#1f4d3f] hover:bg-[#1f4d3f]/10 rounded-lg transition-colors">
                 <ZoomOut size={18} />
               </button>
             </div>

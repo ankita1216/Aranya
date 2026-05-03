@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import SectionWrapper from './components/SectionWrapper'
+import BottomEnquiryForm from './components/BottomEnquiryForm'
 
 // Lazy load sections below the fold
 const AboutSection = lazy(() => import('./components/AboutSection'))
@@ -13,12 +14,13 @@ const PlanSection = lazy(() => import('./components/PlanSection'))
 const VideoWalkthrough = lazy(() => import('./components/VideoWalkthrough'))
 const GallerySection = lazy(() => import('./components/GallerySection'))
 const FooterSection = lazy(() => import('./components/FooterSection'))
+const ContactSection = lazy(() => import('./components/ContactSection'))
 const AranyaHighlight = lazy(() => import('./components/AranyaHighlight'))
 const LeadModal = lazy(() => import('./components/LeadModal'))
 const ThankYou = lazy(() => import('./components/ThankYou'))
 
 const Loader = () => (
-  <div className="h-screen w-full bg-[#407266] flex items-center justify-center">
+  <div className="h-screen w-full bg-[#0b2117] flex items-center justify-center">
     <div className="w-12 h-12 border-4 border-gold/20 border-t-gold rounded-full animate-spin"></div>
   </div>
 );
@@ -117,12 +119,12 @@ function LandingPage() {
   }, []);
 
   return (
-    <main className="w-full max-w-full overflow-x-hidden" style={{ backgroundColor: '#407266' }}>
+    <main className="w-full max-w-full overflow-x-hidden" style={{ backgroundColor: '#f8f0df' }}>
       <Navbar isHidden={isHeaderHidden} onOpenModal={() => setIsModalOpen(true)} />
 
       <HeroSection onOpenModal={() => setIsModalOpen(true)} />
 
-      <Suspense fallback={<div className="h-96 bg-[#407266]" />}>
+      <Suspense fallback={<div className="h-96 bg-[#f8f0df]" />}>
         <SectionWrapper id="about">
           <AboutSection />
         </SectionWrapper>
@@ -145,6 +147,8 @@ function LandingPage() {
 
         <LocationSection />
 
+        <ContactSection />
+
         <div ref={footerRef}>
           <FooterSection />
         </div>
@@ -152,6 +156,8 @@ function LandingPage() {
         <LeadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       </Suspense>
+
+      <BottomEnquiryForm isVisible={hasScrolledForEnquiry && !isFooterVisible} />
     </main>
   );
 }

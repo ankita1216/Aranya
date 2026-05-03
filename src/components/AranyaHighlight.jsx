@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import StyleAccents from "./StyleAccents";
 
 const aranyaViews = [
   {
@@ -38,16 +39,18 @@ export default function AranyaHighlight() {
   }, []);
 
   return (
-    <section className="relative z-20 bg-[#f8f0df] bg-gradient-to-b from-[#72816e]/30 via-[#f8f0df] via-50% to-[#72816e]/40">
+    <section className="relative z-20 overflow-hidden bg-[#f8f0df] bg-gradient-to-b from-[#7f917b]/34 via-[#f8f0df] via-50% to-[#7f917b]/42">
       {/* 
         Aesthetic Gradient Background: 
-        Starts with a soft mix of green (#72816e) at the top, 
+        Starts with a soft mix of green (#7f917b) at the top, 
         transitions to pure cream (#f8f0df) in the middle, 
         and fades back into a slightly deeper green mix at the bottom.
       */}
+      <StyleAccents variant="style_2" position="top-right" size="w-52 sm:w-72 lg:w-[28rem]" opacity={0.18} rotate={-12} />
+      <StyleAccents variant="style_1" position="bottom-left" size="w-56 sm:w-80 lg:w-[30rem]" opacity={0.18} rotate={18} flip />
 
       {/* Main Gallery Area */}
-      <div className="relative flex h-[80vh] w-full items-center justify-center overflow-hidden sm:h-[90vh]">
+      <div className="relative z-10 flex h-[80vh] w-full items-center justify-center overflow-hidden sm:h-[90vh]">
         <AnimatePresence mode="wait">
           <motion.img
             key={activeView.src}
@@ -87,8 +90,8 @@ export default function AranyaHighlight() {
         </div>
 
         {/* Minimalist Corner Accents (Updated to the new green) */}
-        <div className="absolute left-8 top-8 hidden h-16 w-16 border-l border-t border-[#72816e]/50 md:block" />
-        <div className="absolute bottom-8 right-8 hidden h-16 w-16 border-b border-r border-[#72816e]/50 md:block" />
+        <div className="absolute left-8 top-8 hidden h-16 w-16 border-l border-t border-[#7f917b]/50 md:block" />
+        <div className="absolute bottom-8 right-8 hidden h-16 w-16 border-b border-r border-[#7f917b]/50 md:block" />
 
         {/* Navigation Dots */}
         <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3">
@@ -107,26 +110,38 @@ export default function AranyaHighlight() {
         </div>
       </div>
 
-      {/* Footer / After View Section */}
-      <div className="z-30 px-6 py-12 sm:px-12 lg:px-20">
+      {/* After the View — dark green block, fully readable */}
+      <div className="relative z-30 bg-[#0f2318]">
+        {/* thin gold top border */}
+        <div className="h-[2px] w-full" style={{ background: "linear-gradient(90deg, transparent, #C9A44D 30%, #C9A44D 70%, transparent)" }} />
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mx-auto flex max-w-6xl flex-col gap-6 border-t border-[#72816e]/30 pt-8 md:flex-row md:items-end md:justify-between"
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto max-w-7xl px-6 py-16 sm:px-12 lg:px-20"
         >
-          <div>
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#1a3a32]">
-              After the View
-            </p>
-            <h3 className="max-w-3xl font-serif text-2xl leading-tight text-[#0a140f] sm:text-3xl md:text-4xl">
-              Some places impress you once. Aranya is made to stay with you.
-            </h3>
+          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+            {/* Left */}
+            <div className="md:max-w-2xl">
+              <p className="mb-5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.42em] text-[#C9A44D]">
+                <span className="h-px w-8 bg-[#C9A44D]" />
+                After the View
+              </p>
+              <h3 className="font-serif text-3xl font-light leading-tight text-white sm:text-4xl md:text-5xl">
+                Some places impress you once.{" "}
+                <em className="not-italic text-[#C9A44D]">Aranya</em> is made to stay with you.
+              </h3>
+            </div>
+
+            {/* Right */}
+            <div className="md:max-w-xs md:text-right">
+              <p className="text-[15px] font-light leading-8 text-white/60">
+                A quieter return, a softer evening, a home that feels personal before it feels grand.
+              </p>
+            </div>
           </div>
-          <p className="max-w-sm text-sm font-medium leading-relaxed text-[#0a140f]">
-            A quieter return, a softer evening, a home that feels personal before it feels grand.
-          </p>
         </motion.div>
       </div>
     </section>

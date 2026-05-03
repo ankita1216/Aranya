@@ -27,7 +27,7 @@ const OrganicLeaf = ({ className, color = "currentColor" }) => (
   </svg>
 );
 
-export default function DecorativeElements({ type = "leaf", color = "#407266", opacity = 0.1, position = "left-top", size = "w-64" }) {
+export default function DecorativeElements({ type = "leaf", color = "#1f4d3f", opacity = 0.1, position = "left-top", size = "w-64" }) {
   const positions = {
     "left-top": "top-0 -left-24",
     "right-top": "top-0 -right-24",

@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Maximize2, ChevronRight, ChevronLeft } from "lucide-react";
+import StyleAccents from "./StyleAccents";
 
 const galleryData = [
   { src: "/images/Entrance Cam_rang Homes.webp", title: "Grand Entrance", category: "Exteriors" },
@@ -34,10 +35,10 @@ export default function GallerySection() {
   }, []);
 
   return (
-    <section id="gallery" className="relative overflow-hidden bg-[#f8f0df] py-24 text-[#172018]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/45 to-transparent" />
-      <div className="pointer-events-none absolute -right-32 top-10 h-80 w-80 rounded-full bg-[#c9a44d]/14 blur-3xl" />
-      <div className="pointer-events-none absolute -left-32 bottom-10 h-72 w-72 rounded-full bg-white/55 blur-3xl" />
+    <section id="gallery" className="relative overflow-hidden bg-[#f6efe1] bg-gradient-to-b from-[#f5efe1] via-[#f8f0df] to-[#e7eadf] py-24 text-[#112018]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#f5efe1] to-transparent" />
+      <StyleAccents variant="style_1" position="center-left" size="w-56 sm:w-72 lg:w-96" opacity={0.18} rotate={12} />
+      <StyleAccents variant="style_2" position="top-right" size="w-52 sm:w-72 lg:w-[26rem]" opacity={0.2} rotate={-18} flip />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
 
@@ -48,23 +49,23 @@ export default function GallerySection() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               key={`bg-num-${activeIndex}`}
-              className="pointer-events-none absolute right-0 top-1/2 z-0 -translate-y-1/2 select-none font-serif text-[76px] font-bold leading-none text-[#bd8f2a]/42 sm:text-[118px] md:-right-8 md:text-[138px] lg:-right-16"
+              className="pointer-events-none absolute right-0 top-1/2 z-0 -translate-y-1/2 select-none font-serif text-[76px] font-bold leading-none text-[#C9A44D]/42 sm:text-[118px] md:-right-8 md:text-[138px] lg:-right-16"
             >
               {String(activeIndex + 1).padStart(2, "0")}
             </motion.span>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="relative z-10 mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.42em] text-[#a87923] opacity-100"
+              className="relative z-10 mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.42em] text-[#C9A44D] opacity-100"
             >
-              <span className="h-[2px] w-8 bg-[#a87923]" /> Gallery Section
+              <span className="h-[2px] w-8 bg-[#C9A44D]" /> Gallery Section
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="relative z-10 font-serif text-4xl font-semibold leading-tight text-[#132019] md:text-6xl"
+              className="relative z-10 font-serif text-4xl font-semibold leading-tight text-[#112018] md:text-6xl"
             >
-              The <span className="font-medium italic text-[#bd8f2a]">Gallery</span> Collection
+              The <span className="font-medium italic text-[#C9A44D]">Gallery</span> Collection
             </motion.h2>
           </div>
           <p className="max-w-sm text-sm font-medium leading-7 text-[#314033]/72 opacity-100">
@@ -76,7 +77,7 @@ export default function GallerySection() {
         <div className="grid grid-cols-12 items-stretch gap-5 lg:gap-7">
 
           {/* Hero Image Container */}
-          <div className="group relative col-span-12 overflow-hidden rounded-lg border border-[#d8cba8]/70 bg-white shadow-[0_26px_70px_rgba(47,42,28,0.16)] lg:col-span-9">
+          <div className="group relative col-span-12 overflow-hidden rounded-lg border border-[#C9A44D]/70 bg-white shadow-[0_26px_70px_rgba(47,42,28,0.16)] lg:col-span-9">
             <div className="aspect-[16/9] overflow-hidden bg-[#efe4cd]">
               <AnimatePresence mode="wait">
                 <motion.img
@@ -97,13 +98,13 @@ export default function GallerySection() {
             <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 lg:hidden">
               <button
                 onClick={() => goTo(activeIndex - 1)}
-                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/70 text-[#172018] shadow-lg backdrop-blur-md"
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/70 text-[#112018] shadow-lg backdrop-blur-md"
               >
                 <ChevronLeft size={24} strokeWidth={2.5} />
               </button>
               <button
                 onClick={() => goTo(activeIndex + 1)}
-                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/70 text-[#172018] shadow-lg backdrop-blur-md"
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/70 text-[#112018] shadow-lg backdrop-blur-md"
               >
                 <ChevronRight size={24} strokeWidth={2.5} />
               </button>
@@ -134,8 +135,8 @@ export default function GallerySection() {
           </div>
 
           {/* Sidebar Navigation */}
-          <div className="col-span-3 hidden flex-col gap-6 rounded-lg border border-[#d8cba8]/70 bg-[#fff8eb]/78 p-5 shadow-[0_22px_54px_rgba(47,42,28,0.10)] lg:flex">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-[#7c642d] opacity-100">Next Perspective</p>
+          <div className="col-span-3 hidden flex-col gap-6 rounded-lg border border-[#C9A44D]/70 bg-[#fff8eb]/78 p-5 shadow-[0_22px_54px_rgba(47,42,28,0.10)] lg:flex">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-[#1f4d3f] opacity-100">Next Perspective</p>
             <div
               className="group relative aspect-[4/5] cursor-pointer overflow-hidden rounded-lg bg-[#efe4cd]"
               onClick={() => goTo(activeIndex + 1)}
@@ -158,11 +159,11 @@ export default function GallerySection() {
 
             {/* Progress Counter */}
             <div className="mt-2 flex items-center gap-4">
-              <span className="font-serif text-2xl font-bold text-[#bd8f2a]">{String(activeIndex + 1).padStart(2, '0')}</span>
-              <div className="relative h-[2px] flex-1 bg-[#c9a44d]/22">
+              <span className="font-serif text-2xl font-bold text-[#C9A44D]">{String(activeIndex + 1).padStart(2, '0')}</span>
+              <div className="relative h-[2px] flex-1 bg-[#C9A44D]/22">
                 <motion.div
                   animate={{ width: `${((activeIndex + 1) / galleryData.length) * 100}%` }}
-                  className="absolute inset-y-0 left-0 bg-[#bd8f2a]"
+                  className="absolute inset-y-0 left-0 bg-[#C9A44D]"
                 />
               </div>
               <span className="text-[12px] font-bold text-[#314033]/48">{String(galleryData.length).padStart(2, '0')}</span>

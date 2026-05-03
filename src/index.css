@@ -3,7 +3,7 @@
 
 @theme{
   --color-gold: #C9A44D;
-  --color-deep-green: #407266;
+  --color-deep-green: #1f4d3f;
   --color-hero-bg: #06100B;
   --color-warm-white: #F8F3E7;
 
@@ -19,7 +19,7 @@
 :root {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
-  --bg-color: #407266;
+  --bg-color: #f8f0df;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;

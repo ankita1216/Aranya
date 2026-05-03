@@ -25,9 +25,9 @@ function PhotoSection() {
   return (
     <section
       id="photo-section"
-      className="relative overflow-hidden bg-[#f8f0df] px-5 py-14 text-[#172018] sm:px-8 sm:py-20 lg:px-12 lg:py-24"
+      className="relative overflow-hidden bg-[#f8f0df] px-5 py-14 text-[#112018] sm:px-8 sm:py-20 lg:px-12 lg:py-24"
     >
-      <div className="pointer-events-none absolute -right-28 top-20 h-80 w-80 rounded-full bg-[#c9a44d]/14 blur-3xl" />
+      <div className="pointer-events-none absolute -right-28 top-20 h-80 w-80 rounded-full bg-[#C9A44D]/14 blur-3xl" />
       <div className="pointer-events-none absolute -left-28 bottom-10 h-72 w-72 rounded-full bg-white/70 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-[1440px]">
@@ -37,17 +37,17 @@ function PhotoSection() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.42em] text-[#a87923] opacity-100"
+              className="mb-4 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.42em] text-[#C9A44D] opacity-100"
             >
-              <span className="h-[2px] w-9 bg-[#a87923]" /> Photo Story
+              <span className="h-[2px] w-9 bg-[#C9A44D]" /> Photo Story
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-4xl font-serif text-3xl font-semibold leading-tight text-[#132019] sm:text-4xl md:text-6xl"
+              className="max-w-4xl font-serif text-3xl font-semibold leading-tight text-[#112018] sm:text-4xl md:text-6xl"
             >
-              A home should be remembered in <span className="font-medium italic text-[#bd8f2a]">moments</span>.
+              A home should be remembered in <span className="font-medium italic text-[#C9A44D]">moments</span>.
             </motion.h2>
           </div>
           <p className="max-w-md text-sm font-medium leading-7 text-[#314033]/72 opacity-100">
@@ -61,7 +61,7 @@ function PhotoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.65 }}
-            className="group relative min-h-[26rem] overflow-hidden rounded-xl border border-[#d8cba8]/70 bg-[#172018] shadow-[0_28px_80px_rgba(47,42,28,0.16)] sm:min-h-[34rem]"
+            className="group relative min-h-[26rem] overflow-hidden rounded-xl border border-[#C9A44D]/70 bg-[#112018] shadow-[0_28px_80px_rgba(47,42,28,0.16)] sm:min-h-[34rem]"
           >
             <img
               src={photos[0].src}
@@ -70,7 +70,7 @@ function PhotoSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/16 to-transparent" />
             <div className="absolute bottom-0 left-0 max-w-3xl p-7 text-white sm:p-10">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.36em] text-[#f1d48a] opacity-100">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.36em] text-[#C9A44D] opacity-100">
                 {photos[0].label}
               </p>
               <h3 className="font-serif text-3xl leading-tight text-white sm:text-6xl">
@@ -90,7 +90,7 @@ function PhotoSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.65, delay: index * 0.08 }}
-                className="group relative min-h-[14.5rem] overflow-hidden rounded-xl border border-[#d8cba8]/70 bg-[#172018] shadow-[0_20px_54px_rgba(47,42,28,0.12)] sm:min-h-[16.2rem]"
+                className="group relative min-h-[14.5rem] overflow-hidden rounded-xl border border-[#C9A44D]/70 bg-[#112018] shadow-[0_20px_54px_rgba(47,42,28,0.12)] sm:min-h-[16.2rem]"
               >
                 <img
                   src={photo.src}
@@ -99,7 +99,7 @@ function PhotoSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/14 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.32em] text-[#f1d48a] opacity-100">
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A44D] opacity-100">
                     {photo.label}
                   </p>
                   <h3 className="max-w-md font-serif text-2xl leading-tight text-white sm:text-3xl">

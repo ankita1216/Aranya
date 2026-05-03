@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import DecorativeElements from "./DecorativeElements";
+import StyleAccents from "./StyleAccents";
 
 import hero1 from "/images/hero1.webp";
 import hero2 from "/images/hero2.webp";
@@ -23,15 +24,17 @@ const imageStories = [
 export default function HeroSection({ onOpenModal }) {
 
   return (
-    <section className="relative h-screen overflow-hidden bg-[#f5efe1] text-[#172018]">
+    <section className="relative h-screen overflow-hidden bg-[#f5efe1] text-[#112018]">
       <DecorativeElements type="organic" position="left-top" opacity={0.08} size="w-96" />
       <DecorativeElements type="blob" position="right-bottom" opacity={0.06} size="w-[30rem]" />
+      <StyleAccents variant="style_1" position="top-left" size="w-52 sm:w-72 lg:w-96" opacity={0.34} rotate={-18} />
+      <StyleAccents variant="style_2" position="bottom-right" size="w-56 sm:w-80 lg:w-[28rem]" opacity={0.22} rotate={14} flip />
       {/* Decorative Background Grid */}
-      <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(90deg,#8c7b45_1px,transparent_1px),linear-gradient(0deg,#8c7b45_1px,transparent_1px)] [background-size:4.2rem_4.2rem]" />
+      <div className="absolute inset-0 opacity-[0.1] [background-image:linear-gradient(90deg,#7f917b_1px,transparent_1px),linear-gradient(0deg,#7f917b_1px,transparent_1px)] [background-size:4.2rem_4.2rem]" />
 
       {/* Rotating Circle Decoration */}
       <motion.div
-        className="absolute -right-20 top-20 h-[42rem] w-[42rem] rounded-full border border-[#a98b39]/30"
+        className="absolute -right-20 top-20 h-[42rem] w-[42rem] rounded-full border border-[#C9A44D]/30"
         animate={{ rotate: 360 }}
         transition={{ duration: 46, repeat: Infinity, ease: "linear" }}
       />
@@ -41,7 +44,7 @@ export default function HeroSection({ onOpenModal }) {
           {/* Text Content */}
           <div className="max-w-2xl lg:pr-12">
             <motion.p
-              className="mb-6 text-[12px] font-semibold uppercase tracking-[0.24em] text-[#8a7033]"
+              className="mb-6 text-[12px] font-semibold uppercase tracking-[0.24em] text-[#C9A44D]"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -50,7 +53,7 @@ export default function HeroSection({ onOpenModal }) {
               Living redefined
             </motion.p>
             <motion.h1
-              className="font-serif text-[62px] leading-[1.1] text-[#172018]"
+              className="font-serif text-[62px] leading-[1.1] text-[#112018]"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -80,7 +83,7 @@ export default function HeroSection({ onOpenModal }) {
             >
               <button
                 onClick={onOpenModal}
-                className="inline-flex items-center gap-4 border-b border-[#756329] pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#26311f] group transition-all"
+                className="inline-flex items-center gap-4 border-b border-[#C9A44D] pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#112018] group transition-all"
               >
                 Discover More
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

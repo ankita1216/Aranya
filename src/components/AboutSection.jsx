@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Home, Star, MapPin, Building, Trees, Sparkles } from "lucide-react";
 import DecorativeElements from "./DecorativeElements";
+import StyleAccents from "./StyleAccents";
 
 const stats = [
   { label: "Open Green Area", value: "70%", icon: Trees },
@@ -26,10 +27,12 @@ export default function AboutSection() {
       ref={containerRef}
       id="experience"
       // Much stronger green presence! Mixes heavily with cream.
-      className="relative overflow-hidden bg-[#e4e9e3] bg-gradient-to-b from-[#72816e]/60 via-[#f8f0df] via-50% to-[#72816e]/70 pb-20 md:pb-32"
+      className="relative overflow-hidden bg-[#e7eadf] bg-gradient-to-b from-[#7f917b]/45 via-[#f8f0df] via-50% to-[#7f917b]/48 pb-20 md:pb-32"
     >
-      <DecorativeElements type="leaf" position="left-center" color="#72816e" opacity={0.15} size="w-80" />
-      <DecorativeElements type="organic" position="right-top" color="#72816e" opacity={0.12} size="w-[28rem]" />
+      <DecorativeElements type="leaf" position="left-center" color="#7f917b" opacity={0.15} size="w-80" />
+      <DecorativeElements type="organic" position="right-top" color="#7f917b" opacity={0.12} size="w-[28rem]" />
+      <StyleAccents variant="style_2" position="center-right" size="w-72 lg:w-[30rem]" opacity={0.18} rotate={-20} className="hidden md:block" />
+      <StyleAccents variant="style_1" position="bottom-left" size="w-64 lg:w-96" opacity={0.18} rotate={24} flip className="hidden md:block" />
 
       {/* ── FULL-WIDTH IMAGE HERO ── */}
       <div className="relative w-full" ref={imageRef}>
@@ -44,7 +47,7 @@ export default function AboutSection() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent pointer-events-none" />
 
           {/* Bottom fade now matches the heavier green/cream mix to seamlessly blend the image */}
-          <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#d4dbd1] via-[#d4dbd1]/80 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#e7eadf] via-[#e7eadf]/84 to-transparent pointer-events-none" />
         </div>
 
         {/* Vision label — top left */}
@@ -72,40 +75,114 @@ export default function AboutSection() {
         </motion.div>
       </div>
 
-      {/* ── PREMIUM EDITORIAL CONTENT BELOW IMAGE ── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 lg:px-16 -mt-20 md:-mt-32">
+      {/* ── EDITORIAL INTRO CONTENT ── */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 -mt-20 md:-mt-32">
 
-        {/* Large Statement Intro */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="text-center mb-16 md:mb-24"
-        >
-          {/* Forced dark color inline to prevent it from turning white */}
-          <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight max-w-4xl mx-auto mb-10 drop-shadow-sm"
-            style={{ color: "#112018" }}
+        <div className="mx-auto mb-20 max-w-5xl md:mb-28">
+
+          {/* Location pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-10 flex justify-center"
           >
-            Nestled away from the city's hustle, yet connected to the world — Aranya is a meticulously crafted residential masterpiece.
-          </h2>
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#1f4d3f]/30 bg-white/60 px-5 py-2.5 shadow-[0_4px_24px_rgba(15,35,24,0.10)] backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C9A44D] animate-pulse" />
+              <MapPin size={13} className="text-[#1f4d3f]" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#1f4d3f]">
+                RH Aerocity · Dharapur · Guwahati
+              </span>
+            </div>
+          </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-3 md:gap-6">
-            {[
-              { icon: Home, label: "Nature-First Design" },
-              { icon: Star, label: "Vaastu Compliant" },
-              { icon: MapPin, label: "Guwahati, Assam" },
-            ].map(({ icon: Icon, label }, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#72816e]/40 bg-white/50 backdrop-blur-md shadow-sm">
-                <Icon size={14} style={{ color: "#407266" }} />
-                <span className="uppercase-track text-[10px] tracking-widest font-bold" style={{ color: "#172018" }}>
-                  {label}
-                </span>
-              </div>
-            ))}
+          {/* Giant wordmark headline */}
+          <div className="text-center mb-8 overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-5 flex justify-center"
+            >
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#C9A44D]/40 bg-[#C9A44D]/10 px-5 py-1.5 text-[9px] font-bold uppercase tracking-[0.45em] text-[#8a6520] shadow-sm backdrop-blur-sm">
+                <span className="h-1 w-1 rounded-full bg-[#C9A44D]" />
+                Introducing
+              </span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              className="font-serif leading-[0.88] drop-shadow-sm"
+              style={{ fontSize: "clamp(4rem, 12vw, 9rem)", color: "#0f2318" }}
+            >
+              Ar<span style={{ color: "#407266" }}>anya</span>
+            </motion.h2>
+
+            {/* Animated gold underline */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.55 }}
+              style={{ transformOrigin: "center" }}
+              className="mx-auto mt-4 h-[2px] w-32 rounded-full bg-gradient-to-r from-transparent via-[#C9A44D] to-transparent"
+            />
           </div>
-        </motion.div>
+
+          {/* Editorial two-col tagline */}
+          <div className="mt-14 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            >
+              <h3 className="font-serif text-2xl font-light leading-snug md:text-3xl lg:text-4xl" style={{ color: "#112018" }}>
+                A nature-led address crafted for{" "}
+                <em className="not-italic" style={{ color: "#407266" }}>calm</em>,{" "}
+                <em className="not-italic" style={{ color: "#407266" }}>connection</em>,
+                {" "}and everyday belonging.
+              </h3>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+              className="flex flex-col gap-6"
+            >
+              <p className="text-[15px] font-light leading-8" style={{ color: "#2b4a3f" }}>
+                Homes shaped around open greens, quiet views, and the comfort of returning to something more personal.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { icon: Home, label: "Nature-First Design" },
+                  { icon: Star, label: "Vaastu Compliant" },
+                ].map(({ icon: Icon, label }, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.55 + i * 0.1 }}
+                    className="flex items-center gap-2 rounded-full border border-[#407266]/30 bg-white/55 px-4 py-2 shadow-sm backdrop-blur-md"
+                  >
+                    <Icon size={13} style={{ color: "#1f4d3f" }} />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "#112018" }}>
+                      {label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
 
         {/* Minimalist Stats Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
@@ -116,7 +193,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.7 }}
-              className="flex flex-col gap-4 border-t border-[#72816e]/40 pt-6 group"
+              className="flex flex-col gap-4 border-t border-[#7f917b]/40 pt-6 group"
             >
               <div className="flex items-center justify-between">
                 <p
@@ -125,11 +202,11 @@ export default function AboutSection() {
                 >
                   {stat.value}
                 </p>
-                <stat.icon size={22} style={{ color: "#72816e" }} className="opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <stat.icon size={22} style={{ color: "#7f917b" }} className="opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <p
                 className="uppercase-track text-[10px] tracking-[0.2em] font-bold"
-                style={{ color: "#407266" }}
+                style={{ color: "#1f4d3f" }}
               >
                 {stat.label}
               </p>

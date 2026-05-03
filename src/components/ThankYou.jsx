@@ -46,7 +46,7 @@ export default function ThankYou() {
               download="Aranya_Brochure.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 bg-gold text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-xl shadow-gold/20 transition-all hover:bg-[#b89542]"
+              className="flex items-center gap-3 bg-gold text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs shadow-xl shadow-gold/20 transition-all hover:bg-[#C9A44D]"
             >
               <Download size={18} />
               Download Brochure

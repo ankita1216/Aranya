@@ -1,180 +1,188 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, Phone } from "lucide-react";
 
 const navLinks = [
-  { name: "About", href: "#experience" },
-  { name: "Amenities", href: "#amenities" },
-  { name: "Location", href: "#location" },
-  { name: "Plans", href: "#plans" },
-  { name: "Walkthrough", href: "#walkthrough" },
-  { name: "Gallery", href: "#gallery" },
+  { name: "About",       href: "#experience"  },
+  { name: "Amenities",  href: "#amenities"   },
+  { name: "Location",   href: "#location"    },
+  { name: "Plans",      href: "#plans"       },
+  { name: "Walkthrough",href: "#walkthrough" },
+  { name: "Gallery",    href: "#gallery"     },
 ];
 
 export default function Navbar({ isHidden, onOpenModal }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isHero, setIsHero] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsHero(window.scrollY <= window.innerHeight - 80);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <>
+      {/* ── Main Navbar ── */}
       <nav
-        className="fixed left-0 top-0 z-50 w-full px-4 pt-4 transition-all duration-500 sm:px-6 lg:px-10"
+        className="fixed left-0 top-0 z-50 w-full transition-all duration-500"
         style={{
-          transform: isHidden ? "translateY(-120%)" : "translateY(0)",
+          transform: isHidden ? "translateY(-110%)" : "translateY(0)",
           opacity: isHidden ? 0 : 1,
           pointerEvents: isHidden ? "none" : "auto",
         }}
       >
-        <div
-          className={[
-            "mx-auto flex h-[4.25rem] max-w-[1320px] items-center justify-between rounded-full border px-4 shadow-[0_18px_55px_rgba(20,28,18,0.12)] backdrop-blur-2xl transition-all duration-500 sm:h-[4.5rem] sm:px-5",
-            isHero
-              ? "border-[#d8cba8]/75 bg-[#fff8eb]/72 text-[#172018]"
-              : "border-white/12 bg-[#0b2117]/78 text-[#F8F3E7]",
-          ].join(" ")}
-        >
-          <a href="#" className="flex min-w-0 items-center gap-3">
-            <span
-              className={[
-                "flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-white p-1.5 transition",
-                isHero ? "border-[#d8cba8]" : "border-white/15",
-              ].join(" ")}
-            >
-              <img src="/logo/trust.webp" alt="Aranya Logo" className="h-full w-full object-contain" />
-            </span>
-            <span className="hidden leading-none sm:block">
-              <span className="block font-serif text-xl tracking-[0.08em]">ARANYA</span>
-              <span
-                className={[
-                  "mt-1 block text-[8px] font-bold uppercase tracking-[0.28em]",
-                  isHero ? "text-[#8a7033]" : "text-[#C9A44D]",
-                ].join(" ")}
-              >
-                By Rang Homes
-              </span>
-            </span>
-          </a>
-
+        {/* Outer padding */}
+        <div className="px-4 pt-4 sm:px-6 lg:px-8">
           <div
             className={[
-              "hidden items-center rounded-full border p-1 lg:flex",
-              isHero ? "border-[#d8cba8]/80 bg-white/36" : "border-white/10 bg-white/[0.055]",
+              "mx-auto flex h-[4.25rem] max-w-[1340px] items-center justify-between rounded-2xl border px-5 transition-all duration-500 sm:h-[4.5rem] sm:px-6",
+              scrolled
+                ? "border-white/10 bg-[#0b2117]/95 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-2xl"
+                : "border-white/15 bg-[#0b2117]/80 shadow-[0_8px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl",
             ].join(" ")}
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={[
-                  "rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] transition",
-                  isHero
-                    ? "text-[#314033]/76 hover:bg-[#172018] hover:text-[#fff8eb]"
-                    : "text-white/68 hover:bg-white hover:text-[#172018]",
-                ].join(" ")}
+
+            {/* ── Logo lockup ── */}
+            <a href="#" className="flex min-w-0 items-center gap-4 group">
+              <div className={[
+                "flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border bg-white p-2 transition shadow-md",
+                scrolled ? "border-[#C9A44D]/40" : "border-white/40",
+              ].join(" ")}>
+                <img
+                  src="/logo/trust.webp"
+                  alt="Aranya Logo"
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <div className="hidden leading-none sm:block">
+                <span className="block font-serif text-2xl tracking-[0.12em] text-white drop-shadow-sm">
+                  ARANYA
+                </span>
+                <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A44D]">
+                  By Rang Homes
+                </span>
+              </div>
+            </a>
+
+            {/* ── Desktop nav links ── */}
+            <div className="hidden items-center gap-1 lg:flex">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="relative rounded-lg px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition duration-200 hover:text-[#C9A44D]
+                    after:absolute after:bottom-1 after:left-3.5 after:right-3.5 after:h-px after:scale-x-0 after:bg-[#C9A44D] after:transition-transform after:duration-200 hover:after:scale-x-100"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+
+            {/* ── Right actions ── */}
+            <div className="flex items-center gap-4">
+
+              {/* CTA button */}
+              <button
+                onClick={onOpenModal}
+                className="hidden items-center gap-2 rounded-xl px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] transition duration-200 lg:inline-flex"
+                style={{
+                  background: "linear-gradient(135deg, #C9A44D, #b8903c)",
+                  color: "#0f2318",
+                  boxShadow: "0 2px 16px rgba(201,164,77,0.3)",
+                }}
               >
-                {link.name}
-              </a>
-            ))}
-          </div>
+                Enquire Now
+                <ArrowUpRight size={13} />
+              </button>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={onOpenModal}
-              className={[
-                "hidden items-center gap-3 rounded-full px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em] transition lg:inline-flex",
-                isHero
-                  ? "bg-[#172018] text-[#fff8eb] hover:bg-[#C9A44D] hover:text-[#172018]"
-                  : "bg-[#C9A44D] text-[#172018] hover:bg-white",
-              ].join(" ")}
-            >
-              Brochure
-              <ArrowUpRight size={14} />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(true)}
-              className={[
-                "flex h-11 w-11 items-center justify-center rounded-full border transition lg:hidden",
-                isHero
-                  ? "border-[#d8cba8] bg-white/50 text-[#172018]"
-                  : "border-white/15 bg-white/8 text-white",
-              ].join(" ")}
-              aria-label="Open menu"
-            >
-              <Menu size={21} />
-            </button>
+              {/* Hamburger */}
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/8 text-white transition hover:border-white/30 lg:hidden"
+                aria-label="Open menu"
+              >
+                <Menu size={20} />
+              </button>
+            </div>
           </div>
         </div>
       </nav>
 
+      {/* ── Mobile full-screen menu ── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] overflow-y-auto bg-[#08180f] px-6 py-7 text-[#F8F3E7]"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[100] flex flex-col overflow-y-auto bg-[#06100b] px-6 py-7 text-[#F8F3E7]"
           >
+            {/* Mobile header */}
             <div className="flex items-center justify-between">
-              <div>
-                <p className="font-serif text-3xl">ARANYA</p>
-                <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.34em] text-[#C9A44D]">
-                  By Rang Homes
-                </p>
+              <div className="flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-[#C9A44D]/40 bg-white p-2">
+                  <img src="/logo/trust.webp" alt="Aranya Logo" className="h-full w-full object-contain" />
+                </div>
+                <div>
+                  <p className="font-serif text-2xl tracking-[0.1em] text-white">ARANYA</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A44D]">By Rang Homes</p>
+                </div>
               </div>
               <button
                 type="button"
                 onClick={closeMenu}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/6 text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/6 text-white transition hover:border-white/30"
                 aria-label="Close menu"
               >
-                <X size={21} />
+                <X size={20} />
               </button>
             </div>
 
-            <div className="mt-12 flex flex-col gap-2 sm:mt-16 sm:gap-3">
+            {/* Gold separator */}
+            <div className="mt-8 h-px bg-gradient-to-r from-transparent via-[#C9A44D]/40 to-transparent" />
+
+            {/* Nav items */}
+            <nav className="mt-6 flex flex-col gap-1">
               {navLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.055 }}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   onClick={closeMenu}
-                  className="group flex items-center justify-between border-b border-white/8 py-4 sm:py-5"
+                  className="group flex items-center justify-between rounded-xl px-4 py-4 transition hover:bg-white/5"
                 >
-                  <span className="font-serif text-3xl leading-none text-white transition group-hover:text-[#C9A44D] sm:text-4xl">
+                  <span className="font-serif text-3xl font-light text-white transition group-hover:text-[#C9A44D] sm:text-4xl">
                     {link.name}
                   </span>
-                  <ArrowUpRight size={18} className="text-[#C9A44D]" />
+                  <ArrowUpRight size={18} className="text-[#C9A44D]/50 transition group-hover:text-[#C9A44D]" />
                 </motion.a>
               ))}
-            </div>
+            </nav>
 
-            <button
-              type="button"
-              onClick={() => {
-                closeMenu();
-                onOpenModal();
-              }}
-              className="mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-[#C9A44D] px-8 py-4 text-[11px] font-bold uppercase tracking-[0.24em] text-[#172018]"
-            >
-              Download Brochure
-              <ArrowUpRight size={15} />
-            </button>
+            {/* Bottom actions */}
+            <div className="mt-auto pt-10 flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() => { closeMenu(); onOpenModal(); }}
+                className="flex items-center justify-center gap-2 rounded-xl py-4 text-[11px] font-bold uppercase tracking-[0.24em]"
+                style={{
+                  background: "linear-gradient(135deg, #C9A44D, #b8903c)",
+                  color: "#0f2318",
+                  boxShadow: "0 4px 20px rgba(201,164,77,0.25)",
+                }}
+              >
+                Enquire Now
+                <ArrowUpRight size={14} />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

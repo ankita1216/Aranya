@@ -77,8 +77,8 @@ export default function ContactSection() {
             </p>
             <h2 className="font-serif text-4xl font-light leading-tight text-[#112018] md:text-5xl lg:text-6xl drop-shadow-sm">
               Let's find your{" "}
-              <em className="not-italic text-[#407266] font-medium whitespace-nowrap">perfect home</em>
-              <br className="hidden md:block" /> at Aranya.
+              <em className="not-italic text-[#407266] font-medium whitespace-nowrap">Perfect Home</em>
+              <br className="hidden md:block" /> at Aranya
             </h2>
           </motion.div>
         </div>
@@ -227,8 +227,8 @@ export default function ContactSection() {
                   { val: "16,000+", sub: "Sq ft Club" },
                 ].map(({ val, sub }) => (
                   <div key={sub} className="border-t border-[#72816e]/30 pt-4">
-                    <p className="font-serif text-2xl font-semibold text-[#112018]">{val}</p>
-                    <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#407266]">{sub}</p>
+                    <p className="font-serif text-xl font-semibold text-[#112018]">{val}</p>
+                    <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-[#407266]">{sub}</p>
                   </div>
                 ))}
               </div>

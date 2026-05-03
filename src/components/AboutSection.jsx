@@ -141,12 +141,12 @@ export default function AboutSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             >
-              <h3 className="font-serif text-2xl font-light leading-snug md:text-3xl lg:text-4xl" style={{ color: "#112018" }}>
+              <p className="font-sans text-2xl font-light leading-snug md:text-3xl lg:text-4xl" style={{ color: "#112018" }}>
                 A nature-led address crafted for{" "}
                 <em className="not-italic" style={{ color: "#407266" }}>calm</em>,{" "}
                 <em className="not-italic" style={{ color: "#407266" }}>connection</em>,
                 {" "}and everyday belonging.
-              </h3>
+              </p>
             </motion.div>
 
             <motion.div

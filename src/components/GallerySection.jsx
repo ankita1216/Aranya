@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Maximize2, ChevronRight, ChevronLeft } from "lucide-react";
 import StyleAccents from "./StyleAccents";
@@ -25,11 +25,25 @@ export default function GallerySection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showLightbox, setShowLightbox] = useState(false);
   const [zoomScale, setZoomScale] = useState(1);
+  const [isMainLoaded, setIsMainLoaded] = useState(false);
+
+  // Preload next image logic
+  useEffect(() => {
+    const nextIndex = (activeIndex + 1) % galleryData.length;
+    const img = new Image();
+    img.src = galleryData[nextIndex].src;
+    
+    // Also preload a few more if needed, or just the next one
+    const prevIndex = (activeIndex - 1 + galleryData.length) % galleryData.length;
+    const prevImg = new Image();
+    prevImg.src = galleryData[prevIndex].src;
+  }, [activeIndex]);
 
   const current = galleryData[activeIndex];
 
   const goTo = useCallback((i) => {
     const n = ((i % galleryData.length) + galleryData.length) % galleryData.length;
+    setIsMainLoaded(false);
     setActiveIndex(n);
     setZoomScale(1);
   }, []);
@@ -88,11 +102,23 @@ export default function GallerySection() {
                   key={current?.src}
                   src={current?.src}
                   initial={{ scale: 1.1, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
+                  animate={{ 
+                    scale: isMainLoaded ? 1 : 1.05, 
+                    opacity: isMainLoaded ? 1 : 0 
+                  }}
+                  onLoad={() => setIsMainLoaded(true)}
                   exit={{ scale: 1.05, opacity: 0 }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="high"
                 />
+                {!isMainLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#72816e]/10 backdrop-blur-sm">
+                    <div className="w-8 h-8 border-2 border-[#407266]/20 border-t-[#407266] rounded-full animate-spin" />
+                  </div>
+                )}
               </AnimatePresence>
             </div>
 
@@ -150,6 +176,8 @@ export default function GallerySection() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
                 />
               </AnimatePresence>
               <div className="absolute inset-0 bg-gradient-to-t from-[#112018]/80 via-[#112018]/20 to-transparent transition-colors group-hover:from-[#112018]/90" />

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ZoomIn, ZoomOut, Maximize } from "lucide-react";
 import DecorativeElements from "./DecorativeElements";
@@ -52,12 +52,25 @@ export default function PlanSection() {
   const [activeUnit, setActiveUnit] = useState("B");
   const [activeSubTab, setActiveSubTab] = useState(unitsData.find(u => u.id === "B").plans[0].id);
   const [zoom, setZoom] = useState(1);
+  const [isPlanLoaded, setIsPlanLoaded] = useState(false);
   const containerRef = useRef(null);
+
+  // Preload all plans for the currently active unit
+  useEffect(() => {
+    const unit = unitsData.find(u => u.id === activeUnit);
+    if (unit) {
+      unit.plans.forEach(plan => {
+        const img = new Image();
+        img.src = plan.image;
+      });
+    }
+  }, [activeUnit]);
 
   const currentUnit = unitsData.find((u) => u.id === activeUnit);
   const currentPlan = currentUnit.plans.find((p) => p.id === activeSubTab) || currentUnit.plans[0];
 
   const handleUnitChange = (id) => {
+    setIsPlanLoaded(false);
     setActiveUnit(id);
     const newUnit = unitsData.find((u) => u.id === id);
     setActiveSubTab(newUnit.plans[0].id); // Reset to first plan of new unit
@@ -142,7 +155,11 @@ export default function PlanSection() {
                   return (
                     <button
                       key={plan.id}
-                      onClick={() => { setActiveSubTab(plan.id); setZoom(1); }}
+                      onClick={() => { 
+                      setIsPlanLoaded(false);
+                      setActiveSubTab(plan.id); 
+                      setZoom(1); 
+                    }}
                       className={`relative uppercase-track text-[9px] font-bold py-2 px-4 rounded-full border transition-all duration-300 ${isActive
                           ? "border-[#1f4d3f] text-[#1f4d3f] bg-[#1f4d3f]/10 shadow-[0_0_15px_rgba(64,114,102,0.15)]"
                           : "border-[#7f917b]/30 text-[#112018]/60 hover:border-[#7f917b]/60 hover:text-[#112018]"
@@ -176,13 +193,26 @@ export default function PlanSection() {
                   alt={`${currentUnit.name} Plan ${currentPlan.label}`}
                   className="w-full h-full object-contain"
                   style={{ filter: "drop-shadow(0 0 20px rgba(114,129,110,0.1))" }}
-                  animate={{ scale: zoom }}
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    scale: zoom,
+                    opacity: isPlanLoaded ? 1 : 0
+                  }}
+                  onLoad={() => setIsPlanLoaded(true)}
                   drag={zoom > 1}
                   dragConstraints={containerRef}
                   dragElastic={0.1}
                   onClick={() => setZoom(z => z === 1 ? 2 : 1)}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="high"
                 />
+                {!isPlanLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-10 h-10 border-2 border-[#1f4d3f]/20 border-t-[#1f4d3f] rounded-full animate-spin" />
+                  </div>
+                )}
               </motion.div>
             </AnimatePresence>
 

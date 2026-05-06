@@ -67,7 +67,7 @@ export default function DeveloperSection() {
           className="mb-14 max-w-3xl font-serif text-4xl font-light leading-tight text-white md:text-5xl"
         >
           Building communities people are proud to call{" "}
-          <span className="italic text-[#C9A44D]">home.</span>
+          <span className="italic text-[#C9A44D]">home</span>
         </motion.h2>
 
         {/* ── DEVELOPER CARD ── */}
@@ -129,7 +129,7 @@ export default function DeveloperSection() {
               <p className="mb-7 text-[10px] font-bold uppercase tracking-[0.38em] text-[#C9A44D]">
                 Delivered Projects
               </p>
-              
+
               <div className="flex flex-col gap-4">
                 {deliveredProjects.map((proj) => (
                   <div

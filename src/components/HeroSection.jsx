@@ -52,7 +52,7 @@ export default function HeroSection({ onOpenModal }) {
             >
               Living redefined
             </motion.p>
-            <motion.h1
+            <motion.h2
               className="font-serif text-[62px] leading-[1.1] text-[#112018]"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export default function HeroSection({ onOpenModal }) {
               Private <span className="text-[#C9A44D]">greens</span>
               <br />
               Public <span className="text-[#C9A44D]">calm</span>
-            </motion.h1>
+            </motion.h2>
             <motion.p
               className="mt-8 max-w-md text-lg leading-relaxed text-[#314033]/80"
               initial={{ opacity: 0, y: 20 }}

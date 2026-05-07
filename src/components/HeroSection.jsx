@@ -3,21 +3,21 @@ import { ArrowRight } from "lucide-react";
 import DecorativeElements from "./DecorativeElements";
 import StyleAccents from "./StyleAccents";
 
-import hero1 from "/images/first.jpeg";
-import hero2 from "/images/secondmage.jpeg";
+import first from "/images/first.webp";
+import second from "/images/secondmage.webp";
 
 const imageStories = [
   {
     // label: "Sustainable",
     // title: "Eco-conscious Architecture",
-    src: hero1,
+    src: first,
     // Shifted to the opposite side (pushes image right)
     position: "object-[30%_center]"
   },
   {
     // label: "Modern",
     // title: "Contemporary Spaces",
-    src: hero2,
+    src: second,
     // Shifted to the opposite side (pushes image right)
     position: "object-[40%_center]"
   }
@@ -111,6 +111,8 @@ export default function HeroSection({ onOpenModal }) {
                   src={item.src}
                   alt={item.title}
                   fetchpriority="high"
+                  loading="eager"
+                  decoding="async"
                   className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${item.position}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />

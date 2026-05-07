@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { Play, ArrowUpRight } from "lucide-react";
 import StyleAccents from "./StyleAccents";
 
-export default function VideoWalkthrough() {
+export default function VideoWalkthrough({ onOpenModal }) {
   const iframeRef = useRef(null);
   const [hasStarted, setHasStarted] = useState(false);
 
@@ -23,7 +23,7 @@ export default function VideoWalkthrough() {
     /* Changed bg-gradient to solid cream color bg-[#f8f0df] */
     <section
       id="walkthrough"
-      className="relative overflow-hidden bg-[#f8f0df] py-14 text-[#112018] sm:py-20 md:py-24"
+      className="relative overflow-hidden bg-[#f8f0df] pt-14 pb-10 text-[#112018] sm:pt-20 sm:pb-14 md:pt-24 md:pb-16"
     >
       {/* Removed the #edf0e6 (greenish) gradient overlay div from here */}
 
@@ -90,6 +90,28 @@ export default function VideoWalkthrough() {
             )}
           </div>
         </motion.div>
+        
+        {/* CTA Button Added Here */}
+        <div className="mt-10 flex justify-center md:mt-14">
+          <motion.button
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(201,164,77,0.4)" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onOpenModal}
+            className="group relative flex items-center gap-3 overflow-hidden rounded-full px-10 py-5 text-[11px] font-bold uppercase tracking-[0.25em] transition-all"
+            style={{
+              background: "linear-gradient(135deg, #C9A44D, #b8903c)",
+              color: "#0b2117",
+              boxShadow: "0 8px 30px rgba(201,164,77,0.3)",
+            }}
+          >
+            <span className="relative z-10">Schedule a site visit</span>
+            <ArrowUpRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
+          </motion.button>
+        </div>
       </div>
     </section>
   );

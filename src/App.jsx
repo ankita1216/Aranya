@@ -132,7 +132,7 @@ function LandingPage() {
         <AmenitiesSection onOpenModal={() => setIsModalOpen(true)} />
 
         <div ref={walkthroughRef}>
-          <VideoWalkthrough />
+          <VideoWalkthrough onOpenModal={() => setIsModalOpen(true)} />
         </div>
 
         <GallerySection />

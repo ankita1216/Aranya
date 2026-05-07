@@ -151,7 +151,7 @@ export default function PlanSection({ onOpenModal }) {
                 boxShadow: "0 4px 20px rgba(201,164,77,0.25)",
               }}
             >
-              Download all plans
+              Download Brochure
               <ArrowUpRight size={13} />
             </motion.button>
           </div>

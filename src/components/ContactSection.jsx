@@ -43,7 +43,7 @@ export default function ContactSection() {
       id="contact"
       className="relative bg-[#e8e0cc] px-6 py-10 md:py-12 text-[#112018] lg:px-10"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-5xl">
 
         {/* ── Header bar ── */}
         <motion.div
@@ -65,7 +65,7 @@ export default function ContactSection() {
         </motion.div>
 
         {/* ── Main grid ── */}
-        <div className="grid gap-3.5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
+        <div className="grid gap-3.5 lg:grid-cols-[1fr_1.15fr] lg:items-stretch">
 
           {/* ── Form Card ── */}
           <motion.div

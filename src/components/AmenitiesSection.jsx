@@ -116,7 +116,7 @@ function AmenityCard({ item, index }) {
 
 function AmenitiesFinish({ onOpenModal }) {
   return (
-    <div className="col-span-full mt-10 flex justify-center md:mt-14">
+    <div className="col-span-full mt-4 flex justify-center md:mt-6">
       <motion.button
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -142,10 +142,10 @@ function AmenitiesFinish({ onOpenModal }) {
 export default function AmenitiesSection({ onOpenModal }) {
   return (
     /* Background changed to #E8E0CC */
-    <section id="amenities" className="relative w-full max-w-full overflow-hidden bg-[#E8E0CC] py-14 text-[#112018] md:py-24">
+    <section id="amenities" className="relative w-full max-w-full overflow-hidden bg-[#E8E0CC] pt-14 pb-14 text-[#112018] md:pt-24 md:pb-16">
 
       <StyleAccents variant="style_1" position="top-right" size="w-64 sm:w-80 lg:w-[28rem]" opacity={0.15} rotate={18} color="#72816e" />
-      <StyleAccents variant="style_2" position="bottom-left" size="w-64 sm:w-80 lg:w-[30rem]" opacity={0.15} rotate={-16} flip color="#72816e" />
+      <StyleAccents variant="style_2" position="bottom-left" size="w-64 sm:w-80 lg:w-[30rem]" opacity={0.15} rotate={-16} flip color="#72816e" className="!-bottom-16" />
 
       <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 opacity-[0.1] [background:repeating-conic-gradient(from_18deg,#407266_0deg_3deg,transparent_3deg_10deg)] [clip-path:ellipse(54%_70%_at_100%_0%)]" />
 

@@ -33,7 +33,7 @@ export default function FooterSection() {
         <div className="mx-auto max-w-7xl">
 
           {/* COMPACT: Reduced lg:gap-24 to lg:gap-20 */}
-          <div className="grid gap-12 sm:grid-cols-2 lg:gap-20">
+          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-20">
             {/* Corporate Office */}
             <motion.div
               variants={fadeUp} custom={1} initial="hidden" whileInView="show" viewport={{ once: true }}
@@ -48,24 +48,25 @@ export default function FooterSection() {
                 12 C & D, 2nd Floor, Vasant Square Mall,<br />
                 B-5 Vasant Kunj, New Delhi – 110070
               </p>
-              {/* COMPACT: Reduced mt-8 to mt-6 */}
-              <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
-                <a href="tel:01171834410" className="flex items-center gap-2 text-sm font-light text-white/50 hover:text-[#C9A44D] transition-colors">
-                  <Phone size={13} /> 011-71834410/11
-                </a>
-                <a href="mailto:info@indogroup.in" className="flex items-center gap-2 text-sm font-light text-white/50 hover:text-[#C9A44D] transition-colors">
-                  <Mail size={13} /> info@indogroup.in
-                </a>
-                {/* REPLACED WEBSITE WITH RERA NUMBER */}
-                <div className="flex items-center gap-2 text-sm font-light text-white/50">
-                  <Building2 size={13} /> RERA No: PRM/KA/RERA/1251/446/PR/210907/004501
-                </div>
+            </motion.div>
+
+            {/* RERA Number */}
+            <motion.div
+              variants={fadeUp} custom={2} initial="hidden" whileInView="show" viewport={{ once: true }}
+              className="flex flex-col"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Building2 size={16} className="text-[#C9A44D]" />
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A44D]">RERA Number</p>
               </div>
+              <p className="font-serif text-lg leading-relaxed text-white/80 max-w-sm">
+                PRM/KA/RERA/1251/446/PR/210907/004501
+              </p>
             </motion.div>
 
             {/* Site Address */}
             <motion.div
-              variants={fadeUp} custom={2} initial="hidden" whileInView="show" viewport={{ once: true }}
+              variants={fadeUp} custom={3} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="flex flex-col"
             >
               {/* COMPACT: Reduced mb-5 to mb-4 */}
@@ -77,12 +78,6 @@ export default function FooterSection() {
                 RH Aerocity, Dharapur,<br />
                 Palashbari Road, Assam – 781017
               </p>
-              {/* COMPACT: Reduced mt-8 to mt-6 */}
-              <div className="mt-6">
-                <a href="tel:18001201255555" className="flex items-center gap-2 text-sm font-light text-white/50 hover:text-[#C9A44D] transition-colors">
-                  <Phone size={13} /> 1800 12012 5555
-                </a>
-              </div>
             </motion.div>
           </div>
         </div>

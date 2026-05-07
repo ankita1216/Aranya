@@ -98,8 +98,8 @@ export default function HeroSection({ onOpenModal }) {
           <div className="relative grid grid-cols-2 gap-4 lg:gap-8 w-full h-full items-end">
             {imageStories.map((item, index) => (
               <motion.article
-                key={item.label}
-                className={`relative w-full max-h-[60vh] aspect-[3/4.5] md:aspect-[3/4.5] rounded-t-[18rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.2)] border-[6px] md:border-[10px] border-[#f5efe1] group ${index === 0 ? "mb-12 md:mb-16" : "mb-0"
+                key={index}
+                className={`relative w-full max-h-[60vh] aspect-[3/4.5] md:aspect-[3/4.5] rounded-t-[18rem] rounded-b-none overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.2)] border-[6px] md:border-[10px] border-[#f5efe1] group ${index === 0 ? "mb-12 md:mb-16" : "mb-0"
                   }`}
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export default function HeroSection({ onOpenModal }) {
               >
                 <img
                   src={item.src}
-                  alt={item.title}
+                  alt={item.title || "Hero Image"}
                   fetchpriority="high"
                   loading="eager"
                   decoding="async"
@@ -119,16 +119,20 @@ export default function HeroSection({ onOpenModal }) {
 
                 {/* Text Content (Shifted slightly up to make room for the card) */}
                 <div className="absolute bottom-20 md:bottom-24 left-6 md:left-10 right-6 md:right-10 text-center transition-transform duration-500 group-hover:-translate-y-2">
-                  <span className="inline-block px-3 py-1 border border-white/40 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] !text-white mb-3">
-                    {item.label}
-                  </span>
-                  <h3 className="font-serif text-lg md:text-2xl !text-white leading-tight">
-                    {item.title}
-                  </h3>
+                  {item.label && (
+                    <span className="inline-block px-3 py-1 border border-white/40 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] !text-white mb-3">
+                      {item.label}
+                    </span>
+                  )}
+                  {item.title && (
+                    <h3 className="font-serif text-lg md:text-2xl !text-white leading-tight">
+                      {item.title}
+                    </h3>
+                  )}
                 </div>
 
-                {/* Floating Premium Tag */}
-                <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[85%] bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2.5 flex items-center justify-between shadow-2xl transition-transform duration-500 group-hover:-translate-y-1">
+                {/* Floating Premium Tag - Removed rounded-xl, using rounded-none */}
+                <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[85%] bg-white/10 backdrop-blur-md border border-white/20 rounded-none px-4 py-2.5 flex items-center justify-between shadow-2xl transition-transform duration-500 group-hover:-translate-y-1">
                   <div className="flex flex-col text-left">
                     <span className="text-[6px] md:text-[7px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Location</span>
                     <span className="text-[10px] md:text-[11px] font-serif text-white">Dharapur,Guwahati</span>

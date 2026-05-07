@@ -131,7 +131,7 @@ function AmenitiesFinish({ onOpenModal }) {
           boxShadow: "0 8px 30px rgba(201,164,77,0.3)",
         }}
       >
-        <span className="relative z-10">Schedule a site visit</span>
+        <span className="relative z-10">Download Brochure</span>
         <ArrowUpRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
       </motion.button>

@@ -14,8 +14,11 @@ export default function StyleAccents({
   opacity = 1,
   rotate = 0,
   flip = false,
+  color = null,
   className = "",
 }) {
+  const imageUrl = `/images/${variant}.png`;
+
   return (
     <div
       className={[
@@ -26,17 +29,36 @@ export default function StyleAccents({
       ].join(" ")}
       aria-hidden="true"
     >
-      <img
-        src={`/images/${variant}.png`}
-        alt=""
-        className="h-auto w-full object-contain mix-blend-normal"
-        loading="lazy"
-        style={{
-          opacity: 0.7,
-          filter: "saturate(1.1) contrast(1.05) brightness(1.1) drop-shadow(none)",
-          transform: `${flip ? "scaleX(-1) " : ""}rotate(${rotate}deg)`,
-        }}
-      />
+      {color ? (
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundColor: color,
+            maskImage: `url(${imageUrl})`,
+            maskSize: "contain",
+            maskRepeat: "no-repeat",
+            maskPosition: "center",
+            WebkitMaskImage: `url(${imageUrl})`,
+            WebkitMaskSize: "contain",
+            WebkitMaskRepeat: "no-repeat",
+            WebkitMaskPosition: "center",
+            opacity: opacity * 0.7,
+            transform: `${flip ? "scaleX(-1) " : ""}rotate(${rotate}deg)`,
+          }}
+        />
+      ) : (
+        <img
+          src={imageUrl}
+          alt=""
+          className="h-auto w-full object-contain mix-blend-normal"
+          loading="lazy"
+          style={{
+            opacity: opacity * 0.7,
+            filter: "saturate(1.1) contrast(1.05) brightness(1.1) drop-shadow(none)",
+            transform: `${flip ? "scaleX(-1) " : ""}rotate(${rotate}deg)`,
+          }}
+        />
+      )}
     </div>
   );
 }

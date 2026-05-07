@@ -7,8 +7,8 @@ import {
   Gamepad2,
   ShieldCheck,
   Users,
-  Sparkles,
-  Wind,
+  Footprints,
+  Flower2,
   Library,
   Flame,
   Utensils,
@@ -31,7 +31,7 @@ const amenities = [
   },
   {
     name: "Jogging Track",
-    icon: Wind,
+    icon: Footprints,
     desc: "Lush pathways through a landscaped park at golden hour.",
   },
   {
@@ -66,7 +66,7 @@ const amenities = [
   },
   {
     name: "Wellness Spa",
-    icon: Sparkles,
+    icon: Flower2,
     desc: "Curated therapies in a serene indoor pool environment.",
   },
   {

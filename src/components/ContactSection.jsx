@@ -41,14 +41,14 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative bg-[#e8e0cc] py-10 md:py-12 text-[#112018]"
+      className="relative bg-[#e8e0cc] pt-14 pb-14 md:pt-20 md:pb-24 text-[#112018]"
     >
       <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
 
         {/* ── Header bar ── */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="mb-5 flex flex-col md:flex-row md:items-end md:justify-between gap-3 pb-4 border-b border-[#112018]/10"
+          className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-8 pb-8 border-b border-[#112018]/10"
         >
           <div>
             <p className="mb-1.5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#407266]">
@@ -59,14 +59,14 @@ export default function ContactSection() {
               Let's find your <em className="not-italic text-[#407266] font-medium">Perfect Home</em>
             </h2>
           </div>
-          <p className="text-sm text-[#112018]/60 max-w-[260px] md:text-right leading-relaxed">
+          <p className="text-sm text-[#112018]/60 max-w-sm leading-relaxed">
             Leave your details and our property experts will reach out to schedule a private walkthrough.
           </p>
         </motion.div>
 
         {/* ── Main grid ── */}
         {/* Inner container to limit form stretch while maintaining outer alignment */}
-        <div className="grid gap-3.5 lg:grid-cols-[1fr_1.4fr] lg:items-stretch max-w-7xl">
+        <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-stretch max-w-6xl mt-8">
 
           {/* ── Form Card ── */}
           <motion.div

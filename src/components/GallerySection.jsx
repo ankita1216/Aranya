@@ -32,7 +32,7 @@ export default function GallerySection() {
     const nextIndex = (activeIndex + 1) % galleryData.length;
     const img = new Image();
     img.src = galleryData[nextIndex].src;
-    
+
     // Also preload a few more if needed, or just the next one
     const prevIndex = (activeIndex - 1 + galleryData.length) % galleryData.length;
     const prevImg = new Image();
@@ -49,9 +49,8 @@ export default function GallerySection() {
   }, []);
 
   return (
-    <section id="gallery" className="relative overflow-hidden bg-[#e4e9e3] bg-gradient-to-b from-[#72816e]/70 via-[#f8f0df] via-50% to-[#72816e]/80 py-24 text-[#112018]">
-      {/* Softened top edge to blend perfectly */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#72816e]/40 to-transparent" />
+    // Replaced the green background gradient with a clean soft cream solid color
+    <section id="gallery" className="relative overflow-hidden bg-[#f8f0df] py-24 text-[#112018]">
 
       <StyleAccents variant="style_1" position="center-left" size="w-56 sm:w-72 lg:w-96" opacity={0.15} rotate={12} color="#72816e" />
       <StyleAccents variant="style_2" position="top-right" size="w-52 sm:w-72 lg:w-[26rem]" opacity={0.15} rotate={-18} flip color="#72816e" />
@@ -102,9 +101,9 @@ export default function GallerySection() {
                   key={current?.src}
                   src={current?.src}
                   initial={{ scale: 1.1, opacity: 0 }}
-                  animate={{ 
-                    scale: isMainLoaded ? 1 : 1.05, 
-                    opacity: isMainLoaded ? 1 : 0 
+                  animate={{
+                    scale: isMainLoaded ? 1 : 1.05,
+                    opacity: isMainLoaded ? 1 : 0
                   }}
                   onLoad={() => setIsMainLoaded(true)}
                   exit={{ scale: 1.05, opacity: 0 }}
@@ -122,7 +121,8 @@ export default function GallerySection() {
               </AnimatePresence>
             </div>
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#112018]/90 via-[#112018]/20 to-transparent" />
+            {/* OVERLAY FIX: Gradient only covers the bottom half, keeping top completely clear */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#112018]/90 via-[#112018]/30 to-transparent" />
 
             {/* Navigation Arrows for Mobile/Tablet */}
             <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 lg:hidden">
@@ -189,8 +189,28 @@ export default function GallerySection() {
                 </p>
               </div>
 
-              <div className="absolute bottom-4 right-4 text-[#f8f0df] drop-shadow-md">
-                <ChevronRight size={40} strokeWidth={1.5} />
+              {/* Sidebar Navigation Icons - Added Left Previous Arrow */}
+              <div className="absolute bottom-4 right-3 z-10 flex text-[#f8f0df] drop-shadow-md">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goTo(activeIndex - 1);
+                  }}
+                  className="hover:scale-110 hover:text-white transition-all"
+                  aria-label="Previous Perspective"
+                >
+                  <ChevronLeft size={36} strokeWidth={1.5} />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goTo(activeIndex + 1);
+                  }}
+                  className="hover:scale-110 hover:text-white transition-all"
+                  aria-label="Next Perspective"
+                >
+                  <ChevronRight size={36} strokeWidth={1.5} />
+                </button>
               </div>
             </div>
 

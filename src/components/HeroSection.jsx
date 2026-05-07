@@ -3,21 +3,23 @@ import { ArrowRight } from "lucide-react";
 import DecorativeElements from "./DecorativeElements";
 import StyleAccents from "./StyleAccents";
 
-import hero1 from "/images/hero1.webp";
-import hero2 from "/images/hero2.webp";
+import hero1 from "/images/first.jpeg";
+import hero2 from "/images/secondmage.jpeg";
 
 const imageStories = [
   {
-    label: "Sustainable",
-    title: "Eco-conscious Architecture",
+    // label: "Sustainable",
+    // title: "Eco-conscious Architecture",
     src: hero1,
-    position: "object-left"
+    // Shifted to the opposite side (pushes image right)
+    position: "object-[30%_center]"
   },
   {
-    label: "Modern",
-    title: "Contemporary Spaces",
+    // label: "Modern",
+    // title: "Contemporary Spaces",
     src: hero2,
-    position: "object-right"
+    // Shifted to the opposite side (pushes image right)
+    position: "object-[40%_center]"
   }
 ];
 
@@ -29,6 +31,7 @@ export default function HeroSection({ onOpenModal }) {
       <DecorativeElements type="blob" position="right-bottom" opacity={0.06} size="w-[30rem]" />
       <StyleAccents variant="style_1" position="top-left" size="w-52 sm:w-72 lg:w-96" opacity={0.34} rotate={-18} />
       <StyleAccents variant="style_2" position="bottom-right" size="w-56 sm:w-80 lg:w-[28rem]" opacity={0.22} rotate={14} flip />
+
       {/* Decorative Background Grid */}
       <div className="absolute inset-0 opacity-[0.1] [background-image:linear-gradient(90deg,#7f917b_1px,transparent_1px),linear-gradient(0deg,#7f917b_1px,transparent_1px)] [background-size:4.2rem_4.2rem]" />
 
@@ -108,11 +111,12 @@ export default function HeroSection({ onOpenModal }) {
                   src={item.src}
                   alt={item.title}
                   fetchpriority="high"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${item.position}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
 
-                <div className="absolute bottom-8 md:bottom-12 left-6 md:left-10 right-6 md:right-10 text-center">
+                {/* Text Content (Shifted slightly up to make room for the card) */}
+                <div className="absolute bottom-20 md:bottom-24 left-6 md:left-10 right-6 md:right-10 text-center transition-transform duration-500 group-hover:-translate-y-2">
                   <span className="inline-block px-3 py-1 border border-white/40 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] !text-white mb-3">
                     {item.label}
                   </span>
@@ -120,12 +124,27 @@ export default function HeroSection({ onOpenModal }) {
                     {item.title}
                   </h3>
                 </div>
+
+                {/* Floating Premium Tag */}
+                <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[85%] bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2.5 flex items-center justify-between shadow-2xl transition-transform duration-500 group-hover:-translate-y-1">
+                  <div className="flex flex-col text-left">
+                    <span className="text-[6px] md:text-[7px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Location</span>
+                    <span className="text-[10px] md:text-[11px] font-serif text-white">Dharapur,Guwahati</span>
+                  </div>
+
+                  <div className="h-6 w-[1px] bg-white/20"></div>
+
+                  <div className="flex flex-col text-right">
+                    <span className="text-[6px] md:text-[7px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Price</span>
+                    <span className="text-[10px] md:text-[11px] font-serif text-white">Starting at 40 Lac</span>
+                  </div>
+                </div>
+
               </motion.article>
             ))}
           </div>
         </div>
       </div>
-
     </section>
   );
 }

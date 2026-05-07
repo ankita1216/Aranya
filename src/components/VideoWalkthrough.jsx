@@ -1,11 +1,10 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Pause, Play, RotateCcw, RotateCw } from "lucide-react";
+import { Play } from "lucide-react";
 import StyleAccents from "./StyleAccents";
 
 export default function VideoWalkthrough() {
   const iframeRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
   const sendCommand = (command, args = []) => {
@@ -17,20 +16,17 @@ export default function VideoWalkthrough() {
 
   const startVideo = () => {
     setHasStarted(true);
-    setIsPlaying(true);
     setTimeout(() => sendCommand("playVideo"), 350);
   };
 
-  const togglePlay = () => {
-    const nextPlaying = !isPlaying;
-    sendCommand(nextPlaying ? "playVideo" : "pauseVideo");
-    setHasStarted(true);
-    setIsPlaying(nextPlaying);
-  };
-
   return (
-    <section id="walkthrough" className="relative overflow-hidden bg-[#f8f0df] bg-gradient-to-b from-[#edf0e6] via-[#f8f0df] to-[#f5efe1] py-14 text-[#112018] sm:py-20 md:py-24">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#edf0e6] to-transparent" />
+    /* Changed bg-gradient to solid cream color bg-[#f8f0df] */
+    <section
+      id="walkthrough"
+      className="relative overflow-hidden bg-[#f8f0df] py-14 text-[#112018] sm:py-20 md:py-24"
+    >
+      {/* Removed the #edf0e6 (greenish) gradient overlay div from here */}
+
       <StyleAccents variant="style_2" position="top-right" size="w-56 sm:w-72 lg:w-96" opacity={0.2} rotate={22} />
       <StyleAccents variant="style_1" position="bottom-left" size="w-56 sm:w-72 lg:w-96" opacity={0.18} rotate={-20} flip />
 
@@ -92,51 +88,6 @@ export default function VideoWalkthrough() {
                 </span>
               </button>
             )}
-
-            <div className="absolute bottom-0 left-0 right-0 z-30 p-3 sm:p-6">
-              <div className="rounded-2xl border border-white/28 bg-black/66 p-3 text-white shadow-[0_22px_70px_rgba(0,0,0,0.34)] backdrop-blur-xl sm:p-5">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.34em] text-white opacity-100">
-                      Walkthrough Film
-                    </p>
-                    <p className="mt-1 truncate text-sm font-medium text-white/82 opacity-100">
-                      A full-screen look at the Aranya lifestyle.
-                    </p>
-                  </div>
-
-                  <div className="flex shrink-0 items-center gap-3">
-                    <button
-                      type="button"
-                      aria-label="Rewind video"
-                      onClick={() => sendCommand("seekTo", [-10, false])}
-                      className="flex h-11 w-11 items-center justify-center rounded-full border border-white/28 bg-white/10 text-white transition hover:bg-white hover:text-[#0b0d09]"
-                    >
-                      <RotateCcw size={19} />
-                    </button>
-                    <button
-                      type="button"
-                      aria-label={isPlaying ? "Pause video" : "Play video"}
-                      onClick={togglePlay}
-                      className="flex h-14 w-14 items-center justify-center rounded-full border border-white bg-white text-[#0b0d09] shadow-[0_12px_34px_rgba(255,255,255,0.22)] transition hover:bg-[#f8f0df]"
-                    >
-                      {isPlaying ? <Pause fill="currentColor" size={22} /> : <Play fill="currentColor" className="ml-1" size={23} />}
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="Forward video"
-                      onClick={() => sendCommand("seekTo", [10, false])}
-                      className="flex h-11 w-11 items-center justify-center rounded-full border border-white/28 bg-white/10 text-white transition hover:bg-white hover:text-[#0b0d09]"
-                    >
-                      <RotateCw size={19} />
-                    </button>
-                  </div>
-                </div>
-                <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/22">
-                  <div className="h-full w-2/3 rounded-full bg-white" />
-                </div>
-              </div>
-            </div>
           </div>
         </motion.div>
       </div>

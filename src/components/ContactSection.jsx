@@ -1,28 +1,22 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Phone, Mail, MapPin, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 15 },
   show: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 },
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 },
   }),
 };
 
-// Updated inputs for light background
 const inputCls =
-  "w-full rounded-xl border border-[#72816e]/40 bg-white/60 px-4 py-3.5 text-sm text-[#112018] placeholder:text-[#112018]/40 outline-none transition-all duration-200 focus:border-[#407266] focus:bg-white backdrop-blur-sm shadow-sm";
+  "w-full rounded-md border-b-2 border-transparent bg-[#f4eee0] px-4 py-2.5 text-sm text-[#112018] placeholder:text-[#112018]/40 outline-none transition-all duration-200 focus:border-[#407266] focus:bg-white shadow-inner";
 
 const selectCls =
-  "w-full rounded-xl border border-[#72816e]/40 bg-white/60 px-4 py-3.5 text-sm text-[#112018] outline-none transition-all duration-200 focus:border-[#407266] appearance-none cursor-pointer shadow-sm";
-
-const contactInfo = [
-  { icon: Phone, label: "Toll Free", value: "1800 12012 5555", href: "tel:18001201255555" },
-  { icon: Mail, label: "Email", value: "info@indogroup.in", href: "mailto:info@indogroup.in" },
-  { icon: MapPin, label: "Site", value: "RH Aerocity, Dharapur, Assam", href: "#location" },
-];
+  "w-full rounded-md border-b-2 border-transparent bg-[#f4eee0] px-4 py-2.5 text-sm text-[#112018] outline-none transition-all duration-200 focus:border-[#407266] focus:bg-white appearance-none cursor-pointer shadow-inner select-arrow-dark";
 
 export default function ContactSection() {
   const navigate = useNavigate();
@@ -47,111 +41,85 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      // Much stronger green! Starts solid green, dips to cream in the center, ends solid green.
-      className="relative overflow-hidden bg-gradient-to-b from-[#72816e] via-[#f8f0df] via-50% to-[#72816e] px-6 py-24 text-[#112018] md:px-12 lg:px-20"
+      className="relative bg-[#e8e0cc] px-6 py-10 md:py-12 text-[#112018] lg:px-10"
     >
-      {/* Background imagery */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-15 mix-blend-multiply"
-        style={{
-          backgroundImage: 'url("/images/Pool Cam.webp")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
-      />
-      {/* Fixed Overlay: Lets the green shine at the edges and only adds cream in the middle behind the form */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#72816e]/20 via-[#f8f0df]/80 to-[#72816e]/30" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(114,129,110,0.3),transparent)]" />
+      <div className="mx-auto max-w-6xl">
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-
-        <div className="mb-16">
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          >
-            <p className="mb-5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.42em] text-[#112018]/70">
-              <span className="h-px w-8 bg-[#407266]" />
+        {/* ── Header bar ── */}
+        <motion.div
+          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+          className="mb-5 flex flex-col md:flex-row md:items-end md:justify-between gap-3 pb-4 border-b border-[#112018]/10"
+        >
+          <div>
+            <p className="mb-1.5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#407266]">
+              <span className="h-px w-5 bg-[#407266]" />
               Begin Your Journey
             </p>
-            <h2 className="font-serif text-4xl font-light leading-tight text-[#112018] md:text-5xl lg:text-6xl drop-shadow-sm">
-              Let's find your{" "}
-              <em className="not-italic text-[#407266] font-medium whitespace-nowrap">Perfect Home</em>
-              <br className="hidden md:block" /> at Aranya
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#112018] leading-none">
+              Let's find your <em className="not-italic text-[#407266] font-medium">Perfect Home</em>
             </h2>
-          </motion.div>
-        </div>
+          </div>
+          <p className="text-sm text-[#112018]/60 max-w-[260px] md:text-right leading-relaxed">
+            Leave your details and our property experts will reach out to schedule a private walkthrough.
+          </p>
+        </motion.div>
 
         {/* ── Main grid ── */}
-        <div className="grid gap-8 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div className="grid gap-3.5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
 
-          {/* ── Form card ── */}
+          {/* ── Form Card ── */}
           <motion.div
-            variants={fadeUp} custom={2} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="overflow-hidden rounded-3xl border border-[#72816e]/40 bg-white/50 shadow-[0_32px_100px_rgba(114,129,110,0.2)] backdrop-blur-xl"
+            variants={fadeUp} custom={1} initial="hidden" whileInView="show" viewport={{ once: true }}
+            className="flex flex-col rounded-2xl bg-white shadow-lg shadow-[#112018]/6 overflow-hidden"
           >
-            {/* Card top bar */}
-            <div className="flex items-center justify-between border-b border-[#72816e]/20 bg-white/40 px-8 py-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.38em] text-[#407266]">
-                Contact Us
-              </p>
-              <div className="flex gap-1.5">
-                {[0, 1, 2].map(i => (
-                  <span key={i} className="h-2 w-2 rounded-full bg-[#407266]/30" />
-                ))}
-              </div>
-            </div>
-
             {submitted ? (
-              <div className="flex flex-col items-center justify-center gap-4 px-8 py-20 text-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                >
+              <div className="flex h-full flex-col items-center justify-center gap-3 p-10 text-center">
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200 }}>
                   <CheckCircle2 size={52} className="text-[#407266]" />
                 </motion.div>
                 <p className="font-serif text-2xl text-[#112018]">We'll be in touch soon.</p>
-                <p className="text-sm text-[#112018]/60">Redirecting to confirmation…</p>
+                <p className="text-sm text-[#112018]/60">Redirecting you shortly…</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="grid gap-5 p-8">
+              <form onSubmit={handleSubmit} className="grid gap-2.5 p-5 md:p-6">
+
                 {/* Row 1 */}
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#112018]/70">Full Name *</label>
-                    <input required type="text" placeholder="Your full name"
+                <div className="grid gap-2.5 sm:grid-cols-2">
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Full Name *</label>
+                    <input required type="text" placeholder="John Doe"
                       value={form.name} onChange={set("name")} className={inputCls} />
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#112018]/70">Phone *</label>
-                    <input required type="tel" placeholder="10-digit number"
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Phone *</label>
+                    <input required type="tel" placeholder="+91 00000 00000"
                       value={form.phone} onChange={set("phone")} className={inputCls} />
                   </div>
                 </div>
 
                 {/* Row 2 */}
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#112018]/70">Email Address *</label>
+                <div className="flex flex-col gap-1">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Email Address *</label>
                   <input required type="email" placeholder="your@email.com"
                     value={form.email} onChange={set("email")} className={inputCls} />
                 </div>
 
                 {/* Row 3 */}
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#112018]/70">Requirement</label>
-                    <select value={form.requirement} onChange={set("requirement")} className={selectCls}>
-                      <option value="">Select BHK</option>
-                      <option value="2bhk">2 BHK</option>
-                      <option value="3bhk">3 BHK</option>
-                      <option value="4bhk">4 BHK</option>
-                      <option value="villa">Villa / Penthouse</option>
-                    </select>
+                <div className="grid gap-2.5 sm:grid-cols-2">
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Requirement</label>
+                    <div className="relative">
+                      <select value={form.requirement} onChange={set("requirement")} className={selectCls}>
+                        <option value="">Select BHK</option>
+                        <option value="2bhk">2 BHK</option>
+                        <option value="3bhk">3 BHK</option>
+                        <option value="4bhk">4 BHK</option>
+                        <option value="villa">Villa / Penthouse</option>
+                      </select>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#112018]/70">Best Time to Call</label>
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Best Time to Call</label>
                     <select value={form.time} onChange={set("time")} className={selectCls}>
                       <option value="">Any time</option>
                       <option value="morning">Morning (9 AM – 12 PM)</option>
@@ -161,79 +129,73 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                {/* Row 4 — message */}
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#112018]/70">Message (optional)</label>
-                  <textarea rows={3} placeholder="Any specific questions or preferences…"
+                {/* Row 4 */}
+                <div className="flex flex-col gap-1">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Message (optional)</label>
+                  <textarea rows={2} placeholder="I am looking for..."
                     value={form.message} onChange={set("message")}
                     className={`${inputCls} resize-none`} />
                 </div>
 
                 {/* Submit */}
                 <motion.button
-                  type="submit"
-                  disabled={isLoading}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="mt-2 flex w-full items-center justify-center gap-2.5 rounded-xl py-4 text-[11px] font-bold uppercase tracking-[0.22em] transition-all disabled:opacity-60 text-white"
-                  style={{
-                    background: "linear-gradient(135deg, #407266, #2a5046)",
-                    boxShadow: "0 8px 25px rgba(64,114,102,0.3)",
-                  }}
+                  type="submit" disabled={isLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
+                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-[#407266] py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#2a5046] disabled:opacity-60"
                 >
                   {isLoading ? (
                     <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
                   ) : (
-                    <>Confirm Enquiry <Send size={14} /></>
+                    <>Confirm Enquiry <Send size={13} /></>
                   )}
                 </motion.button>
-
-                <p className="text-center text-[10px] text-[#112018]/50">
-                  Your information is secure and will not be shared.
-                </p>
               </form>
             )}
           </motion.div>
 
-          {/* ── Right panel — project highlights ── */}
+          {/* ── Right Panel ── */}
           <motion.div
-            variants={fadeUp} custom={3} initial="hidden" whileInView="show" viewport={{ once: true }}
-            className="flex flex-col gap-5"
+            variants={fadeUp} custom={2} initial="hidden" whileInView="show" viewport={{ once: true }}
+            className="group relative flex flex-col min-h-[380px] rounded-2xl overflow-hidden"
           >
-            {/* Pool image card */}
-            <div className="relative overflow-hidden rounded-3xl border border-[#72816e]/40 aspect-[4/3] shadow-md">
+            {/* Background Image */}
+            <div className="absolute inset-0 w-full h-full">
               <img
                 src="/images/Pool Cam.webp"
                 alt="Aranya pool"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#112018]/90 via-[#112018]/30 to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5">
-                <p className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#f8f0df]">Club Aranya</p>
-                <p className="mt-1 font-serif text-xl text-white">34m × 8.4m Swimming Pool</p>
-              </div>
             </div>
 
-            {/* Key highlights */}
-            <div className="rounded-2xl border border-[#72816e]/40 bg-white/50 p-6 backdrop-blur-md shadow-sm">
-              <p className="mb-5 text-[9px] font-bold uppercase tracking-[0.35em] text-[#407266]">
-                Project Highlights
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { val: "2 Towers", sub: "G+9 & G+10" },
-                  { val: "257 Units", sub: "2, 3 & 4 BHK" },
-                  { val: "69%", sub: "Green Open Space" },
-                  { val: "16,000+", sub: "Sq ft Club" },
-                ].map(({ val, sub }) => (
-                  <div key={sub} className="border-t border-[#72816e]/30 pt-4">
-                    <p className="font-serif text-xl font-semibold text-[#112018]">{val}</p>
-                    <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-[#407266]">{sub}</p>
-                  </div>
-                ))}
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#112018]/60 via-transparent to-transparent" />
+
+            {/* Stats Card */}
+            <div className="relative mt-auto p-2.5">
+              <div className="rounded-xl bg-white/96 backdrop-blur-md p-4 md:p-5 shadow-2xl ring-1 ring-[#112018]/5">
+
+                <div className="mb-4 flex flex-col gap-0.5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#407266]">Club Aranya</p>
+                  <p className="font-serif text-xl text-[#112018] leading-snug">34m × 8.4m Pool & Lounge</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-y-3.5 gap-x-4 border-t border-[#72816e]/20 pt-4">
+                  {[
+                    { val: "2 Towers", sub: "G+9 & G+10" },
+                    { val: "257 Units", sub: "2, 3 & 4 BHK" },
+                    { val: "69%", sub: "Green Open Space" },
+                    { val: "16,000+", sub: "Sq Ft Club" },
+                  ].map(({ val, sub }) => (
+                    <div key={sub} className="flex flex-col">
+                      <p className="font-serif text-lg font-medium text-[#112018]">{val}</p>
+                      <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#112018]/55">{sub}</p>
+                    </div>
+                  ))}
+                </div>
+
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>

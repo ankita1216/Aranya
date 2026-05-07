@@ -14,10 +14,10 @@ const VideoWalkthrough = lazy(() => import('./components/VideoWalkthrough'))
 const GallerySection = lazy(() => import('./components/GallerySection'))
 const FooterSection = lazy(() => import('./components/FooterSection'))
 const ContactSection = lazy(() => import('./components/ContactSection'))
-const AranyaHighlight = lazy(() => import('./components/AranyaHighlight'))
 const LeadModal = lazy(() => import('./components/LeadModal'))
 const ThankYou = lazy(() => import('./components/ThankYou'))
 const DeveloperSection = lazy(() => import('./components/DeveloperSection'))
+const BottomEnquiryForm = lazy(() => import('./components/BottomEnquiryForm'))
 
 const Loader = () => (
   <div className="h-screen w-full bg-[#0b2117] flex items-center justify-center">
@@ -129,7 +129,7 @@ function LandingPage() {
           <AboutSection />
         </SectionWrapper>
 
-        <AmenitiesSection />
+        <AmenitiesSection onOpenModal={() => setIsModalOpen(true)} />
 
         <div ref={walkthroughRef}>
           <VideoWalkthrough />
@@ -137,13 +137,13 @@ function LandingPage() {
 
         <GallerySection />
 
-        <PlanSection />
+        <PlanSection onOpenModal={() => setIsModalOpen(true)} />
 
 
 
-        <div ref={quoteRef}>
+        {/* <div ref={quoteRef}>
           <AranyaHighlight />
-        </div>
+        </div> */}
 
         <LocationSection />
 
@@ -156,7 +156,7 @@ function LandingPage() {
         </div>
 
         <LeadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
+        <BottomEnquiryForm isVisible={hasScrolledForEnquiry && !isFooterVisible} />
       </Suspense>
 
 

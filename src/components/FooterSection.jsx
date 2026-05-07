@@ -3,11 +3,11 @@ import { Mail, MapPin, Phone, Globe, Building2, ArrowUpRight } from "lucide-reac
 
 /* ─── Data ──────────────────────────────────── */
 const navLinks = [
-  { name: "About",     href: "#experience" },
-  { name: "Amenities", href: "#amenities"  },
-  { name: "Location",  href: "#location"   },
-  { name: "Plans",     href: "#plans"      },
-  { name: "Gallery",   href: "#gallery"    },
+  { name: "About", href: "#experience" },
+  { name: "Amenities", href: "#amenities" },
+  { name: "Location", href: "#location" },
+  { name: "Plans", href: "#plans" },
+  { name: "Gallery", href: "#gallery" },
 ];
 
 const fadeUp = {
@@ -28,16 +28,19 @@ export default function FooterSection() {
       {/* ══════════════════════════════════════════
           MINIMALIST GET IN TOUCH SECTION
       ══════════════════════════════════════════ */}
-      <section className="px-6 pt-16 pb-16 md:px-14 lg:px-20 border-t border-white/5">
+      {/* COMPACT: Reduced pt-16 pb-16 to pt-12 pb-12 */}
+      <section className="px-6 pt-12 pb-12 md:px-14 lg:px-20 border-t border-white/5">
         <div className="mx-auto max-w-7xl">
 
-          <div className="grid gap-12 sm:grid-cols-2 lg:gap-24">
+          {/* COMPACT: Reduced lg:gap-24 to lg:gap-20 */}
+          <div className="grid gap-12 sm:grid-cols-2 lg:gap-20">
             {/* Corporate Office */}
             <motion.div
               variants={fadeUp} custom={1} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="flex flex-col"
             >
-              <div className="flex items-center gap-3 mb-5">
+              {/* COMPACT: Reduced mb-5 to mb-4 */}
+              <div className="flex items-center gap-3 mb-4">
                 <Building2 size={16} className="text-[#C9A44D]" />
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A44D]">Corporate Office</p>
               </div>
@@ -45,16 +48,18 @@ export default function FooterSection() {
                 12 C & D, 2nd Floor, Vasant Square Mall,<br />
                 B-5 Vasant Kunj, New Delhi – 110070
               </p>
-              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
+              {/* COMPACT: Reduced mt-8 to mt-6 */}
+              <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
                 <a href="tel:01171834410" className="flex items-center gap-2 text-sm font-light text-white/50 hover:text-[#C9A44D] transition-colors">
                   <Phone size={13} /> 011-71834410/11
                 </a>
                 <a href="mailto:info@indogroup.in" className="flex items-center gap-2 text-sm font-light text-white/50 hover:text-[#C9A44D] transition-colors">
                   <Mail size={13} /> info@indogroup.in
                 </a>
-                <a href="https://www.indogroup.in" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-light text-white/50 hover:text-[#C9A44D] transition-colors">
-                  <Globe size={13} /> www.indogroup.in
-                </a>
+                {/* REPLACED WEBSITE WITH RERA NUMBER */}
+                <div className="flex items-center gap-2 text-sm font-light text-white/50">
+                  <Building2 size={13} /> RERA No: PRM/KA/RERA/1251/446/PR/210907/004501
+                </div>
               </div>
             </motion.div>
 
@@ -63,7 +68,8 @@ export default function FooterSection() {
               variants={fadeUp} custom={2} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="flex flex-col"
             >
-              <div className="flex items-center gap-3 mb-5">
+              {/* COMPACT: Reduced mb-5 to mb-4 */}
+              <div className="flex items-center gap-3 mb-4">
                 <MapPin size={16} className="text-[#C9A44D]" />
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A44D]">Site Address</p>
               </div>
@@ -71,7 +77,8 @@ export default function FooterSection() {
                 RH Aerocity, Dharapur,<br />
                 Palashbari Road, Assam – 781017
               </p>
-              <div className="mt-8">
+              {/* COMPACT: Reduced mt-8 to mt-6 */}
+              <div className="mt-6">
                 <a href="tel:18001201255555" className="flex items-center gap-2 text-sm font-light text-white/50 hover:text-[#C9A44D] transition-colors">
                   <Phone size={13} /> 1800 12012 5555
                 </a>
@@ -90,7 +97,8 @@ export default function FooterSection() {
           <div className="h-px bg-white/5 w-full" />
 
           {/* Quote + nav */}
-          <div className="flex flex-col gap-10 py-12 lg:flex-row lg:items-center lg:justify-between">
+          {/* COMPACT: Reduced py-12 to py-10 and gap-10 to gap-8 */}
+          <div className="flex flex-col gap-8 py-10 lg:flex-row lg:items-center lg:justify-between">
             <nav className="flex flex-wrap gap-x-8 gap-y-4">
               {navLinks.map((link) => (
                 <a key={link.name} href={link.href}
@@ -99,13 +107,15 @@ export default function FooterSection() {
                 </a>
               ))}
             </nav>
-            <p className="max-w-md font-serif text-xl italic leading-snug text-[#C9A44D]/70 lg:text-right">
+            {/* WIDENED max-w-md to max-w-xl so it forces the quote into exactly 2 lines */}
+            <p className="max-w-xl font-serif text-xl italic leading-snug text-[#C9A44D]/70 lg:text-right">
               "A home should not only shelter you. It should soften the day before you step inside."
             </p>
           </div>
 
           {/* Copyright */}
-          <div className="flex flex-col items-start justify-between gap-6 border-t border-white/5 py-8 md:flex-row md:items-center">
+          {/* COMPACT: Reduced py-8 to py-6 and gap-6 to gap-5 */}
+          <div className="flex flex-col items-start justify-between gap-5 border-t border-white/5 py-6 md:flex-row md:items-center">
             <div className="flex items-center gap-5">
               <div className="bg-white/90 rounded-md p-1.5 transition-transform hover:scale-105">
                 <img src="/images/RANG HOMES-New1.webp" alt="Rang Homes" className="h-5 w-auto object-contain" />
@@ -114,10 +124,7 @@ export default function FooterSection() {
                 © {currentYear} Aranya by Rang Homes.
               </p>
             </div>
-            <a href="https://www.indogroup.in" target="_blank" rel="noreferrer"
-              className="text-[10px] uppercase tracking-[0.24em] text-white/20 hover:text-[#C9A44D] transition-colors flex items-center gap-2">
-              www.indogroup.in <ArrowUpRight size={11} />
-            </a>
+
           </div>
         </div>
       </div>

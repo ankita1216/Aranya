@@ -33,7 +33,7 @@ export default function StyleAccents({
         loading="lazy"
         style={{
           opacity: 0.7,
-          filter: "saturate(1.1) contrast(1.05) brightness(1.1)",
+          filter: "saturate(1.1) contrast(1.05) brightness(1.1) drop-shadow(none)",
           transform: `${flip ? "scaleX(-1) " : ""}rotate(${rotate}deg)`,
         }}
       />

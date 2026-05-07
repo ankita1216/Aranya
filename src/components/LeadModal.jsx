@@ -124,7 +124,7 @@ export default function LeadModal({ isOpen, onClose }) {
                       <label className="text-[10px] font-bold uppercase tracking-widest text-[#1f4d3f]/60 ml-1">Requirement</label>
                       <select
                         required
-                        className="w-full appearance-none rounded-xl border border-[#1f4d3f]/10 bg-white px-5 py-3.5 text-sm text-black outline-none transition-colors focus:border-[#C9A44D]"
+                        className="w-full appearance-none rounded-xl border border-[#1f4d3f]/10 bg-white px-5 py-3.5 text-sm text-black outline-none transition-colors focus:border-[#C9A44D] select-arrow-dark"
                         value={formData.price}
                         onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                       >
@@ -138,7 +138,7 @@ export default function LeadModal({ isOpen, onClose }) {
                       <label className="text-[10px] font-bold uppercase tracking-widest text-[#1f4d3f]/60 ml-1">Location</label>
                       <select
                         required
-                        className="w-full appearance-none rounded-xl border border-[#1f4d3f]/10 bg-white px-5 py-3.5 text-sm text-black outline-none transition-colors focus:border-[#C9A44D]"
+                        className="w-full appearance-none rounded-xl border border-[#1f4d3f]/10 bg-white px-5 py-3.5 text-sm text-black outline-none transition-colors focus:border-[#C9A44D] select-arrow-dark"
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                       >

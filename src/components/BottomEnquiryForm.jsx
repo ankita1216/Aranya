@@ -108,8 +108,7 @@ export default function BottomEnquiryForm({ isVisible }) {
                     required
                     value={formData.requirement}
                     onChange={(e) => update("requirement", e.target.value)}
-                    className={`${inputCls} hidden md:block flex-[0.8] cursor-pointer`}
-                    style={{ backgroundImage: "none" }}
+                    className={`${inputCls} hidden md:block flex-[0.8] cursor-pointer select-arrow-light`}
                   >
                     <option value="" disabled className="bg-[#112018] text-white/60">
                       Requirement
@@ -117,15 +116,14 @@ export default function BottomEnquiryForm({ isVisible }) {
                     <option value="2bhk" className="bg-[#112018] text-white">2 BHK</option>
                     <option value="3bhk" className="bg-[#112018] text-white">3 BHK</option>
                     <option value="4bhk" className="bg-[#112018] text-white">4 BHK</option>
-                    <option value="villa" className="bg-[#112018] text-white">Villa</option>
+
                   </select>
 
                   {/* Time Preference - desktop only */}
                   <select
                     value={formData.time}
                     onChange={(e) => update("time", e.target.value)}
-                    className={`${inputCls} hidden lg:block flex-[0.8] cursor-pointer`}
-                    style={{ backgroundImage: "none" }}
+                    className={`${inputCls} hidden lg:block flex-[0.8] cursor-pointer select-arrow-light`}
                   >
                     <option value="" disabled className="bg-[#112018] text-white/60">
                       Morning

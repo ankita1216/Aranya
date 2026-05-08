@@ -136,16 +136,16 @@ export default function HeroSection({ onOpenModal }) {
                   {/* Show Location only on the first image */}
                   {index === 0 && (
                     <div className="flex flex-col text-center">
-                      <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Location</span>
-                      <span className="text-[12px] md:text-[12px] font-serif text-white">Dharapur, Guwahati</span>
+                      <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Location</span>
+                      <span className="text-[14px] md:text-[18px] font-serif text-white">Dharapur, Guwahati</span>
                     </div>
                   )}
 
                   {/* Show Price only on the second image */}
                   {index === 1 && (
                     <div className="flex flex-col text-center">
-                      <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Price</span>
-                      <span className="text-[12px] md:text-[12px] font-serif text-white">Starting at 40 Lac</span>
+                      <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Price</span>
+                      <span className="text-[14px] md:text-[18px] font-serif text-white">Starting at 40 Lac</span>
                     </div>
                   )}
 

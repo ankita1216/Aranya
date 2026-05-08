@@ -12,6 +12,7 @@ import {
   Library,
   Flame,
   Utensils,
+  Wine,
   ArrowUpRight,
 } from "lucide-react";
 
@@ -56,7 +57,7 @@ const amenities = [
   },
   {
     name: "Banquet Hall",
-    icon: Users,
+    icon: Wine,
     desc: "Grand venue with crystal chandeliers for celebrations.",
   },
   {
@@ -84,8 +85,13 @@ const amenities = [
 function AmenityCard({ item, index }) {
   const Icon = item.icon;
 
-  // Dark background logic (every alternate card)
-  const isDark = index % 2 !== 0;
+  // Checkerboard pattern logic for 4 columns
+  // Calculate which row the card is in (0 for first row, 1 for second, etc.)
+  const row = Math.floor(index / 4);
+
+  // If it's an even row (row 0, 2), use the normal odd/even logic
+  // If it's an odd row (row 1, 3), flip the logic so it starts with Dark/Green
+  const isDark = row % 2 === 0 ? index % 2 !== 0 : index % 2 === 0;
 
   return (
     <motion.article

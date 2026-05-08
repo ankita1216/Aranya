@@ -66,7 +66,7 @@ export default function ContactSection() {
 
         {/* ── Main grid ── */}
         {/* Inner container to limit form stretch while maintaining outer alignment */}
-        <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-stretch max-w-6xl mt-8">
+        <div className="mx-auto grid max-w-6xl gap-6 mt-8 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
 
           {/* ── Form Card ── */}
           <motion.div

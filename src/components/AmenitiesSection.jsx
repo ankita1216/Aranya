@@ -84,8 +84,8 @@ const amenities = [
 function AmenityCard({ item, index }) {
   const Icon = item.icon;
 
-  // Alternating light cream and dark cream based on index
-  const bgColor = index % 2 === 0 ? "bg-[#f8f0df]" : "bg-[#f0e6d3]";
+  // Dark background logic (every alternate card)
+  const isDark = index % 2 !== 0;
 
   return (
     <motion.article
@@ -93,22 +93,52 @@ function AmenityCard({ item, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, delay: index * 0.035 }}
-      className={`group relative flex h-full min-h-[14rem] flex-col justify-between overflow-hidden rounded-xl border border-[#72816e]/30 ${bgColor} p-6 shadow-[0_8px_30px_rgba(114,129,110,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(114,129,110,0.12)]`}
+      className={`group relative flex h-full min-h-[14rem] flex-col justify-between overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(114,129,110,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(114,129,110,0.12)] ${isDark
+          ? "bg-[#305242] border-white/10"
+          : "bg-[#f8f0df] border-[#72816e]/30"
+        }`}
     >
-      {/* Grid opacity reduced from 0.25 to 0.06 so text is easy to read */}
-      <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(90deg,#407266_1px,transparent_1px),linear-gradient(0deg,#407266_1px,transparent_1px)] [background-size:2.5rem_2.5rem] transition-opacity duration-500 group-hover:opacity-[0.12]" />
-      <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#407266]/10 blur-[45px] transition-all duration-700 group-hover:bg-[#407266]/20" />
+      {/* Dynamic Grid Background */}
+      <div
+        className={`absolute inset-0 opacity-[0.06] [background-size:2.5rem_2.5rem] transition-opacity duration-500 group-hover:opacity-[0.12] ${isDark
+            ? "[background-image:linear-gradient(90deg,#ffffff_1px,transparent_1px),linear-gradient(0deg,#ffffff_1px,transparent_1px)]"
+            : "[background-image:linear-gradient(90deg,#407266_1px,transparent_1px),linear-gradient(0deg,#407266_1px,transparent_1px)]"
+          }`}
+      />
+
+      {/* Dynamic Blur blob */}
+      <div
+        className={`absolute -right-16 -top-16 h-48 w-48 rounded-full blur-[45px] transition-all duration-700 ${isDark
+            ? "bg-white/10 group-hover:bg-white/20"
+            : "bg-[#407266]/10 group-hover:bg-[#407266]/20"
+          }`}
+      />
 
       <div className="relative z-10 flex h-full flex-col">
-        <div className="mb-5 flex h-[4.5rem] w-[3rem] shrink-0 items-center justify-center rounded-t-full rounded-b-xl border border-[#407266]/30 bg-[#407266]/5 text-[#407266] shadow-sm backdrop-blur-md transition-all duration-500 group-hover:scale-105 group-hover:border-[#407266]/50 group-hover:bg-[#407266]/10">
+        {/* Icon Container */}
+        <div
+          className={`mb-5 flex h-[4.5rem] w-[3rem] shrink-0 items-center justify-center rounded-t-full rounded-b-xl border shadow-sm backdrop-blur-md transition-all duration-500 group-hover:scale-105 ${isDark
+              ? "border-white/30 bg-white/10 text-white group-hover:border-white/60 group-hover:bg-white/20"
+              : "border-[#407266]/30 bg-[#407266]/5 text-[#407266] group-hover:border-[#407266]/50 group-hover:bg-[#407266]/10"
+            }`}
+        >
           <Icon strokeWidth={1.2} className="h-6 w-6" />
         </div>
 
         <div className="mt-auto">
-          <h3 className="font-serif text-[1.35rem] leading-tight text-[#112018] sm:text-[1.5rem]">
+          {/* Title - Explicitly making it white for dark mode */}
+          <h3
+            className={`font-serif text-[1.35rem] leading-tight sm:text-[1.5rem] ${isDark ? "!text-white" : "text-[#112018]"
+              }`}
+          >
             {item.name}
           </h3>
-          <p className="mt-2 text-[12px] font-medium leading-relaxed text-[#112018]/70">
+
+          {/* Description - Explicitly making it light for dark mode */}
+          <p
+            className={`mt-2 text-[12px] font-medium leading-relaxed ${isDark ? "!text-white/90" : "text-[#112018]/70"
+              }`}
+          >
             {item.desc}
           </p>
         </div>
@@ -124,7 +154,10 @@ function AmenitiesFinish({ onOpenModal }) {
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(201,164,77,0.4)" }}
+        whileHover={{
+          scale: 1.05,
+          boxShadow: "0 12px 40px rgba(201,164,77,0.4)",
+        }}
         whileTap={{ scale: 0.95 }}
         onClick={onOpenModal}
         className="group relative flex items-center gap-3 overflow-hidden rounded-full px-10 py-5 text-[11px] font-bold uppercase tracking-[0.25em] transition-all"
@@ -135,7 +168,10 @@ function AmenitiesFinish({ onOpenModal }) {
         }}
       >
         <span className="relative z-10">Download Brochure</span>
-        <ArrowUpRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+        <ArrowUpRight
+          size={16}
+          className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+        />
         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
       </motion.button>
     </div>
@@ -144,15 +180,31 @@ function AmenitiesFinish({ onOpenModal }) {
 
 export default function AmenitiesSection({ onOpenModal }) {
   return (
-    /* Background changed to #E8E0CC */
-    <section id="amenities" className="relative w-full max-w-full overflow-hidden bg-[#E8E0CC] pt-14 pb-14 text-[#112018] md:pt-24 md:pb-16">
-
-      <StyleAccents variant="style_1" position="top-right" size="w-64 sm:w-80 lg:w-[28rem]" opacity={0.15} rotate={18} color="#72816e" />
-      <StyleAccents variant="style_2" position="bottom-left" size="w-64 sm:w-80 lg:w-[30rem]" opacity={0.15} rotate={-16} flip color="#72816e" className="!-bottom-16" />
+    <section
+      id="amenities"
+      className="relative w-full max-w-full overflow-hidden bg-[#E8E0CC] pt-14 pb-14 text-[#112018] md:pt-24 md:pb-16"
+    >
+      <StyleAccents
+        variant="style_1"
+        position="top-right"
+        size="w-64 sm:w-80 lg:w-[28rem]"
+        opacity={0.15}
+        rotate={18}
+        color="#72816e"
+      />
+      <StyleAccents
+        variant="style_2"
+        position="bottom-left"
+        size="w-64 sm:w-80 lg:w-[30rem]"
+        opacity={0.15}
+        rotate={-16}
+        flip
+        color="#72816e"
+        className="!-bottom-16"
+      />
 
       <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 opacity-[0.1] [background:repeating-conic-gradient(from_18deg,#407266_0deg_3deg,transparent_3deg_10deg)] [clip-path:ellipse(54%_70%_at_100%_0%)]" />
 
-      {/* Top fade adjusted to #E8E0CC */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#E8E0CC] via-[#E8E0CC]/80 to-transparent" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1420px] px-5 sm:px-8 lg:px-12">
@@ -172,7 +224,8 @@ export default function AmenitiesSection({ onOpenModal }) {
               viewport={{ once: true }}
               className="max-w-[58rem] font-serif text-[clamp(2.55rem,12vw,5.6rem)] font-normal leading-[0.95] text-[#112018] drop-shadow-sm"
             >
-              The <span className="italic text-[#407266]">Amenities</span> <span className="block xl:inline">Selection</span>
+              The <span className="italic text-[#407266]">Amenities</span>{" "}
+              <span className="block xl:inline">Selection</span>
             </motion.h2>
           </div>
         </div>

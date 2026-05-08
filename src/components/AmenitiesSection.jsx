@@ -12,11 +12,12 @@ import {
   Library,
   Flame,
   Utensils,
-  Wine,
+  Hotel,
   ArrowUpRight,
 } from "lucide-react";
 
 // FIX 1: Ensure this import path is correct based on your file structure
+// Force reload to clear any phantom ReferenceErrors
 import StyleAccents from "./StyleAccents";
 
 const amenities = [
@@ -57,7 +58,7 @@ const amenities = [
   },
   {
     name: "Banquet Hall",
-    icon: Wine,
+    icon: Hotel,
     desc: "Grand venue with crystal chandeliers for celebrations.",
   },
   {

@@ -41,25 +41,25 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative bg-[#e8e0cc] pt-14 pb-14 md:pt-20 md:pb-24 text-[#112018]"
+      className="relative bg-[#305242] pt-14 pb-14 md:pt-20 md:pb-24 text-white"
     >
       <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
 
         {/* ── Header bar ── */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-8 pb-8 border-b border-[#112018]/10"
+          className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-8 pb-8 border-b border-white/10"
         >
           <div>
-            <p className="mb-1.5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#407266]">
-              <span className="h-px w-5 bg-[#407266]" />
+            <p className="mb-1.5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A44D]">
+              <span className="h-px w-5 bg-[#C9A44D]" />
               Begin Your Journey
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#112018] leading-none">
-              Let's find your <em className="not-italic text-[#407266] font-medium">Perfect Home</em>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white leading-none">
+              Let's find your <em className="not-italic text-[#C9A44D] font-medium">Perfect Home</em>
             </h2>
           </div>
-          <p className="text-sm text-[#112018]/60 max-w-sm leading-relaxed">
+          <p className="text-sm text-white/60 max-w-sm leading-relaxed">
             Leave your details and our property experts will reach out to schedule a private walkthrough.
           </p>
         </motion.div>
@@ -76,10 +76,10 @@ export default function ContactSection() {
             {submitted ? (
               <div className="flex h-full flex-col items-center justify-center gap-3 p-10 text-center">
                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200 }}>
-                  <CheckCircle2 size={52} className="text-[#407266]" />
+                  <CheckCircle2 size={52} className="text-[#C9A44D]" />
                 </motion.div>
-                <p className="font-serif text-2xl text-[#112018]">We'll be in touch soon.</p>
-                <p className="text-sm text-[#112018]/60">Redirecting you shortly…</p>
+                <p className="font-serif text-2xl !text-[#112018]">We'll be in touch soon.</p>
+                <p className="text-sm !text-[#112018]/60">Redirecting you shortly…</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-2.5 p-5 md:p-6">
@@ -87,12 +87,12 @@ export default function ContactSection() {
                 {/* Row 1 */}
                 <div className="grid gap-2.5 sm:grid-cols-2">
                   <div className="flex flex-col gap-1">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Full Name *</label>
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] !text-[#112018]/70 pl-1">Full Name *</label>
                     <input required type="text" placeholder="John Doe"
                       value={form.name} onChange={set("name")} className={inputCls} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Phone *</label>
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] !text-[#112018]/70 pl-1">Phone *</label>
                     <input required type="tel" placeholder="+91 00000 00000"
                       value={form.phone} onChange={set("phone")} className={inputCls} />
                   </div>
@@ -100,7 +100,7 @@ export default function ContactSection() {
 
                 {/* Row 2 */}
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Email Address *</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.15em] !text-[#112018]/70 pl-1">Email Address *</label>
                   <input required type="email" placeholder="your@email.com"
                     value={form.email} onChange={set("email")} className={inputCls} />
                 </div>
@@ -108,7 +108,7 @@ export default function ContactSection() {
                 {/* Row 3 */}
                 <div className="grid gap-2.5 sm:grid-cols-2">
                   <div className="flex flex-col gap-1">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Requirement</label>
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] !text-[#112018]/70 pl-1">Requirement</label>
                     <div className="relative">
                       <select value={form.requirement} onChange={set("requirement")} className={selectCls}>
                         <option value="">Select BHK</option>
@@ -120,7 +120,7 @@ export default function ContactSection() {
                     </div>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Best Time to Call</label>
+                    <label className="text-[10px] font-bold uppercase tracking-[0.15em] !text-[#112018]/70 pl-1">Best Time to Call</label>
                     <select value={form.time} onChange={set("time")} className={selectCls}>
                       <option value="">Any time</option>
                       <option value="morning">Morning (9 AM – 12 PM)</option>
@@ -132,7 +132,7 @@ export default function ContactSection() {
 
                 {/* Row 4 */}
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#112018]/70 pl-1">Message (optional)</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.15em] !text-[#112018]/70 pl-1">Message (optional)</label>
                   <textarea rows={2} placeholder="I am looking for..."
                     value={form.message} onChange={set("message")}
                     className={`${inputCls} resize-none`} />
@@ -175,8 +175,8 @@ export default function ContactSection() {
               <div className="rounded-xl bg-white/96 backdrop-blur-md p-4 md:p-5 shadow-2xl ring-1 ring-[#112018]/5">
 
                 <div className="mb-4 flex flex-col gap-0.5">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#407266]">Club Aranya</p>
-                  <p className="font-serif text-xl text-[#112018] leading-snug">34m × 8.4m Pool & Lounge</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] !text-[#C9A44D]">Club Aranya</p>
+                  <p className="font-serif text-xl !text-[#112018] leading-snug">34m × 8.4m Pool & Lounge</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-y-3.5 gap-x-4 border-t border-[#72816e]/20 pt-4">
@@ -187,8 +187,8 @@ export default function ContactSection() {
                     { val: "16,000+", sub: "Sq Ft Club" },
                   ].map(({ val, sub }) => (
                     <div key={sub} className="flex flex-col">
-                      <p className="font-serif text-lg font-medium text-[#112018]">{val}</p>
-                      <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#112018]/55">{sub}</p>
+                      <p className="font-serif text-lg font-medium !text-[#112018]">{val}</p>
+                      <p className="text-[9px] font-bold uppercase tracking-[0.15em] !text-[#112018]/55">{sub}</p>
                     </div>
                   ))}
                 </div>

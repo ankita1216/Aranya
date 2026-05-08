@@ -24,7 +24,6 @@ const imageStories = [
 ];
 
 export default function HeroSection({ onOpenModal }) {
-
   return (
     <section className="relative h-screen overflow-hidden bg-[#f5efe1] text-[#112018]">
       <DecorativeElements type="organic" position="left-top" opacity={0.08} size="w-96" />
@@ -117,7 +116,7 @@ export default function HeroSection({ onOpenModal }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
 
-                {/* Text Content (Shifted slightly up to make room for the card) */}
+                {/* Text Content */}
                 <div className="absolute bottom-20 md:bottom-24 left-6 md:left-10 right-6 md:right-10 text-center transition-transform duration-500 group-hover:-translate-y-2">
                   {item.label && (
                     <span className="inline-block px-3 py-1 border border-white/40 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] !text-white mb-3">
@@ -131,21 +130,26 @@ export default function HeroSection({ onOpenModal }) {
                   )}
                 </div>
 
-                {/* Floating Premium Tag - Removed rounded-xl, using rounded-none */}
-                <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[85%] bg-white/10 backdrop-blur-md border border-white/20 rounded-none px-4 py-2.5 flex items-center justify-between shadow-2xl transition-transform duration-500 group-hover:-translate-y-1">
-                  <div className="flex flex-col text-left">
-                    <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Location</span>
-                    <span className="text-[12px] md:text-[12px] font-serif text-white">Dharapur,Guwahati</span>
-                  </div>
+                {/* Floating Premium Tag */}
+                <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[85%] bg-white/10 backdrop-blur-md border border-white/20 rounded-none px-4 py-2.5 flex items-center justify-center shadow-2xl transition-transform duration-500 group-hover:-translate-y-1">
 
-                  <div className="h-6 w-[1px] bg-white/20"></div>
+                  {/* Show Location only on the first image */}
+                  {index === 0 && (
+                    <div className="flex flex-col text-center">
+                      <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Location</span>
+                      <span className="text-[12px] md:text-[12px] font-serif text-white">Dharapur, Guwahati</span>
+                    </div>
+                  )}
 
-                  <div className="flex flex-col text-right">
-                    <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Price</span>
-                    <span className="text-[12px] md:text-[12px] font-serif text-white">Starting at 40 Lac</span>
-                  </div>
+                  {/* Show Price only on the second image */}
+                  {index === 1 && (
+                    <div className="flex flex-col text-center">
+                      <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-[#C9A44D] mb-1">Price</span>
+                      <span className="text-[12px] md:text-[12px] font-serif text-white">Starting at 40 Lac</span>
+                    </div>
+                  )}
+
                 </div>
-
               </motion.article>
             ))}
           </div>

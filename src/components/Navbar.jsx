@@ -41,8 +41,8 @@ export default function Navbar({ isHidden, onOpenModal }) {
             className={[
               "mx-auto flex h-[4.25rem] max-w-[1280px] items-center rounded-2xl border px-5 transition-all duration-500 sm:h-[4.5rem] sm:px-8",
               scrolled
-                ? "border-white/10 bg-[#0b2117]/95 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-2xl"
-                : "border-white/15 bg-[#0b2117]/80 shadow-[0_8px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl",
+                ? "border-white/10 bg-[#305242]/95 shadow-[0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-2xl"
+                : "border-white/15 bg-[#305242]/80 shadow-[0_8px_40px_rgba(0,0,0,0.2)] backdrop-blur-xl",
             ].join(" ")}
           >
             {/* ── Logo ── */}
@@ -111,7 +111,7 @@ export default function Navbar({ isHidden, onOpenModal }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[100] flex flex-col overflow-y-auto bg-[#06100b] px-6 py-7 text-[#F8F3E7]"
+            className="fixed inset-0 z-[100] flex flex-col overflow-y-auto bg-[#305242] px-6 py-7 text-[#F8F3E7]"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">

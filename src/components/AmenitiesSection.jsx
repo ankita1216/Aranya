@@ -84,16 +84,19 @@ const amenities = [
 function AmenityCard({ item, index }) {
   const Icon = item.icon;
 
+  // Alternating light cream and dark cream based on index
+  const bgColor = index % 2 === 0 ? "bg-[#f8f0df]" : "bg-[#f0e6d3]";
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, delay: index * 0.035 }}
-      // Note: Cards keep their internal #f8f0df for contrast, or change to match if desired
-      className="group relative flex h-full min-h-[14rem] flex-col justify-between overflow-hidden rounded-xl border border-[#72816e]/30 bg-[#f8f0df] p-6 shadow-[0_8px_30px_rgba(114,129,110,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(114,129,110,0.12)]"
+      className={`group relative flex h-full min-h-[14rem] flex-col justify-between overflow-hidden rounded-xl border border-[#72816e]/30 ${bgColor} p-6 shadow-[0_8px_30px_rgba(114,129,110,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(114,129,110,0.12)]`}
     >
-      <div className="absolute inset-0 opacity-[0.25] [background-image:linear-gradient(90deg,#407266_1px,transparent_1px),linear-gradient(0deg,#407266_1px,transparent_1px)] [background-size:2.5rem_2.5rem] transition-opacity duration-500 group-hover:opacity-[0.35]" />
+      {/* Grid opacity reduced from 0.25 to 0.06 so text is easy to read */}
+      <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(90deg,#407266_1px,transparent_1px),linear-gradient(0deg,#407266_1px,transparent_1px)] [background-size:2.5rem_2.5rem] transition-opacity duration-500 group-hover:opacity-[0.12]" />
       <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#407266]/10 blur-[45px] transition-all duration-700 group-hover:bg-[#407266]/20" />
 
       <div className="relative z-10 flex h-full flex-col">

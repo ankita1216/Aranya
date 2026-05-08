@@ -23,7 +23,7 @@ export default function FooterSection() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="footer" className="relative bg-[#0b2117] text-[#F8F3E7] overflow-hidden">
+    <footer id="footer" className="relative bg-[#305242] text-[#F8F3E7] overflow-hidden">
 
       {/* ══════════════════════════════════════════
           MINIMALIST GET IN TOUCH SECTION

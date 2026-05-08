@@ -23,7 +23,7 @@ export default function VideoWalkthrough({ onOpenModal }) {
     /* Changed bg-gradient to solid cream color bg-[#f8f0df] */
     <section
       id="walkthrough"
-      className="relative overflow-hidden bg-[#f8f0df] pt-14 pb-10 text-[#112018] sm:pt-20 sm:pb-14 md:pt-24 md:pb-16"
+      className="relative overflow-hidden bg-[#305242] pt-14 pb-10 text-white sm:pt-20 sm:pb-14 md:pt-24 md:pb-16"
     >
       {/* Removed the #edf0e6 (greenish) gradient overlay div from here */}
 
@@ -45,12 +45,12 @@ export default function VideoWalkthrough({ onOpenModal }) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-4xl font-serif text-3xl font-semibold leading-tight text-[#112018] sm:text-4xl md:text-6xl"
+              className="max-w-4xl font-serif text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-6xl"
             >
               Experience <span className="font-medium italic text-[#C9A44D]">Aranya</span> in Motion
             </motion.h2>
           </div>
-          <p className="max-w-sm text-sm font-medium leading-7 text-[#314033]/72 opacity-100">
+          <p className="max-w-sm text-sm font-medium leading-7 text-white/70 opacity-100">
             Step through arrival, amenities, interiors, and open spaces in a refined cinematic preview.
           </p>
         </div>
